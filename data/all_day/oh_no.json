@@ -1,0 +1,157 @@
+{
+    "duration": 0,
+    "album": "All Day",
+    "track": "Oh No",
+    "tracks": [
+        {
+            "startTime": 3000,
+            "endTime": 128000,
+            "artist": "Black Sabbath",
+            "track": "War Pigs"
+        },
+        {
+            "startTime": 13000,
+            "endTime": 15000,
+            "artist": "2Pac",
+            "track": "How Do U Want It"
+        },
+        {
+            "startTime": 15000,
+            "endTime": 15000,
+            "artist": "Jay-Z",
+            "track": "99 Problems"
+        },
+        {
+            "startTime": 20000,
+            "endTime": 122000,
+            "artist": "Ludacris",
+            "track": "Move Bitch"
+        },
+        {
+            "startTime": 20000,
+            "endTime": 54000,
+            "artist": "JC",
+            "track": "Vote 4 Me"
+        },
+        {
+            "startTime": 20000,
+            "endTime": 54000,
+            "artist": "The D.O.C.",
+            "track": "It's Funky Enough"
+        },
+        {
+            "startTime": 61000,
+            "endTime": 123000,
+            "artist": "Jay-Z",
+            "track": "Empire State of Mind"
+        },
+        {
+            "startTime": 122000,
+            "endTime": 162000,
+            "artist": "N.W.A",
+            "track": "Express Yourself"
+        },
+        {
+            "startTime": 124000,
+            "endTime": 159000,
+            "artist": "Eminem",
+            "track": "Crack a Bottle"
+        },
+        {
+            "startTime": 125000,
+            "endTime": 154000,
+            "artist": "Cali Swag District",
+            "track": "Teach Me How to Dougie"
+        },
+        {
+            "startTime": 132000,
+            "endTime": 134000,
+            "artist": "The Pack",
+            "track": "This Shit Slappin'"
+        },
+        {
+            "startTime": 133000,
+            "endTime": 154000,
+            "artist": "Jane's Addiction",
+            "track": "Jane Says"
+        },
+        {
+            "startTime": 133000,
+            "endTime": 165000,
+            "artist": "David Banner",
+            "track": "Get Like Me"
+        },
+        {
+            "startTime": 160000,
+            "endTime": 162000,
+            "artist": "M.I.A.",
+            "track": "Paper Planes"
+        },
+        {
+            "startTime": 163000,
+            "endTime": 165000,
+            "artist": "Jimmy Smith",
+            "track": "I'm Gonna Love You Just a Little More Babe"
+        },
+        {
+            "startTime": 165000,
+            "endTime": 250000,
+            "artist": "Dorrough",
+            "track": "Ice Cream Paint Job"
+        },
+        {
+            "startTime": 165000,
+            "endTime": 250000,
+            "artist": "The Brothers Johnson",
+            "track": "Strawberry Letter 23"
+        },
+        {
+            "startTime": 250000,
+            "endTime": 290000,
+            "artist": "J-Kwon",
+            "track": "Tipsy '09"
+        },
+        {
+            "startTime": 251000,
+            "endTime": 339000,
+            "artist": "Ramones",
+            "track": "Blitzkrieg Bop"
+        },
+        {
+            "startTime": 255000,
+            "endTime": 258000,
+            "artist": "Slick Rick and",
+            "track": "La Di Da Di"
+        },
+        {
+            "startTime": 259000,
+            "endTime": 287000,
+            "artist": "The Doors",
+            "track": "Waiting for the Sun"
+        },
+        {
+            "startTime": 261000,
+            "endTime": 290000,
+            "artist": "Aaliyah",
+            "track": "Try Again"
+        },
+        {
+            "startTime": 285000,
+            "endTime": 295000,
+            "artist": "Trina",
+            "track": "Look Back at Me"
+        },
+        {
+            "startTime": 293000,
+            "endTime": 293000,
+            "artist": "N.W.A",
+            "track": "Wilson Pickett"
+        },
+        {
+            "startTime": 296000,
+            "endTime": 339000,
+            "artist": "Missy Elliott",
+            "track": "Get Ur Freak On"
+        }
+    ]
+}
