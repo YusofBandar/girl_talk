@@ -1,11 +1,14 @@
 const fs = require("fs");
 const readline = require("readline");
 
-const file = "./all_day/oh_no.txt";
+const sourceFile = "./all_day/oh_no.txt";
+const targetFile = "./all_day/oh_no.json";
 
 const readInterface = readline.createInterface({
-    input: fs.createReadStream(file)
+    input: fs.createReadStream(sourceFile)
 });
+
+let tracks = [];
 
 readInterface.on('line', function (line) {
     line = line.toString();
@@ -29,11 +32,32 @@ readInterface.on('line', function (line) {
     track = track.trim();
 
 
+    tracks.push({startTime,endTime,artist,track})
 
-    console.log(startTime,endTime,artist,track);
+    console.log(startTime, endTime, artist, track);
     console.log("==================")
 });
 
+readInterface.on("close",() => {
+    writeTrack(targetFile,tracks)
+})
+
+
+function writeTrack(file, tracks) {
+    fs.readFile(file, { encoding: 'utf-8' }, function (err, data) {
+        if (!err) {
+            let JSONdata = JSON.parse(data);
+            JSONdata.tracks = tracks;
+            fs.writeFile(file, JSON.stringify(JSONdata), function (err) {
+                if (err) {
+                    return console.log(err);
+                }
+            });
+        } else {
+            console.log(err);
+        }
+    });
+}
 
 function timeConversion(timeString) {
     let time = new Date(10, 10, 10, 0, timeString.split(":")[0], timeString.split(":")[1])
