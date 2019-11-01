@@ -28,7 +28,7 @@ d3.json(trackPath).then((track) => {
 
     let record = svg.append("g")
         .style("transform", () => {
-            return `translate(${options.width/2}px,${options.height/2}px)`
+            return `translate(${options.width / 2}px,${options.height / 2}px)`
         })
 
 
@@ -38,8 +38,8 @@ d3.json(trackPath).then((track) => {
     record.append("path")
         .attr("d", (d) => {
             let path = d3.arc()
-                .innerRadius((options.innerPadding/2) * 0.25)
-                .outerRadius(options.innerPadding/2)
+                .innerRadius((options.innerPadding / 2) * 0.25)
+                .outerRadius(options.innerPadding / 2)
                 .startAngle(0)
                 .endAngle(2 * Math.PI);
 
@@ -47,14 +47,7 @@ d3.json(trackPath).then((track) => {
         })
         .style("fill", "#909090")
 
-    let timeLine = record.append("line")
-        .attr("x1",0)
-        .attr("y1",0)
-        .attr("x2",0)
-        .attr("y2",-((height/2)+(height/2 * 0.3)))
-        .style("stroke","#bfbfbf")
-        .style("stroke-width","3px")
-        .style("stroke-dasharray","10px");
+
 
     record.selectAll(".track")
         .data(track.tracks)
@@ -78,6 +71,28 @@ d3.json(trackPath).then((track) => {
             return path();
 
         })
+
+
+    let timeLine = record.append("g")
+        .attr("class", "timeline")
+
+    timeLine.append("line")
+        .attr("x1", 0)
+        .attr("y1", 0)
+        .attr("x2", 0)
+        .attr("y2", -((height / 2) + (height / 2 * 0.3)))
+        .style("stroke", "#bfbfbf")
+        .style("stroke-width", "3px")
+        .style("stroke-dasharray", "3px");
+
+    timeLine.append("text")
+        .text("0:00")
+        .attr("x",-((height / 2) + (height / 2 * 0.55)))
+        .attr("y",10)
+        .style("transform","rotate(90deg)")
+        .style("font-size","30px")
+        .style("font-family","arial")
+
 
 
 
