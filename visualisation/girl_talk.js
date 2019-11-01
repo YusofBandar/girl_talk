@@ -10,11 +10,12 @@ const options = {
 
 d3.json(trackPath).then((track) => {
 
+    const tracks = track.tracks;
 
     const width = options.width - 300;
     const height = options.height - 300;
 
-    const arcWidth = ((width - (options.outerPadding + options.innerPadding + 50)) / 2) / track.tracks.length;
+    const arcWidth = ((width - (options.outerPadding + options.innerPadding + 50)) / 2) / tracks.length;
     const duration = track.duration;
 
 
@@ -48,8 +49,9 @@ d3.json(trackPath).then((track) => {
         .style("fill", "#909090")
 
 
-    track.tracks.forEach((d,i) => {
+    tracks.forEach((d, i) => {
         record.append("path")
+            .attr("class", "track")
             .style("fill", () => {
 
                 return colors[i % colors.length];
@@ -62,8 +64,8 @@ d3.json(trackPath).then((track) => {
                 let path = d3.arc()
                     .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
                     .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
-                    .startAngle(startAngle)
-                    .endAngle(endAngle);
+                    .startAngle(0)
+                    .endAngle(0);
 
                 return path();
 
@@ -90,16 +92,49 @@ d3.json(trackPath).then((track) => {
         .style("font-size", "30px")
         .style("font-family", "arial")
 
+    let trackEls = record.selectAll(".track");
+
     let t = d3.timer(function (elapsed) {
+
+        const circum = 2 * Math.PI;
+        let angleDeg = (elapsed / duration) * 360;
+        let angleRad = (elapsed / duration) * circum;
+
+        console.log(angleRad);
+
+        timeLine.style("transform", `rotate(${angleDeg}deg)`)
+
+
+        trackEls.each(function (d,i) {
+            d3.select(this).attr("d", () => {
+                let d = tracks[i];
+                
+                let startAngle = (d.startTime / duration) * circum;
+                let endAngle = (d.endTime / duration) * circum;
+
+                startAngle = startAngle > angleRad ? angleRad : startAngle;
+                endAngle = endAngle > angleRad ? angleRad : endAngle;
+    
+                let path = d3.arc()
+                    .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
+                    .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
+                    .startAngle(startAngle)
+                    .endAngle(endAngle);
+    
+                return path();
+    
+            })
+        })
+
+
+
+
         let minutes = parseInt(elapsed / 60000);
 
         let seconds = parseInt((elapsed - (60000 * minutes)) / 1000);
         seconds = seconds < 10 ? `0${seconds}` : seconds.toString();
 
         text.text(`${minutes}:${seconds}`);
-
-        let angle = (elapsed / duration) * 360;
-        timeLine.style("transform", `rotate(${angle}deg)`)
 
         if (elapsed > duration) t.stop();
     }, 150);
