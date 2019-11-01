@@ -10,7 +10,7 @@ const options = {
 
 d3.json(trackPath).then((track) => {
 
-    const arcWidth = ((options.width-(options.outerPadding+options.innerPadding + 50)) / 2) / track.tracks.length;
+    const arcWidth = ((options.width - (options.outerPadding + options.innerPadding + 50)) / 2) / track.tracks.length;
     const duration = track.duration;
 
 
@@ -29,11 +29,19 @@ d3.json(trackPath).then((track) => {
 
 
     record.append("circle")
-        .attr("r",options.width/2)
+        .attr("r", options.width / 2)
 
-    record.append("circle")
-        .attr("r",options.innerPadding/2)
-        .style("fill","#909090")
+    record.append("path")
+        .attr("d", (d) => {
+            let path = d3.arc()
+                .innerRadius((options.innerPadding/2) * 0.25)
+                .outerRadius(options.innerPadding/2)
+                .startAngle(0)
+                .endAngle(2 * Math.PI);
+
+            return path();
+        })
+        .style("fill", "#909090")
 
     record.selectAll(".track")
         .data(track.tracks)
@@ -49,8 +57,8 @@ d3.json(trackPath).then((track) => {
             let endAngle = (d.endTime / duration) * circum;
 
             let path = d3.arc()
-                .innerRadius(((options.width/2) - ((i + 1) * arcWidth)) - options.outerPadding)
-                .outerRadius(((options.width/2) - (i * arcWidth)) - options.outerPadding)
+                .innerRadius(((options.width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
+                .outerRadius(((options.width / 2) - (i * arcWidth)) - options.outerPadding)
                 .startAngle(startAngle)
                 .endAngle(endAngle);
 
