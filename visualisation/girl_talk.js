@@ -2,8 +2,8 @@
 const trackPath = "../data/all_day/oh_no.json";
 
 const options = {
-    width: 500,
-    height: 500,
+    width: 800,
+    height: 800,
     outerPadding: 10,
     innerPadding: 100,
 }
@@ -24,7 +24,7 @@ d3.json(trackPath).then((track) => {
 
     let record = svg.append("g")
         .style("transform", () => {
-            return `translate(250px,250px)`
+            return `translate(${options.width/2}px,${options.height/2}px)`
         })
 
 
