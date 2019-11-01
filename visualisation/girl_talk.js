@@ -92,11 +92,14 @@ d3.json(trackPath).then((track) => {
         .style("transform", "rotate(90deg)")
         .style("font-size", "30px")
         .style("font-family", "arial")
+        68783
+        10000
 
+    let t = d3.timer(function (elapsed) {
+        let minutes = parseInt(elapsed/60000);
 
-    d3.timer(function (elapsed) {
-        let seconds = (((elapsed/1000) % 60).toFixed(0))
-        let minutes = (elapsed/(60*1000)).toFixed(0);
+        let seconds = parseInt((elapsed - (60000*minutes)) / 1000);    
+        seconds = seconds < 10 ? `0${seconds}` : seconds.toString();
         
         text.text(`${minutes}:${seconds}`);
 
