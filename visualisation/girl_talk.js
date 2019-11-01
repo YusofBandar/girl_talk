@@ -85,15 +85,26 @@ d3.json(trackPath).then((track) => {
         .style("stroke-width", "3px")
         .style("stroke-dasharray", "3px");
 
-    timeLine.append("text")
+    let text = timeLine.append("text")
         .text("0:00")
-        .attr("x",-((height / 2) + (height / 2 * 0.55)))
-        .attr("y",10)
-        .style("transform","rotate(90deg)")
-        .style("font-size","30px")
-        .style("font-family","arial")
+        .attr("x", -((height / 2) + (height / 2 * 0.55)))
+        .attr("y", 10)
+        .style("transform", "rotate(90deg)")
+        .style("font-size", "30px")
+        .style("font-family", "arial")
 
 
+    d3.timer(function (elapsed) {
+        let seconds = (((elapsed/1000) % 60).toFixed(0))
+        let minutes = (elapsed/(60*1000)).toFixed(0);
+        
+        text.text(`${minutes}:${seconds}`);
+
+        let angle = (elapsed / duration) * 360;
+        timeLine.style("transform",`rotate(${angle}deg)`)
+
+        if (elapsed > duration) t.stop();
+    }, 150);
 
 
 }).catch((err) => {
