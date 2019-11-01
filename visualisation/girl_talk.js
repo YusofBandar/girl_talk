@@ -47,6 +47,15 @@ d3.json(trackPath).then((track) => {
         })
         .style("fill", "#909090")
 
+    let timeLine = record.append("line")
+        .attr("x1",0)
+        .attr("y1",0)
+        .attr("x2",0)
+        .attr("y2",-((height/2)+(height/2 * 0.3)))
+        .style("stroke","#bfbfbf")
+        .style("stroke-width","3px")
+        .style("stroke-dasharray","10px");
+
     record.selectAll(".track")
         .data(track.tracks)
         .enter()
