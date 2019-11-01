@@ -57,10 +57,6 @@ d3.json(trackPath).then((track) => {
                 return colors[i % colors.length];
             })
             .attr("d", () => {
-                const circum = 2 * Math.PI;
-                let startAngle = (d.startTime / duration) * circum;
-                let endAngle = (d.endTime / duration) * circum;
-
                 let path = d3.arc()
                     .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
                     .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
