@@ -48,30 +48,27 @@ d3.json(trackPath).then((track) => {
         .style("fill", "#909090")
 
 
+    track.tracks.forEach((d,i) => {
+        record.append("path")
+            .style("fill", () => {
 
-    record.selectAll(".track")
-        .data(track.tracks)
-        .enter()
-        .append("path")
-        .style("fill", (d, i) => {
+                return colors[i % colors.length];
+            })
+            .attr("d", () => {
+                const circum = 2 * Math.PI;
+                let startAngle = (d.startTime / duration) * circum;
+                let endAngle = (d.endTime / duration) * circum;
 
-            return colors[i % colors.length];
-        })
-        .attr("d", (d, i) => {
-            const circum = 2 * Math.PI;
-            let startAngle = (d.startTime / duration) * circum;
-            let endAngle = (d.endTime / duration) * circum;
+                let path = d3.arc()
+                    .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
+                    .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
+                    .startAngle(startAngle)
+                    .endAngle(endAngle);
 
-            let path = d3.arc()
-                .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
-                .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
-                .startAngle(startAngle)
-                .endAngle(endAngle);
+                return path();
 
-            return path();
-
-        })
-
+            })
+    });
 
     let timeLine = record.append("g")
         .attr("class", "timeline")
@@ -92,17 +89,17 @@ d3.json(trackPath).then((track) => {
         .style("transform", "rotate(90deg)")
         .style("font-size", "30px")
         .style("font-family", "arial")
-    
-    let t = d3.timer(function (elapsed) {
-        let minutes = parseInt(elapsed/60000);
 
-        let seconds = parseInt((elapsed - (60000*minutes)) / 1000);    
+    let t = d3.timer(function (elapsed) {
+        let minutes = parseInt(elapsed / 60000);
+
+        let seconds = parseInt((elapsed - (60000 * minutes)) / 1000);
         seconds = seconds < 10 ? `0${seconds}` : seconds.toString();
-        
+
         text.text(`${minutes}:${seconds}`);
 
         let angle = (elapsed / duration) * 360;
-        timeLine.style("transform",`rotate(${angle}deg)`)
+        timeLine.style("transform", `rotate(${angle}deg)`)
 
         if (elapsed > duration) t.stop();
     }, 150);
