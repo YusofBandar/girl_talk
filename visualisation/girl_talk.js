@@ -50,8 +50,9 @@ d3.json(trackPath).then((track) => {
 
 
     tracks.forEach((d, i) => {
-        record.append("path")
+        record.append("g")
             .attr("class", "track")
+            .append("path")
             .style("fill", () => {
 
                 return colors[i % colors.length];
@@ -92,44 +93,40 @@ d3.json(trackPath).then((track) => {
 
     let t = d3.timer(function (elapsed) {
 
+        elapsed *= 40;
+
         const circum = 2 * Math.PI;
         let angleDeg = (elapsed / duration) * 360;
         let angleRad = (elapsed / duration) * circum;
 
-        console.log(angleRad);
-
         timeLine.style("transform", `rotate(${angleDeg}deg)`)
-
-
+        
         trackEls.each(function (d, i) {
-            d3.select(this).attr("d", () => {
-                let d = tracks[i];
+            d3.select(this)
+                .select("path")
+                .attr("d", () => {
+                    let d = tracks[i];
 
-                let startAngle = (d.startTime / duration) * circum;
-                let endAngle = (d.endTime / duration) * circum;
+                    let startAngle = (d.startTime / duration) * circum;
+                    let endAngle = (d.endTime / duration) * circum;
 
-                startAngle = startAngle > angleRad ? angleRad : startAngle;
-                endAngle = endAngle > angleRad ? angleRad : endAngle;
+                    startAngle = startAngle > angleRad ? angleRad : startAngle;
+                    endAngle = endAngle > angleRad ? angleRad : endAngle;
 
-                let path = d3.arc()
-                    .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
-                    .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
-                    .startAngle(startAngle)
-                    .endAngle(endAngle);
+                    let path = d3.arc()
+                        .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
+                        .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
+                        .startAngle(startAngle)
+                        .endAngle(endAngle);
 
-                return path();
+                    return path();
 
-            })
+                })
         })
 
-
-
-
         let minutes = parseInt(elapsed / 60000);
-
         let seconds = parseInt((elapsed - (60000 * minutes)) / 1000);
         seconds = seconds < 10 ? `0${seconds}` : seconds.toString();
-
         text.text(`${minutes}:${seconds}`);
 
         if (elapsed > duration) {
@@ -137,33 +134,34 @@ d3.json(trackPath).then((track) => {
 
             text.text(`0:00`);
 
+            trackEls.each(function (d, i) {
+                d3.select(this)
+                    .select("path")
+                    .transition()
+                    .duration(2000)
+                    .ease(d3.easeExp)
+                    .attrTween("d", () => {
+                        let d = tracks[i];
 
+                        let startAngle = (d.startTime / duration) * circum;
+                        let endAngle = (d.endTime / duration) * circum;
 
+                        var interpolate = d3.interpolate(endAngle, startAngle);
 
-            d3.selectAll(".track").transition()
-                .duration(2000)
-                .ease(d3.easeExp)
-                .attrTween("d", (m, i) => {
-                    let d = tracks[i];
+                        return function (t) {
+                            endAngle = interpolate(t);
 
-                    let startAngle = (d.startTime / duration) * circum;
-                    let endAngle = (d.endTime / duration) * circum;
+                            let path = d3.arc()
+                                .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
+                                .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
+                                .startAngle(startAngle)
+                                .endAngle(endAngle);
 
-                    var interpolate = d3.interpolate(endAngle, startAngle);
+                            return path();
+                        };
 
-                    return function (t) {
-                        endAngle = interpolate(t);
-
-                        let path = d3.arc()
-                            .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
-                            .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
-                            .startAngle(startAngle)
-                            .endAngle(endAngle);
-
-                        return path();
-                    };
-
-                }).remove();
+                    }).remove();
+            })
         };
     }, 150);
 
