@@ -75,7 +75,7 @@ d3.json(trackPath).then((track) => {
 
         let label = track.append("g")
             .attr("class", "label")
-            .style("visibility","hidden")
+            .style("visibility", "hidden")
 
         // artist labels
         label.append("line")
@@ -158,13 +158,13 @@ d3.json(trackPath).then((track) => {
             const centroid = path.centroid();
             const radius = (width / 2);
             const hypo = Math.hypot(centroid[0], centroid[1])
-            const scaler = (radius+(65 * ((i+1) % 3))) / hypo;
+            const scaler = (radius + (65 * ((i + 1) % 3))) / hypo;
 
 
             let label = d3.select(this)
                 .select(".label")
-                .style("visibility",() => {
-                    return startAngle != angleRad ? "visible" : "hidden"; 
+                .style("visibility", () => {
+                    return startAngle != angleRad ? "visible" : "hidden";
                 })
 
 
@@ -175,8 +175,8 @@ d3.json(trackPath).then((track) => {
                 .attr("y2", centroid[1] * scaler)
 
             label.select("text")
-                .attr("x", (centroid[0]+3) * scaler)
-                .attr("y", (centroid[1]+1) * scaler)
+                .attr("x", (centroid[0] + 3) * scaler)
+                .attr("y", (centroid[1] + 1) * scaler)
                 .style("transform-origin", () => {
                     return `${centroid[0] * scaler}px ${centroid[1] * scaler}px`;
                 })
@@ -205,17 +205,50 @@ d3.json(trackPath).then((track) => {
 
             text.text(`0:00`);
 
-            trackEls.each(function (d, i) {
+            trackEls.each(function (m, i) {
+                let d = tracks[i];
+
+                let startAngle = (d.startTime / duration) * circum;
+                let endAngle = (d.endTime / duration) * circum;
+
+                let path = d3.arc()
+                    .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
+                    .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
+                    .startAngle(startAngle)
+                    .endAngle(endAngle);
+
+
+                // artist label line goes from arc centroid to 100 + radius of record 
+                const centroid = path.centroid();
+
+                let label = d3.select(this)
+                    .select(".label");
+
+                label.select("line")
+                    .transition()
+                    .duration(2000)
+                    .delay(1000)
+                    .ease(d3.easeExp)
+                    .attr("x1", centroid[0])
+                    .attr("y1", centroid[1])
+                    .attr("x2", centroid[0])
+                    .attr("y2", centroid[1]);
+
+                label.select("text")
+                    .transition()
+                    .duration(2000)
+                    .delay(1000)
+                    .style("opacity",0)
+
+
+
                 d3.select(this)
                     .select("path")
                     .transition()
                     .duration(2000)
+                    .delay(1000)
                     .ease(d3.easeExp)
                     .attrTween("d", () => {
-                        let d = tracks[i];
-
-                        let startAngle = (d.startTime / duration) * circum;
-                        let endAngle = (d.endTime / duration) * circum;
 
                         var interpolate = d3.interpolate(endAngle, startAngle);
 
