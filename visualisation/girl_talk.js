@@ -50,11 +50,11 @@ d3.json(trackPath).then((track) => {
 
 
     tracks.forEach((d, i) => {
-        record.append("g")
+        let track = record.append("g")
             .attr("class", "track")
-            .append("path")
-            .style("fill", () => {
 
+        track.append("path")
+            .style("fill", () => {
                 return colors[i % colors.length];
             })
             .attr("d", () => {
@@ -67,6 +67,18 @@ d3.json(trackPath).then((track) => {
                 return path();
 
             })
+
+        track.append("line")
+            .attr("x1", 0)
+            .attr("y1", 0)
+            .attr("x2", 0)
+            .attr("y2", 0)
+            .style("stroke", "#bfbfbf")
+            .style("stroke-width", "3px")
+            .style("stroke-dasharray", "3px");
+
+
+
     });
 
     let timeLine = record.append("g")
@@ -93,7 +105,7 @@ d3.json(trackPath).then((track) => {
 
     let t = d3.timer(function (elapsed) {
 
-        elapsed *= 40;
+        elapsed *= 20;
 
         const circum = 2 * Math.PI;
         let angleDeg = (elapsed / duration) * 360;
@@ -101,26 +113,38 @@ d3.json(trackPath).then((track) => {
 
         timeLine.style("transform", `rotate(${angleDeg}deg)`)
 
-        trackEls.each(function (d, i) {
+        trackEls.each(function (m, i) {
+            let d = tracks[i];
+
+            let startAngle = (d.startTime / duration) * circum;
+            let endAngle = (d.endTime / duration) * circum;
+
+            startAngle = startAngle > angleRad ? angleRad : startAngle;
+            endAngle = endAngle > angleRad ? angleRad : endAngle;
+
+            let path = d3.arc()
+                .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
+                .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
+                .startAngle(startAngle)
+                .endAngle(endAngle);
+
+            const centroid = path.centroid();
+            const radius = (width / 2) + 100;
+            const hypo = Math.hypot(centroid[0],centroid[1])
+            const scaler = radius/hypo;
+
+            d3.select(this)
+                .select("line")
+                .attr("x1", centroid[0])
+                .attr("y1", centroid[1])
+                .attr("x2", centroid[0] * scaler)
+                .attr("y2", centroid[1] * scaler)
+
+
             d3.select(this)
                 .select("path")
                 .attr("d", () => {
-                    let d = tracks[i];
-
-                    let startAngle = (d.startTime / duration) * circum;
-                    let endAngle = (d.endTime / duration) * circum;
-
-                    startAngle = startAngle > angleRad ? angleRad : startAngle;
-                    endAngle = endAngle > angleRad ? angleRad : endAngle;
-
-                    let path = d3.arc()
-                        .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
-                        .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
-                        .startAngle(startAngle)
-                        .endAngle(endAngle);
-
                     return path();
-
                 })
         })
 
