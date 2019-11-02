@@ -250,7 +250,7 @@ d3.json(trackPath).then((track) => {
                     .ease(d3.easeExp)
                     .attrTween("d", () => {
 
-                        var interpolate = d3.interpolate(endAngle, startAngle);
+                        let interpolate = d3.interpolate(endAngle, startAngle);
 
                         return function (t) {
                             endAngle = interpolate(t);
