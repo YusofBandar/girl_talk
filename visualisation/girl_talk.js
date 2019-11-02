@@ -101,24 +101,24 @@ d3.json(trackPath).then((track) => {
         timeLine.style("transform", `rotate(${angleDeg}deg)`)
 
 
-        trackEls.each(function (d,i) {
+        trackEls.each(function (d, i) {
             d3.select(this).attr("d", () => {
                 let d = tracks[i];
-                
+
                 let startAngle = (d.startTime / duration) * circum;
                 let endAngle = (d.endTime / duration) * circum;
 
                 startAngle = startAngle > angleRad ? angleRad : startAngle;
                 endAngle = endAngle > angleRad ? angleRad : endAngle;
-    
+
                 let path = d3.arc()
                     .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
                     .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
                     .startAngle(startAngle)
                     .endAngle(endAngle);
-    
+
                 return path();
-    
+
             })
         })
 
@@ -132,7 +132,39 @@ d3.json(trackPath).then((track) => {
 
         text.text(`${minutes}:${seconds}`);
 
-        if (elapsed > duration) t.stop();
+        if (elapsed > duration) {
+            t.stop()
+
+            text.text(`0:00`);
+
+
+
+
+            d3.selectAll(".track").transition()
+                .duration(2000)
+                .ease(d3.easeExp)
+                .attrTween("d", (m, i) => {
+                    let d = tracks[i];
+
+                    let startAngle = (d.startTime / duration) * circum;
+                    let endAngle = (d.endTime / duration) * circum;
+
+                    var interpolate = d3.interpolate(endAngle, startAngle);
+
+                    return function (t) {
+                        endAngle = interpolate(t);
+
+                        let path = d3.arc()
+                            .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
+                            .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
+                            .startAngle(startAngle)
+                            .endAngle(endAngle);
+
+                        return path();
+                    };
+
+                }).remove();
+        };
     }, 150);
 
 
