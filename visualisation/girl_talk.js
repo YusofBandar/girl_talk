@@ -100,7 +100,7 @@ d3.json(trackPath).then((track) => {
         let angleRad = (elapsed / duration) * circum;
 
         timeLine.style("transform", `rotate(${angleDeg}deg)`)
-        
+
         trackEls.each(function (d, i) {
             d3.select(this)
                 .select("path")
@@ -160,7 +160,11 @@ d3.json(trackPath).then((track) => {
                             return path();
                         };
 
-                    }).remove();
+                    }).on("end", () => {
+                        trackEls.each(() => {
+                            d3.select(this).remove();
+                        })
+                    });
             })
         };
     }, 150);
