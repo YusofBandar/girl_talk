@@ -73,8 +73,11 @@ d3.json(trackPath).then((track) => {
 
             })
 
+        let label = track.append("g")
+            .attr("class", "label")
+
         // artist labels
-        track.append("line")
+        label.append("line")
             .attr("x1", 0)
             .attr("y1", 0)
             .attr("x2", 0)
@@ -82,6 +85,13 @@ d3.json(trackPath).then((track) => {
             .style("stroke", "#bfbfbf")
             .style("stroke-width", "3px")
             .style("stroke-dasharray", "3px");
+
+        label.append("text")
+            .text("test")
+            .attr("x", 0)
+            .attr("y", 0)
+            .style("font-size", "20px")
+            .style("font-family", "arial");
 
 
 
@@ -114,17 +124,16 @@ d3.json(trackPath).then((track) => {
     let t = d3.timer(function (elapsed) {
 
         //speed up time
-        elapsed *= 20;
+        elapsed *= 30;
 
         // used to calculate radians
         const circum = 2 * Math.PI;
 
         // time of the track converted into an angle
         // 360deg = track duration
-        let angleDeg = (elapsed / duration) * 360;
         let angleRad = (elapsed / duration) * circum;
 
-        timeLine.style("transform", `rotate(${angleDeg}deg)`)
+        timeLine.style("transform", `rotate(${angleRad}rad)`)
 
         trackEls.each(function (m, i) {
             let d = tracks[i];
@@ -147,16 +156,27 @@ d3.json(trackPath).then((track) => {
 
             // artist label line goes from arc centroid to 100 + radius of record 
             const centroid = path.centroid();
-            const radius = (width / 2) + 100;
-            const hypo = Math.hypot(centroid[0],centroid[1])
-            const scaler = radius/hypo;
+            const radius = (width / 2);
+            const hypo = Math.hypot(centroid[0], centroid[1])
+            const scaler = (radius+100) / hypo;
 
-            d3.select(this)
-                .select("line")
+
+            let label = d3.select(this).select(".label")
+
+            label.select("line")
                 .attr("x1", centroid[0])
                 .attr("y1", centroid[1])
                 .attr("x2", centroid[0] * scaler)
                 .attr("y2", centroid[1] * scaler)
+
+            label.select("text")
+                .attr("x", (centroid[0]+6) * scaler)
+                .attr("y", (centroid[1]+3) * scaler)
+                .style("transform-origin", () => {
+                    return `${centroid[0] * scaler}px ${centroid[1] * scaler}px`;
+                })
+                .style("transform", `rotate(${-1.57 + ((startAngle + endAngle) / 2)}rad)`)
+
 
 
             d3.select(this)
