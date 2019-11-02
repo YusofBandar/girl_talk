@@ -10,8 +10,10 @@ const options = {
 
 d3.json(trackPath).then((track) => {
 
+    // track samples
     const tracks = track.tracks;
 
+    //record height and width
     const width = options.width - 300;
     const height = options.height - 300;
 
@@ -32,10 +34,11 @@ d3.json(trackPath).then((track) => {
             return `translate(${options.width / 2}px,${options.height / 2}px)`
         })
 
-
+    // record
     record.append("circle")
         .attr("r", width / 2)
 
+    // inner part of record
     record.append("path")
         .attr("d", (d) => {
             let path = d3.arc()
@@ -48,11 +51,13 @@ d3.json(trackPath).then((track) => {
         })
         .style("fill", "#909090")
 
-
+    // each sample 
     tracks.forEach((d, i) => {
         let track = record.append("g")
             .attr("class", "track")
 
+
+        // track arcs
         track.append("path")
             .style("fill", () => {
                 return colors[i % colors.length];
@@ -68,6 +73,7 @@ d3.json(trackPath).then((track) => {
 
             })
 
+        // artist labels
         track.append("line")
             .attr("x1", 0)
             .attr("y1", 0)
@@ -81,6 +87,8 @@ d3.json(trackPath).then((track) => {
 
     });
 
+
+    // timeline 
     let timeLine = record.append("g")
         .attr("class", "timeline")
 
@@ -105,9 +113,14 @@ d3.json(trackPath).then((track) => {
 
     let t = d3.timer(function (elapsed) {
 
+        //speed up time
         elapsed *= 20;
 
+        // used to calculate radians
         const circum = 2 * Math.PI;
+
+        // time of the track converted into an angle
+        // 360deg = track duration
         let angleDeg = (elapsed / duration) * 360;
         let angleRad = (elapsed / duration) * circum;
 
@@ -116,9 +129,12 @@ d3.json(trackPath).then((track) => {
         trackEls.each(function (m, i) {
             let d = tracks[i];
 
+            // angles of each ith track
             let startAngle = (d.startTime / duration) * circum;
             let endAngle = (d.endTime / duration) * circum;
 
+
+            // dont display track arcs until we have reached the correct point
             startAngle = startAngle > angleRad ? angleRad : startAngle;
             endAngle = endAngle > angleRad ? angleRad : endAngle;
 
@@ -128,6 +144,8 @@ d3.json(trackPath).then((track) => {
                 .startAngle(startAngle)
                 .endAngle(endAngle);
 
+
+            // artist label line goes from arc centroid to 100 + radius of record 
             const centroid = path.centroid();
             const radius = (width / 2) + 100;
             const hypo = Math.hypot(centroid[0],centroid[1])
@@ -148,11 +166,15 @@ d3.json(trackPath).then((track) => {
                 })
         })
 
+
+        // minutes and seconds has elapsed
         let minutes = parseInt(elapsed / 60000);
         let seconds = parseInt((elapsed - (60000 * minutes)) / 1000);
         seconds = seconds < 10 ? `0${seconds}` : seconds.toString();
         text.text(`${minutes}:${seconds}`);
 
+
+        // if at the end of track remove all arcs and labels
         if (elapsed > duration) {
             t.stop()
 
