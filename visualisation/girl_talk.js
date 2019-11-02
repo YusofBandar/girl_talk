@@ -2,8 +2,8 @@
 const trackPath = "../data/all_day/oh_no.json";
 
 const options = {
-    width: 800,
-    height: 800,
+    width: 1000,
+    height: 1000,
     outerPadding: 10,
     innerPadding: 100,
 }
@@ -14,8 +14,8 @@ d3.json(trackPath).then((track) => {
     const tracks = track.tracks;
 
     //record height and width
-    const width = options.width - 300;
-    const height = options.height - 300;
+    const width = options.width - 500;
+    const height = options.height - 500;
 
     const arcWidth = ((width - (options.outerPadding + options.innerPadding + 50)) / 2) / tracks.length;
     const duration = track.duration;
@@ -75,6 +75,7 @@ d3.json(trackPath).then((track) => {
 
         let label = track.append("g")
             .attr("class", "label")
+            .style("visibility","hidden")
 
         // artist labels
         label.append("line")
@@ -123,7 +124,7 @@ d3.json(trackPath).then((track) => {
     let t = d3.timer(function (elapsed) {
 
         //speed up time
-        elapsed *= 30;
+        elapsed *= 50;
 
         // used to calculate radians
         const circum = 2 * Math.PI;
@@ -157,10 +158,15 @@ d3.json(trackPath).then((track) => {
             const centroid = path.centroid();
             const radius = (width / 2);
             const hypo = Math.hypot(centroid[0], centroid[1])
-            const scaler = (radius+100) / hypo;
+            const scaler = (radius+(65 * ((i+1) % 3))) / hypo;
 
 
-            let label = d3.select(this).select(".label")
+            let label = d3.select(this)
+                .select(".label")
+                .style("visibility",() => {
+                    return startAngle != angleRad ? "visible" : "hidden"; 
+                })
+
 
             label.select("line")
                 .attr("x1", centroid[0])
