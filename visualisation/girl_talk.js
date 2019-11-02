@@ -83,14 +83,13 @@ d3.json(trackPath).then((track) => {
             .attr("x2", 0)
             .attr("y2", 0)
             .style("stroke", "#bfbfbf")
-            .style("stroke-width", "3px")
-            .style("stroke-dasharray", "3px");
+            .style("stroke-width", "2px")
 
         label.append("text")
-            .text("test")
+            .text(tracks[i].artist)
             .attr("x", 0)
             .attr("y", 0)
-            .style("font-size", "20px")
+            .style("font-size", "15px")
             .style("font-family", "arial");
 
 
@@ -170,8 +169,8 @@ d3.json(trackPath).then((track) => {
                 .attr("y2", centroid[1] * scaler)
 
             label.select("text")
-                .attr("x", (centroid[0]+6) * scaler)
-                .attr("y", (centroid[1]+3) * scaler)
+                .attr("x", (centroid[0]+3) * scaler)
+                .attr("y", (centroid[1]+1) * scaler)
                 .style("transform-origin", () => {
                     return `${centroid[0] * scaler}px ${centroid[1] * scaler}px`;
                 })
