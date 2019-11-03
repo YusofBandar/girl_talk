@@ -1,10 +1,10 @@
 
-const trackPath = "../data/all_day/oh_no.json";
+const trackPath = "../data/all_day/let_it_out.json";
 
 const options = {
     width: 1000,
     height: 1000,
-    outerPadding: 10,
+    outerPadding: 5,
     innerPadding: 100,
 }
 
@@ -42,7 +42,7 @@ d3.json(trackPath).then((track) => {
     record.append("path")
         .attr("d", (d) => {
             let path = d3.arc()
-                .innerRadius((options.innerPadding / 2) * 0.25)
+                .innerRadius((options.innerPadding / 2) * 0.2)
                 .outerRadius(options.innerPadding / 2)
                 .startAngle(0)
                 .endAngle(2 * Math.PI);
@@ -87,10 +87,19 @@ d3.json(trackPath).then((track) => {
             .style("stroke-width", "2px")
 
         label.append("text")
+            .attr("class", "label_artist")
             .text(tracks[i].artist)
             .attr("x", 0)
             .attr("y", 0)
             .style("font-size", "15px")
+            .style("font-family", "arial");
+
+        label.append("text")
+            .attr("class", "label_track")
+            .text(tracks[i].track)
+            .attr("x", 0)
+            .attr("y", 0)
+            .style("font-size", "10px")
             .style("font-family", "arial");
 
 
@@ -121,10 +130,12 @@ d3.json(trackPath).then((track) => {
 
     let trackEls = record.selectAll(".track");
 
+    new Audio('../audio/Girl_Talk_Oh_No.mp3').play()
+
     let t = d3.timer(function (elapsed) {
 
         //speed up time
-        elapsed *= 50;
+        elapsed *= 70;
 
         // used to calculate radians
         const circum = 2 * Math.PI;
@@ -174,9 +185,18 @@ d3.json(trackPath).then((track) => {
                 .attr("x2", centroid[0] * scaler)
                 .attr("y2", centroid[1] * scaler)
 
-            label.select("text")
-                .attr("x", (centroid[0] + 3) * scaler)
-                .attr("y", (centroid[1] + 1) * scaler)
+            label.select(".label_artist")
+                .attr("x", (centroid[0] * scaler) + 3)
+                .attr("y", (centroid[1] * scaler) + 1)
+                .style("transform-origin", () => {
+                    return `${centroid[0] * scaler}px ${centroid[1] * scaler}px`;
+                })
+                .style("transform", `rotate(${-1.57 + ((startAngle + endAngle) / 2)}rad)`)
+
+
+            label.select(".label_track")
+                .attr("x", (centroid[0] * scaler) + 3)
+                .attr("y", (centroid[1] * scaler) + 15)
                 .style("transform-origin", () => {
                     return `${centroid[0] * scaler}px ${centroid[1] * scaler}px`;
                 })
@@ -220,6 +240,7 @@ d3.json(trackPath).then((track) => {
 
                 // artist label line goes from arc centroid to 100 + radius of record 
                 const centroid = path.centroid();
+                const delay = 5000;
 
                 let label = d3.select(this)
                     .select(".label");
@@ -227,18 +248,25 @@ d3.json(trackPath).then((track) => {
                 label.select("line")
                     .transition()
                     .duration(2000)
-                    .delay(1000)
+                    .delay(delay)
                     .ease(d3.easeExp)
                     .attr("x1", centroid[0])
                     .attr("y1", centroid[1])
                     .attr("x2", centroid[0])
                     .attr("y2", centroid[1]);
 
-                label.select("text")
+                label.select(".label_artist")
                     .transition()
                     .duration(2000)
-                    .delay(1000)
-                    .style("opacity",0)
+                    .delay(delay)
+                    .style("opacity", 0)
+
+                label.select(".label_track")
+                    .transition()
+                    .duration(2000)
+                    .delay(delay)
+                    .style("opacity", 0)
+
 
 
 
@@ -246,7 +274,7 @@ d3.json(trackPath).then((track) => {
                     .select("path")
                     .transition()
                     .duration(2000)
-                    .delay(1000)
+                    .delay(delay)
                     .ease(d3.easeExp)
                     .attrTween("d", () => {
 
