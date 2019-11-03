@@ -1,11 +1,11 @@
 
-const trackPath = "../data/all_day/let_it_out.json";
+const trackPath = "../data/all_day/jump_on_stage.json";
 
 const options = {
     width: 1000,
     height: 1000,
     outerPadding: 5,
-    innerPadding: 100,
+    innerPadding: 150,
 }
 
 d3.json(trackPath).then((track) => {
@@ -34,9 +34,24 @@ d3.json(trackPath).then((track) => {
             return `translate(${options.width / 2}px,${options.height / 2}px)`
         })
 
+    record.append("defs")
+        .append("pattern")
+        .attr("id", "albumArt")
+        .attr("width", 400)
+        .attr("height", 400)
+        .append("image")
+        .attr("xlink:href", "../album_art/All_Day.jpg")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", 400)
+        .attr("height", 400)
+
     // record
     record.append("circle")
         .attr("r", width / 2)
+
+    record.append("button")
+        .attr("class", "viynl")
 
     // inner part of record
     record.append("path")
@@ -49,7 +64,7 @@ d3.json(trackPath).then((track) => {
 
             return path();
         })
-        .style("fill", "#909090")
+        .style("fill", "url(#albumArt)")
 
     // each sample 
     tracks.forEach((d, i) => {
@@ -127,15 +142,19 @@ d3.json(trackPath).then((track) => {
         .style("transform", "rotate(90deg)")
         .style("font-size", "30px")
         .style("font-family", "arial")
+        
+
+
+
 
     let trackEls = record.selectAll(".track");
 
-    new Audio('../audio/Girl_Talk_Oh_No.mp3').play()
+    new Audio('../audio/Jump_On_Stage.mp3').play()
 
     let t = d3.timer(function (elapsed) {
 
         //speed up time
-        elapsed *= 70;
+        elapsed *= 1;
 
         // used to calculate radians
         const circum = 2 * Math.PI;
