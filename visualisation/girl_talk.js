@@ -1,5 +1,5 @@
 
-const trackPath = "../data/all_day/jump_on_stage.json";
+const trackPath = "../data/all_day/this_is_the_remix.json";
 
 const options = {
     width: 1000,
@@ -121,10 +121,12 @@ d3.json(trackPath).then((track) => {
 
     });
 
+    // 0 , -(width/2)
 
     // timeline 
     let timeLine = record.append("g")
-        .attr("class", "timeline")
+        .attr("class", "timeline");
+
 
     timeLine.append("line")
         .attr("x1", 0)
@@ -142,19 +144,25 @@ d3.json(trackPath).then((track) => {
         .style("transform", "rotate(90deg)")
         .style("font-size", "30px")
         .style("font-family", "arial")
-        
 
 
+    let offset = 0;
 
+    timeLine.call(d3.drag()
+        .on("drag", function () {
+            let angle = 180 - Math.atan2(d3.event.x,d3.event.y) * 180 / Math.PI;
+            offset = (angle/360) * duration;       
+        })
+    )
 
     let trackEls = record.selectAll(".track");
 
-    new Audio('../audio/Jump_On_Stage.mp3').play()
+    new Audio('../audio/This_is_the_Remix.mp3').play()
 
     let t = d3.timer(function (elapsed) {
 
-        //speed up time
-        elapsed *= 1;
+        //fast-forward
+        elapsed += offset;
 
         // used to calculate radians
         const circum = 2 * Math.PI;
