@@ -18,7 +18,7 @@ d3.json(trackPath).then((track) => {
     const height = options.height - 500;
 
     const arcWidth = ((width - (options.outerPadding + options.innerPadding + 50)) / 2) / tracks.length;
-    const duration = track.duration;
+
 
 
     let colors = ["#9bd5f3", "#ecb60f", "#b75dc5", "#4dbd2c"]
@@ -148,14 +148,6 @@ d3.json(trackPath).then((track) => {
 
     let offset = 0;
 
-    timeLine.call(d3.drag()
-        .on("drag", function () {
-            let angle = 180 - Math.atan2(d3.event.x, d3.event.y) * 180 / Math.PI;
-            offset = (angle / 360) * duration;
-        })
-    )
-
-   
 
     let audio = new Audio('../audio/This_is_the_Remix.mp3');
     let t;
@@ -163,7 +155,18 @@ d3.json(trackPath).then((track) => {
     audio.addEventListener("loadedmetadata", () => {
         audio.play();
 
+        const duration = track.duration;
         let trackEls = record.selectAll(".track");
+
+
+        timeLine.call(d3.drag()
+            .on("drag", function () {
+                let angle = 180 - Math.atan2(d3.event.x, d3.event.y) * 180 / Math.PI;
+                offset = (angle / 360) * duration;
+            })
+        )
+
+
         t = d3.timer(function (elapsed) {
 
             //fast-forward
