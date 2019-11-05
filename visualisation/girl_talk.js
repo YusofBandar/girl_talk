@@ -150,113 +150,45 @@ d3.json(trackPath).then((track) => {
 
     timeLine.call(d3.drag()
         .on("drag", function () {
-            let angle = 180 - Math.atan2(d3.event.x,d3.event.y) * 180 / Math.PI;
-            offset = (angle/360) * duration;       
+            let angle = 180 - Math.atan2(d3.event.x, d3.event.y) * 180 / Math.PI;
+            offset = (angle / 360) * duration;
         })
     )
 
-    let trackEls = record.selectAll(".track");
+   
 
-    new Audio('../audio/This_is_the_Remix.mp3').play()
+    let audio = new Audio('../audio/This_is_the_Remix.mp3');
+    let t;
 
-    let t = d3.timer(function (elapsed) {
+    audio.addEventListener("loadedmetadata", () => {
+        audio.play();
 
-        //fast-forward
-        elapsed += offset;
+        let trackEls = record.selectAll(".track");
+        t = d3.timer(function (elapsed) {
 
-        // used to calculate radians
-        const circum = 2 * Math.PI;
+            //fast-forward
+            elapsed += offset;
 
-        // time of the track converted into an angle
-        // 360deg = track duration
-        let angleRad = (elapsed / duration) * circum;
+            // used to calculate radians
+            const circum = 2 * Math.PI;
 
-        timeLine.style("transform", `rotate(${angleRad}rad)`)
+            // time of the track converted into an angle
+            // 360deg = track duration
+            let angleRad = (elapsed / duration) * circum;
 
-        trackEls.each(function (m, i) {
-            let d = tracks[i];
-
-            // angles of each ith track
-            let startAngle = (d.startTime / duration) * circum;
-            let endAngle = (d.endTime / duration) * circum;
-
-
-            // dont display track arcs until we have reached the correct point
-            startAngle = startAngle > angleRad ? angleRad : startAngle;
-            endAngle = endAngle > angleRad ? angleRad : endAngle;
-
-            let path = d3.arc()
-                .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
-                .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
-                .startAngle(startAngle)
-                .endAngle(endAngle);
-
-
-            // artist label line goes from arc centroid to 100 + radius of record 
-            const centroid = path.centroid();
-            const radius = (width / 2);
-            const hypo = Math.hypot(centroid[0], centroid[1])
-            const scaler = (radius + (65 * ((i + 1) % 3))) / hypo;
-
-
-            let label = d3.select(this)
-                .select(".label")
-                .style("visibility", () => {
-                    return startAngle != angleRad ? "visible" : "hidden";
-                })
-
-
-            label.select("line")
-                .attr("x1", centroid[0])
-                .attr("y1", centroid[1])
-                .attr("x2", centroid[0] * scaler)
-                .attr("y2", centroid[1] * scaler)
-
-            label.select(".label_artist")
-                .attr("x", (centroid[0] * scaler) + 3)
-                .attr("y", (centroid[1] * scaler) + 1)
-                .style("transform-origin", () => {
-                    return `${centroid[0] * scaler}px ${centroid[1] * scaler}px`;
-                })
-                .style("transform", `rotate(${-1.57 + ((startAngle + endAngle) / 2)}rad)`)
-
-
-            label.select(".label_track")
-                .attr("x", (centroid[0] * scaler) + 3)
-                .attr("y", (centroid[1] * scaler) + 15)
-                .style("transform-origin", () => {
-                    return `${centroid[0] * scaler}px ${centroid[1] * scaler}px`;
-                })
-                .style("transform", `rotate(${-1.57 + ((startAngle + endAngle) / 2)}rad)`)
-
-
-
-            d3.select(this)
-                .select("path")
-                .attr("d", () => {
-                    return path();
-                })
-        })
-
-
-        // minutes and seconds has elapsed
-        let minutes = parseInt(elapsed / 60000);
-        let seconds = parseInt((elapsed - (60000 * minutes)) / 1000);
-        seconds = seconds < 10 ? `0${seconds}` : seconds.toString();
-        text.text(`${minutes}:${seconds}`);
-
-
-        // if at the end of track remove all arcs and labels
-        if (elapsed > duration) {
-            t.stop()
-
-            text.text(`0:00`);
+            timeLine.style("transform", `rotate(${angleRad}rad)`)
 
             trackEls.each(function (m, i) {
                 let d = tracks[i];
 
+                // angles of each ith track
                 let startAngle = (d.startTime / duration) * circum;
                 let endAngle = (d.endTime / duration) * circum;
+
+
+                // dont display track arcs until we have reached the correct point
+                startAngle = startAngle > angleRad ? angleRad : startAngle;
+                endAngle = endAngle > angleRad ? angleRad : endAngle;
 
                 let path = d3.arc()
                     .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
@@ -267,66 +199,142 @@ d3.json(trackPath).then((track) => {
 
                 // artist label line goes from arc centroid to 100 + radius of record 
                 const centroid = path.centroid();
-                const delay = 5000;
+                const radius = (width / 2);
+                const hypo = Math.hypot(centroid[0], centroid[1])
+                const scaler = (radius + (65 * ((i + 1) % 3))) / hypo;
+
 
                 let label = d3.select(this)
-                    .select(".label");
+                    .select(".label")
+                    .style("visibility", () => {
+                        return startAngle != angleRad ? "visible" : "hidden";
+                    })
+
 
                 label.select("line")
-                    .transition()
-                    .duration(2000)
-                    .delay(delay)
-                    .ease(d3.easeExp)
                     .attr("x1", centroid[0])
                     .attr("y1", centroid[1])
-                    .attr("x2", centroid[0])
-                    .attr("y2", centroid[1]);
+                    .attr("x2", centroid[0] * scaler)
+                    .attr("y2", centroid[1] * scaler)
 
                 label.select(".label_artist")
-                    .transition()
-                    .duration(2000)
-                    .delay(delay)
-                    .style("opacity", 0)
+                    .attr("x", (centroid[0] * scaler) + 3)
+                    .attr("y", (centroid[1] * scaler) + 1)
+                    .style("transform-origin", () => {
+                        return `${centroid[0] * scaler}px ${centroid[1] * scaler}px`;
+                    })
+                    .style("transform", `rotate(${-1.57 + ((startAngle + endAngle) / 2)}rad)`)
+
 
                 label.select(".label_track")
-                    .transition()
-                    .duration(2000)
-                    .delay(delay)
-                    .style("opacity", 0)
-
+                    .attr("x", (centroid[0] * scaler) + 3)
+                    .attr("y", (centroid[1] * scaler) + 15)
+                    .style("transform-origin", () => {
+                        return `${centroid[0] * scaler}px ${centroid[1] * scaler}px`;
+                    })
+                    .style("transform", `rotate(${-1.57 + ((startAngle + endAngle) / 2)}rad)`)
 
 
 
                 d3.select(this)
                     .select("path")
-                    .transition()
-                    .duration(2000)
-                    .delay(delay)
-                    .ease(d3.easeExp)
-                    .attrTween("d", () => {
-
-                        let interpolate = d3.interpolate(endAngle, startAngle);
-
-                        return function (t) {
-                            endAngle = interpolate(t);
-
-                            let path = d3.arc()
-                                .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
-                                .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
-                                .startAngle(startAngle)
-                                .endAngle(endAngle);
-
-                            return path();
-                        };
-
-                    }).on("end", () => {
-                        trackEls.each(() => {
-                            d3.select(this).remove();
-                        })
-                    });
+                    .attr("d", () => {
+                        return path();
+                    })
             })
-        };
-    }, 150);
+
+
+            // minutes and seconds has elapsed
+            let minutes = parseInt(elapsed / 60000);
+            let seconds = parseInt((elapsed - (60000 * minutes)) / 1000);
+            seconds = seconds < 10 ? `0${seconds}` : seconds.toString();
+            text.text(`${minutes}:${seconds}`);
+
+
+            // if at the end of track remove all arcs and labels
+            if (elapsed > duration) {
+                t.stop()
+
+                text.text(`0:00`);
+
+                trackEls.each(function (m, i) {
+                    let d = tracks[i];
+
+                    let startAngle = (d.startTime / duration) * circum;
+                    let endAngle = (d.endTime / duration) * circum;
+
+                    let path = d3.arc()
+                        .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
+                        .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
+                        .startAngle(startAngle)
+                        .endAngle(endAngle);
+
+
+                    // artist label line goes from arc centroid to 100 + radius of record 
+                    const centroid = path.centroid();
+                    const delay = 5000;
+
+                    let label = d3.select(this)
+                        .select(".label");
+
+                    label.select("line")
+                        .transition()
+                        .duration(2000)
+                        .delay(delay)
+                        .ease(d3.easeExp)
+                        .attr("x1", centroid[0])
+                        .attr("y1", centroid[1])
+                        .attr("x2", centroid[0])
+                        .attr("y2", centroid[1]);
+
+                    label.select(".label_artist")
+                        .transition()
+                        .duration(2000)
+                        .delay(delay)
+                        .style("opacity", 0)
+
+                    label.select(".label_track")
+                        .transition()
+                        .duration(2000)
+                        .delay(delay)
+                        .style("opacity", 0)
+
+
+
+
+                    d3.select(this)
+                        .select("path")
+                        .transition()
+                        .duration(2000)
+                        .delay(delay)
+                        .ease(d3.easeExp)
+                        .attrTween("d", () => {
+
+                            let interpolate = d3.interpolate(endAngle, startAngle);
+
+                            return function (t) {
+                                endAngle = interpolate(t);
+
+                                let path = d3.arc()
+                                    .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
+                                    .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
+                                    .startAngle(startAngle)
+                                    .endAngle(endAngle);
+
+                                return path();
+                            };
+
+                        }).on("end", () => {
+                            trackEls.each(() => {
+                                d3.select(this).remove();
+                            })
+                        });
+                })
+            };
+        }, 150);
+    })
+
+
 
 
 }).catch((err) => {
