@@ -162,12 +162,13 @@ d3.json(trackPath).then((track) => {
         timeLine.call(d3.drag()
             .on("drag", function () {
                 let angle = 180 - Math.atan2(d3.event.x, d3.event.y) * 180 / Math.PI;
-                offset = (angle / 360) * duration;
+                audio.currentTime = ((angle / 360) * duration)/1000;
             })
         )
 
 
         t = d3.timer(function (elapsed) {
+            
             elapsed = (audio.currentTime * 1000);
             
             //fast-forward
