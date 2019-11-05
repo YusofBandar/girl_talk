@@ -168,7 +168,8 @@ d3.json(trackPath).then((track) => {
 
 
         t = d3.timer(function (elapsed) {
-
+            elapsed = (audio.currentTime * 1000);
+            
             //fast-forward
             elapsed += offset;
 
