@@ -359,6 +359,8 @@ class Record {
                 .append("g")
                 .style("transform", () => {
                     return `translate(${options.width / 2}px,${options.height / 2}px)`
+                }).on("click",()=>{
+                    this.play();
                 })
 
 
@@ -372,10 +374,6 @@ class Record {
 
 
             this.timer = this.timeLine(this.svg, width, height);
-
-            this.play();
-
-
         }).catch((err) => {
             console.error(err);
         })
