@@ -1,0 +1,31 @@
+{
+    "title":"All Day",
+    "released": "November 15, 2010",
+    "tracks": [
+        {
+            "title":"Oh No",
+            "dataPath":"../data/all_day/oh_no.json",
+            "audioPath": "../audio/Oh_No.mp3"
+        },
+        {
+            "title":"Let It Out",
+            "dataPath":"../data/all_day/let_it_out.json",
+            "audioPath": "../audio/let_it_out.mp3"
+        },
+        {
+            "title":"That's Right",
+            "dataPath":"../data/all_day/thats_right.json",
+            "audioPath": "../audio/Thats_Right.mp3"
+        },
+        {
+            "title":"Jump On Stage",
+            "dataPath":"../data/all_day/jump_on_stage.json",
+            "audioPath": "../audio/jump_on_stage.mp3"
+        },
+        {
+            "title":"This is the Remix",
+            "dataPath":"../data/all_day/this_is_the_remix.json",
+            "audioPath": "../audio/this_is_the_remix.mp3"
+        }
+    ]
+}
