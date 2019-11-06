@@ -1,6 +1,7 @@
 {
     "title":"All Day",
     "released": "November 15, 2010",
+    "artWork": "../album_art/All_Day.jpg",
     "tracks": [
         {
             "title":"Oh No",
