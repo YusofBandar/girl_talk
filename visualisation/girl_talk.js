@@ -382,7 +382,18 @@ class Record {
 
 
 
-const trackPath = "../data/all_day/this_is_the_remix.json";
-const audioPath = "../audio/This_is_the_Remix.mp3";
-new Record(trackPath, audioPath);
+//const trackPath = "../data/all_day/this_is_the_remix.json";
+//const audioPath = "../audio/This_is_the_Remix.mp3";
+//new Record(trackPath, audioPath);
+
+const albumPath = "../data/all_day.json"
+
+d3.json(albumPath).then((album) => {
+    album.tracks.forEach(track => {
+        new Record(track.dataPath, track.audioPath); 
+    });
+}).catch((err) => {
+    console.log(err);
+})
+
 
