@@ -1,94 +1,84 @@
+class Record {
+    constructor(dataPath, audioPath) {
+        this.dataPath = dataPath;
+        this.audioPath = audioPath;
 
-const trackPath = "../data/all_day/this_is_the_remix.json";
+        this.options = {
+            width: 1000,
+            height: 1000,
+            outerPadding: 5,
+            innerPadding: 150
+        }
 
-const options = {
-    width: 1000,
-    height: 1000,
-    outerPadding: 5,
-    innerPadding: 150,
-}
+        this.colors = ["#9bd5f3", "#ecb60f", "#b75dc5", "#4dbd2c"]
 
-d3.json(trackPath).then((track) => {
-
-    // track samples
-    const tracks = track.tracks;
-
-    //record height and width
-    const width = options.width - 500;
-    const height = options.height - 500;
-
-    const arcWidth = ((width - (options.outerPadding + options.innerPadding + 50)) / 2) / tracks.length;
+        this._init();
+    }
 
 
+    arc(index, startAngle, endAngle) {
+        let path = d3.arc()
+            .innerRadius(((this.width / 2) - ((index + 1) * this.arcWidth)) - this.options.outerPadding)
+            .outerRadius(((this.width / 2) - (index * this.arcWidth)) - this.options.outerPadding)
+            .startAngle(startAngle)
+            .endAngle(endAngle);
 
-    let colors = ["#9bd5f3", "#ecb60f", "#b75dc5", "#4dbd2c"]
+        return path;
+    }
 
-    let svg = d3.select("body")
-        .append("svg")
-        .attr("width", options.width)
-        .attr("height", options.height)
+    record(node, width, height) {
+        node.append("defs")
+            .append("pattern")
+            .attr("id", "albumArt")
+            .attr("width", 400)
+            .attr("height", 400)
+            .append("image")
+            .attr("xlink:href", "../album_art/All_Day.jpg")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width", 400)
+            .attr("height", 400)
 
+        // record
+        node.append("circle")
+            .attr("r", width / 2)
 
-    let record = svg.append("g")
-        .style("transform", () => {
-            return `translate(${options.width / 2}px,${options.height / 2}px)`
-        })
+        // inner part of record
+        node.append("path")
+            .attr("d", (d) => {
+                let path = d3.arc()
+                    .innerRadius((this.options.innerPadding / 2) * 0.2)
+                    .outerRadius(this.options.innerPadding / 2)
+                    .startAngle(0)
+                    .endAngle(2 * Math.PI);
 
-    record.append("defs")
-        .append("pattern")
-        .attr("id", "albumArt")
-        .attr("width", 400)
-        .attr("height", 400)
-        .append("image")
-        .attr("xlink:href", "../album_art/All_Day.jpg")
-        .attr("x", 0)
-        .attr("y", 0)
-        .attr("width", 400)
-        .attr("height", 400)
+                return path();
+            })
+            .style("fill", "url(#albumArt)")
 
-    // record
-    record.append("circle")
-        .attr("r", width / 2)
+        return node;
+    }
 
-    record.append("button")
-        .attr("class", "viynl")
-
-    // inner part of record
-    record.append("path")
-        .attr("d", (d) => {
-            let path = d3.arc()
-                .innerRadius((options.innerPadding / 2) * 0.2)
-                .outerRadius(options.innerPadding / 2)
-                .startAngle(0)
-                .endAngle(2 * Math.PI);
-
-            return path();
-        })
-        .style("fill", "url(#albumArt)")
-
-    // each sample 
-    tracks.forEach((d, i) => {
-        let track = record.append("g")
+    trackArc(index, node, width, height, arcWidth) {
+        let track = node.append("g")
             .attr("class", "track")
 
 
         // track arcs
         track.append("path")
             .style("fill", () => {
-                return colors[i % colors.length];
+                return this.colors[index % this.colors.length];
             })
             .attr("d", () => {
-                let path = d3.arc()
-                    .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
-                    .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
-                    .startAngle(0)
-                    .endAngle(0);
-
+                let path = this.arc(index, 0, 0);
                 return path();
+            });
 
-            })
+        return track;
+    }
 
-        let label = track.append("g")
+    trackLabel(node, track) {
+        let label = node.append("g")
             .attr("class", "label")
             .style("visibility", "hidden")
 
@@ -103,7 +93,7 @@ d3.json(trackPath).then((track) => {
 
         label.append("text")
             .attr("class", "label_artist")
-            .text(tracks[i].artist)
+            .text(track.artist)
             .attr("x", 0)
             .attr("y", 0)
             .style("font-size", "15px")
@@ -111,237 +101,290 @@ d3.json(trackPath).then((track) => {
 
         label.append("text")
             .attr("class", "label_track")
-            .text(tracks[i].track)
+            .text(track.track)
             .attr("x", 0)
             .attr("y", 0)
             .style("font-size", "10px")
             .style("font-family", "arial");
 
+        return label;
+    }
+
+    timeLine(node, width, height) {
+        // timeline 
+        let timeLine = node.append("g")
+            .attr("class", "timeline");
 
 
-    });
+        timeLine.append("line")
+            .attr("x1", 0)
+            .attr("y1", 0)
+            .attr("x2", 0)
+            .attr("y2", -((height / 2) + (height / 2 * 0.3)))
+            .style("stroke", "#bfbfbf")
+            .style("stroke-width", "3px")
+            .style("stroke-dasharray", "3px");
 
-    // 0 , -(width/2)
+        timeLine.append("text")
+            .text("0:00")
+            .attr("x", -((height / 2) + (height / 2 * 0.55)))
+            .attr("y", 10)
+            .style("transform", "rotate(90deg)")
+            .style("font-size", "30px")
+            .style("font-family", "arial")
 
-    // timeline 
-    let timeLine = record.append("g")
-        .attr("class", "timeline");
+        return timeLine;
+    }
 
+    artistLabels(node, index, path, startAngle, endAngle, angle) {
+        // artist label line goes from arc centroid to 100 + radius of record 
+        const centroid = path.centroid();
+        const radius = (this.width / 2);
+        const hypo = Math.hypot(centroid[0], centroid[1])
+        const scaler = (radius + (65 * ((index + 1) % 3))) / hypo;
 
-    timeLine.append("line")
-        .attr("x1", 0)
-        .attr("y1", 0)
-        .attr("x2", 0)
-        .attr("y2", -((height / 2) + (height / 2 * 0.3)))
-        .style("stroke", "#bfbfbf")
-        .style("stroke-width", "3px")
-        .style("stroke-dasharray", "3px");
-
-    let text = timeLine.append("text")
-        .text("0:00")
-        .attr("x", -((height / 2) + (height / 2 * 0.55)))
-        .attr("y", 10)
-        .style("transform", "rotate(90deg)")
-        .style("font-size", "30px")
-        .style("font-family", "arial")
-
-
-    let offset = 0;
-
-
-    let audio = new Audio('../audio/This_is_the_Remix.mp3');
-    let t;
-
-    audio.addEventListener("loadedmetadata", () => {
-        audio.play();
-
-        const duration = track.duration;
-        let trackEls = record.selectAll(".track");
-
-
-        timeLine.call(d3.drag()
-            .on("drag", function () {
-                let angle = 180 - Math.atan2(d3.event.x, d3.event.y) * 180 / Math.PI;
-                audio.currentTime = ((angle / 360) * duration)/1000;
+        let label = d3.select(node)
+            .select(".label")
+            .style("visibility", () => {
+                return startAngle != angle ? "visible" : "hidden";
             })
-        )
 
 
-        t = d3.timer(function (elapsed) {
-            
-            elapsed = (audio.currentTime * 1000);
-            
-            //fast-forward
-            elapsed += offset;
+        label.select("line")
+            .attr("x1", centroid[0])
+            .attr("y1", centroid[1])
+            .attr("x2", centroid[0] * scaler)
+            .attr("y2", centroid[1] * scaler)
 
-            // used to calculate radians
-            const circum = 2 * Math.PI;
-
-            // time of the track converted into an angle
-            // 360deg = track duration
-            let angleRad = (elapsed / duration) * circum;
-
-            timeLine.style("transform", `rotate(${angleRad}rad)`)
-
-            trackEls.each(function (m, i) {
-                let d = tracks[i];
-
-                // angles of each ith track
-                let startAngle = (d.startTime / duration) * circum;
-                let endAngle = (d.endTime / duration) * circum;
+        label.select(".label_artist")
+            .attr("x", (centroid[0] * scaler) + 3)
+            .attr("y", (centroid[1] * scaler) + 1)
+            .style("transform-origin", () => {
+                return `${centroid[0] * scaler}px ${centroid[1] * scaler}px`;
+            })
+            .style("transform", `rotate(${-1.57 + ((startAngle + endAngle) / 2)}rad)`)
 
 
-                // dont display track arcs until we have reached the correct point
-                startAngle = startAngle > angleRad ? angleRad : startAngle;
-                endAngle = endAngle > angleRad ? angleRad : endAngle;
+        label.select(".label_track")
+            .attr("x", (centroid[0] * scaler) + 3)
+            .attr("y", (centroid[1] * scaler) + 15)
+            .style("transform-origin", () => {
+                return `${centroid[0] * scaler}px ${centroid[1] * scaler}px`;
+            })
+            .style("transform", `rotate(${-1.57 + ((startAngle + endAngle) / 2)}rad)`)
+    }
 
-                let path = d3.arc()
-                    .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
-                    .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
-                    .startAngle(startAngle)
-                    .endAngle(endAngle);
+    end(trackEls,duration) {
+        const circum = 2 * Math.PI;
 
+        trackEls.each((m, i,nodes) => {
+            let d = this.data.tracks[i];
 
-                // artist label line goes from arc centroid to 100 + radius of record 
-                const centroid = path.centroid();
-                const radius = (width / 2);
-                const hypo = Math.hypot(centroid[0], centroid[1])
-                const scaler = (radius + (65 * ((i + 1) % 3))) / hypo;
+            let startAngle = (d.startTime / duration) * circum;
+            let endAngle = (d.endTime / duration) * circum;
 
-
-                let label = d3.select(this)
-                    .select(".label")
-                    .style("visibility", () => {
-                        return startAngle != angleRad ? "visible" : "hidden";
-                    })
-
-
-                label.select("line")
-                    .attr("x1", centroid[0])
-                    .attr("y1", centroid[1])
-                    .attr("x2", centroid[0] * scaler)
-                    .attr("y2", centroid[1] * scaler)
-
-                label.select(".label_artist")
-                    .attr("x", (centroid[0] * scaler) + 3)
-                    .attr("y", (centroid[1] * scaler) + 1)
-                    .style("transform-origin", () => {
-                        return `${centroid[0] * scaler}px ${centroid[1] * scaler}px`;
-                    })
-                    .style("transform", `rotate(${-1.57 + ((startAngle + endAngle) / 2)}rad)`)
+            let path = d3.arc()
+                .innerRadius(((this.width / 2) - ((i + 1) * this.arcWidth)) - this.options.outerPadding)
+                .outerRadius(((this.width / 2) - (i * this.arcWidth)) - this.options.outerPadding)
+                .startAngle(startAngle)
+                .endAngle(endAngle);
 
 
-                label.select(".label_track")
-                    .attr("x", (centroid[0] * scaler) + 3)
-                    .attr("y", (centroid[1] * scaler) + 15)
-                    .style("transform-origin", () => {
-                        return `${centroid[0] * scaler}px ${centroid[1] * scaler}px`;
-                    })
-                    .style("transform", `rotate(${-1.57 + ((startAngle + endAngle) / 2)}rad)`)
+            // artist label line goes from arc centroid to 100 + radius of record 
+            const centroid = path.centroid();
+            const delay = 5000;
+
+            let label = d3.select(nodes[i])
+                .select(".label");
+
+            label.select("line")
+                .transition()
+                .duration(2000)
+                .delay(delay)
+                .ease(d3.easeExp)
+                .attr("x1", centroid[0])
+                .attr("y1", centroid[1])
+                .attr("x2", centroid[0])
+                .attr("y2", centroid[1]);
+
+            label.select(".label_artist")
+                .transition()
+                .duration(2000)
+                .delay(delay)
+                .style("opacity", 0)
+
+            label.select(".label_track")
+                .transition()
+                .duration(2000)
+                .delay(delay)
+                .style("opacity", 0)
 
 
 
-                d3.select(this)
-                    .select("path")
-                    .attr("d", () => {
+
+            d3.select(nodes[i])
+                .select("path")
+                .transition()
+                .duration(2000)
+                .delay(delay)
+                .ease(d3.easeExp)
+                .attrTween("d", () => {
+
+                    let interpolate = d3.interpolate(endAngle, startAngle);
+
+                    return (t)=> {
+                        endAngle = interpolate(t);
+
+                        let path = d3.arc()
+                            .innerRadius(((this.width / 2) - ((i + 1) * this.arcWidth)) - this.options.outerPadding)
+                            .outerRadius(((this.width / 2) - (i * this.arcWidth)) - this.options.outerPadding)
+                            .startAngle(startAngle)
+                            .endAngle(endAngle);
+
                         return path();
+                    };
+
+                }).on("end", () => {
+                    this.timer.select("text").text(`0:00`);
+                    trackEls.each(() => {
+                        d3.select(this).remove();
                     })
-            })
+                });
+        })
+    }
+
+    play() {
+        let audio = new Audio(this.audioPath);
+        let t;
+
+        audio.addEventListener("loadedmetadata", () => {
+            audio.play();
+
+            const duration = this.data.duration;
+            let trackEls = this.svg.selectAll(".track");
 
 
-            // minutes and seconds has elapsed
-            let minutes = parseInt(elapsed / 60000);
-            let seconds = parseInt((elapsed - (60000 * minutes)) / 1000);
-            seconds = seconds < 10 ? `0${seconds}` : seconds.toString();
-            text.text(`${minutes}:${seconds}`);
+
+            this.timer.call(d3.drag()
+                .on("drag", function () {
+                    let angle = 180 - Math.atan2(d3.event.x, d3.event.y) * 180 / Math.PI;
+                    audio.currentTime = ((angle / 360) * duration) / 1000;
+                })
+            )
 
 
-            // if at the end of track remove all arcs and labels
-            if (elapsed > duration) {
-                t.stop()
+            t = d3.timer((elapsed) => {
 
-                text.text(`0:00`);
+                elapsed = (audio.currentTime * 1000) * 1;
 
-                trackEls.each(function (m, i) {
-                    let d = tracks[i];
+                // used to calculate radians
+                const circum = 2 * Math.PI;
 
+                // time of the track converted into an angle
+                // 360deg = track duration
+                let angleRad = (elapsed / duration) * circum;
+
+                this.timer.style("transform", `rotate(${angleRad}rad)`)
+
+
+                trackEls.each((m, i, nodes) => {
+                    let d = this.data.tracks[i];
+
+                    // angles of each ith track
                     let startAngle = (d.startTime / duration) * circum;
                     let endAngle = (d.endTime / duration) * circum;
 
+
+                    // dont display track arcs until we have reached the correct point
+                    startAngle = startAngle > angleRad ? angleRad : startAngle;
+                    endAngle = endAngle > angleRad ? angleRad : endAngle;
+
                     let path = d3.arc()
-                        .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
-                        .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
+                        .innerRadius(((this.width / 2) - ((i + 1) * this.arcWidth)) - this.options.outerPadding)
+                        .outerRadius(((this.width / 2) - (i * this.arcWidth)) - this.options.outerPadding)
                         .startAngle(startAngle)
                         .endAngle(endAngle);
 
 
-                    // artist label line goes from arc centroid to 100 + radius of record 
-                    const centroid = path.centroid();
-                    const delay = 5000;
+                    this.artistLabels(nodes[i], i, path, startAngle, endAngle, angleRad);
 
-                    let label = d3.select(this)
-                        .select(".label");
-
-                    label.select("line")
-                        .transition()
-                        .duration(2000)
-                        .delay(delay)
-                        .ease(d3.easeExp)
-                        .attr("x1", centroid[0])
-                        .attr("y1", centroid[1])
-                        .attr("x2", centroid[0])
-                        .attr("y2", centroid[1]);
-
-                    label.select(".label_artist")
-                        .transition()
-                        .duration(2000)
-                        .delay(delay)
-                        .style("opacity", 0)
-
-                    label.select(".label_track")
-                        .transition()
-                        .duration(2000)
-                        .delay(delay)
-                        .style("opacity", 0)
-
-
-
-
-                    d3.select(this)
+                    d3.select(nodes[i])
                         .select("path")
-                        .transition()
-                        .duration(2000)
-                        .delay(delay)
-                        .ease(d3.easeExp)
-                        .attrTween("d", () => {
-
-                            let interpolate = d3.interpolate(endAngle, startAngle);
-
-                            return function (t) {
-                                endAngle = interpolate(t);
-
-                                let path = d3.arc()
-                                    .innerRadius(((width / 2) - ((i + 1) * arcWidth)) - options.outerPadding)
-                                    .outerRadius(((width / 2) - (i * arcWidth)) - options.outerPadding)
-                                    .startAngle(startAngle)
-                                    .endAngle(endAngle);
-
-                                return path();
-                            };
-
-                        }).on("end", () => {
-                            trackEls.each(() => {
-                                d3.select(this).remove();
-                            })
-                        });
+                        .attr("d", () => {
+                            return path();
+                        })
                 })
-            };
-        }, 150);
-    })
+
+
+                // minutes and seconds has elapsed
+                let minutes = parseInt(elapsed / 60000);
+                let seconds = parseInt((elapsed - (60000 * minutes)) / 1000);
+                seconds = seconds < 10 ? `0${seconds}` : seconds.toString();
+                this.timer.select("text").text(`${minutes}:${seconds}`);
+
+
+                // if at the end of track remove all arcs and labels
+                if (elapsed > duration) {
+                    t.stop()
+                    this.end(trackEls,duration);
+                }
+            }, 150);
+        })
+    }
+
+
+    _init() {
+        d3.json(this.dataPath).then((track) => {
+
+            this.data = track;
+
+            const options = this.options;
+
+            // track samples
+            const tracks = track.tracks;
+
+            //record height and width
+            const width = options.width - 500;
+            const height = options.height - 500;
+            this.width = width;
+            this.height = height;
+
+            const arcWidth = ((width - (options.outerPadding + options.innerPadding + 50)) / 2) / tracks.length;
+            this.arcWidth = arcWidth;
+
+            this.svg = d3.select("body")
+                .append("svg")
+                .attr("width", options.width)
+                .attr("height", options.height)
+                .append("g")
+                .style("transform", () => {
+                    return `translate(${options.width / 2}px,${options.height / 2}px)`
+                })
+
+
+            this.record(this.svg, width, height);
+
+            // each sample 
+            tracks.forEach((track, i) => {
+                let trackArc = this.trackArc(i, this.svg, width, height, arcWidth);
+                this.trackLabel(trackArc, track)
+            });
+
+
+            this.timer = this.timeLine(this.svg, width, height);
+
+            this.play();
+
+
+        }).catch((err) => {
+            console.error(err);
+        })
+    }
+}
 
 
 
+const trackPath = "../data/all_day/this_is_the_remix.json";
+const audioPath = "../audio/This_is_the_Remix.mp3";
+new Record(trackPath, audioPath);
 
-}).catch((err) => {
-    console.error(err);
-})
