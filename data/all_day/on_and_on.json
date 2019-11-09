@@ -1,0 +1,157 @@
+{
+    "duration": 309000,
+    "album": "All Day",
+    "track": "On and On",
+    "tracks": [
+        {
+            "startTime": 0,
+            "endTime": 82000,
+            "artist": "Lisa Lisa and Cult Jam",
+            "track": "Let the Beat Hit 'Em"
+        },
+        {
+            "startTime": 0,
+            "endTime": 74000,
+            "artist": "Cream",
+            "track": "Sunshine of Your Love"
+        },
+        {
+            "startTime": 0,
+            "endTime": 81000,
+            "artist": "James Brown",
+            "track": "Funky Drummer"
+        },
+        {
+            "startTime": 0,
+            "endTime": 83000,
+            "artist": "Pet Shop Boys",
+            "track": "Opportunities (Let's Make Lots of Money)"
+        },
+        {
+            "startTime": 3000,
+            "endTime": 3000,
+            "artist": "The Notorious B.I.G.",
+            "track": "Nasty Girl"
+        },
+        {
+            "startTime": 7000,
+            "endTime": 66000,
+            "artist": "The Notorious B.I.G.",
+            "track": "Nasty Boy"
+        },
+        {
+            "startTime": 69000,
+            "endTime": 146000,
+            "artist": "Trina",
+            "track": "Pull Over (Remix)"
+        },
+        {
+            "startTime": 74000,
+            "endTime": 90000,
+            "artist": "Kesha",
+            "track": "Tik Tok"
+        },
+        {
+            "startTime": 87000,
+            "endTime": 89000,
+            "artist": "Grand Funk Railroad",
+            "track": "We're an American Band"
+        },
+        {
+            "startTime": 89000,
+            "endTime": 157000,
+            "artist": "New Order",
+            "track": "Bizarre Love Triangle"
+        },
+        {
+            "startTime": 92000,
+            "endTime": 114000,
+            "artist": "Birdman",
+            "track": "Birdman [["
+        },
+        {
+            "startTime": 131000,
+            "endTime": 149000,
+            "artist": "Chubb Rock",
+            "track": "Treat 'Em Right"
+        },
+        {
+            "startTime": 156000,
+            "endTime": 156000,
+            "artist": "Britney Spears",
+            "track": "Circus"
+        },
+        {
+            "startTime": 157000,
+            "endTime": 242000,
+            "artist": "White Zombie",
+            "track": "Thunder Kiss '65"
+        },
+        {
+            "startTime": 158000,
+            "endTime": 226000,
+            "artist": "Ying Yang Twins",
+            "track": "Wild Out"
+        },
+        {
+            "startTime": 215000,
+            "endTime": 237000,
+            "artist": "Ludacris",
+            "track": "Everybody Drunk"
+        },
+        {
+            "startTime": 227000,
+            "endTime": 228000,
+            "artist": "De La Soul",
+            "track": "Me Myself and I"
+        },
+        {
+            "startTime": 229000,
+            "endTime": 306000,
+            "artist": "Daft Punk",
+            "track": "Television Rules the Nation"
+        },
+        {
+            "startTime": 229000,
+            "endTime": 233000,
+            "artist": "Lyn Collins",
+            "track": "Think (About It)"
+        },
+        {
+            "startTime": 237000,
+            "endTime": 306000,
+            "artist": "U2",
+            "track": "With or Without You"
+        },
+        {
+            "startTime": 244000,
+            "endTime": 293000,
+            "artist": "Twista",
+            "track": "Wetter"
+        },
+        {
+            "startTime": 277000,
+            "endTime": 292000,
+            "artist": "Robert Palmer",
+            "track": "Addicted to Love"
+        },
+        {
+            "startTime": 292000,
+            "endTime": 294000,
+            "artist": "DJ OGB",
+            "track": "Hands Up"
+        },
+        {
+            "startTime": 299000,
+            "endTime": 309000,
+            "artist": "Aphex Twin",
+            "track": "Windowlicker"
+        },
+        {
+            "startTime": 301000,
+            "endTime": 309000,
+            "artist": "Lady Gaga",
+            "track": "Bad Romance"
+        }
+    ]
+}

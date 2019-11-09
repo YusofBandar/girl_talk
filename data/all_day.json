@@ -26,7 +26,12 @@
         {
             "title":"This is the Remix",
             "dataPath":"../data/all_day/this_is_the_remix.json",
-            "audioPath": "../audio/this_is_the_remix.mp3"
+            "audioPath": "../audio/This_is_the_Remix.mp3"
+        },
+        {
+            "title":"On and On",
+            "dataPath":"../data/all_day/on_and_on.json",
+            "audioPath": "../audio/On_and_On.mp3"
         }
     ]
 }
