@@ -10,7 +10,7 @@ class Record {
             innerPadding: 150
         }
 
-        this.colors = ["#9bd5f3", "#ecb60f", "#b75dc5", "#4dbd2c","#b72d44"]
+        this.colors = ["#9bd5f3", "#ecb60f", "#b75dc5", "#4dbd2c", "#b72d44"]
         this.PLAYING = 1;
         this.PAUSED = 0;
         this.STOPPED = -1;
@@ -63,21 +63,52 @@ class Record {
     }
 
     trackArc(index, node, width, height, arcWidth) {
+
+        let scope = this;
+
         let track = node.append("g")
             .attr("class", "track")
 
 
+
+
         // track arcs
         track.append("path")
+            .attr("index", index)
             .style("fill", () => {
                 return this.colors[index % this.colors.length];
             })
             .attr("d", () => {
                 let path = this.arc(index, 0, 0);
                 return path();
-            });
+            })
+            .on("mouseover", function () {
+                scope.arcHover(d3.select(this).attr("index"));
+            })
+            .on("mouseout", function () {
+                scope.arcLeave();
+            })
 
         return track;
+    }
+
+    arcLeave() {
+        let trackEls = this.svg.selectAll(".track");
+        trackEls.each((m, i, nodes) => {
+            let node = d3.select(nodes[i]);
+            node.style("opacity", 1);
+        })
+    }
+
+    arcHover(index) {
+        console.log(index);
+        let trackEls = this.svg.selectAll(".track");
+        trackEls.each((m, i, nodes) => {
+            let node = d3.select(nodes[i]);
+            if (node.select("path").attr("index") != index) {
+                node.style("opacity", 0.2);
+            }
+        })
     }
 
     trackLabel(node, track) {
@@ -123,7 +154,7 @@ class Record {
             .attr("x1", 0)
             .attr("y1", 0)
             .attr("x2", 0)
-            .attr("y2", -(this.radius * 1.2 ))
+            .attr("y2", -(this.radius * 1.2))
             .style("stroke", "#bfbfbf")
             .style("stroke-width", "3px")
             .style("stroke-dasharray", "3px");
@@ -166,7 +197,7 @@ class Record {
                 return `${centroid[0] * scaler}px ${centroid[1] * scaler}px`;
             })
             .style("transform", `rotate(${-1.57 + ((startAngle + endAngle) / 2)}rad)`)
-            .style("opacity",1);
+            .style("opacity", 1);
 
 
         label.select(".label_track")
@@ -176,21 +207,21 @@ class Record {
                 return `${centroid[0] * scaler}px ${centroid[1] * scaler}px`;
             })
             .style("transform", `rotate(${-1.57 + ((startAngle + endAngle) / 2)}rad)`)
-            .style("opacity",1);
+            .style("opacity", 1);
     }
 
-    resume(){
+    resume() {
         this.state = this.PLAYING;
         this.audio.play();
     }
 
-    stop(trackEls,duration) {
+    stop(trackEls, duration) {
 
         this.state = this.STOPPED;
 
         const circum = 2 * Math.PI;
 
-        trackEls.each((m, i,nodes) => {
+        trackEls.each((m, i, nodes) => {
             let d = this.data.tracks[i];
 
             let startAngle = (d.startTime / duration) * circum;
@@ -245,7 +276,7 @@ class Record {
 
                     let interpolate = d3.interpolate(endAngle, startAngle);
 
-                    return (t)=> {
+                    return (t) => {
                         endAngle = interpolate(t);
 
                         let path = d3.arc()
@@ -266,7 +297,7 @@ class Record {
         })
     }
 
-    pause(){
+    pause() {
         this.state = this.PAUSED;
         this.audio.pause();
     }
@@ -276,7 +307,7 @@ class Record {
 
         let audio = new Audio(this.audioPath);
         this.audio = audio;
-        
+
         audio.addEventListener("loadedmetadata", () => {
             audio.play();
 
@@ -346,7 +377,7 @@ class Record {
                 // if at the end of track remove all arcs and labels
                 if (elapsed > duration) {
                     this.t.stop()
-                    this.stop(trackEls,duration);
+                    this.stop(trackEls, duration);
                 }
             }, 150);
         })
@@ -371,7 +402,7 @@ class Record {
             this.height = height;
             this.radius = width / 1.8;
 
-            const arcWidth = (((this.radius*2) - (options.outerPadding + options.innerPadding + 50)) / 2) / tracks.length;
+            const arcWidth = (((this.radius * 2) - (options.outerPadding + options.innerPadding + 50)) / 2) / tracks.length;
             this.arcWidth = arcWidth;
 
             this.svg = d3.select("body")
@@ -381,12 +412,12 @@ class Record {
                 .append("g")
                 .style("transform", () => {
                     return `translate(${options.width / 2}px,${options.height / 2}px)`
-                }).on("click",()=>{
-                    if(this.state == this.STOPPED){
+                }).on("click", () => {
+                    if (this.state == this.STOPPED) {
                         this.play();
-                    }else if(this.state == this.PAUSED){
+                    } else if (this.state == this.PAUSED) {
                         this.resume();
-                    }else if(this.state == this.PLAYING){
+                    } else if (this.state == this.PLAYING) {
                         this.pause();
                     }
                 })
@@ -413,7 +444,7 @@ const albumPath = "../data/all_day.json"
 
 d3.json(albumPath).then((album) => {
     album.tracks.forEach(track => {
-        new Record(track.dataPath, track.audioPath); 
+        new Record(track.dataPath, track.audioPath);
     });
 }).catch((err) => {
     console.log(err);
