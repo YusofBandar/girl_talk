@@ -166,6 +166,7 @@ class Record {
                 return `${centroid[0] * scaler}px ${centroid[1] * scaler}px`;
             })
             .style("transform", `rotate(${-1.57 + ((startAngle + endAngle) / 2)}rad)`)
+            .style("opacity",1);
 
 
         label.select(".label_track")
@@ -175,6 +176,7 @@ class Record {
                 return `${centroid[0] * scaler}px ${centroid[1] * scaler}px`;
             })
             .style("transform", `rotate(${-1.57 + ((startAngle + endAngle) / 2)}rad)`)
+            .style("opacity",1);
     }
 
     resume(){
