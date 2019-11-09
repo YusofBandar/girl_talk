@@ -18,8 +18,8 @@ class Record {
 
     arc(index, startAngle, endAngle) {
         let path = d3.arc()
-            .innerRadius(((this.width / 2) - ((index + 1) * this.arcWidth)) - this.options.outerPadding)
-            .outerRadius(((this.width / 2) - (index * this.arcWidth)) - this.options.outerPadding)
+            .innerRadius(((this.radius) - ((index + 1) * this.arcWidth)) - this.options.outerPadding)
+            .outerRadius(((this.radius) - (index * this.arcWidth)) - this.options.outerPadding)
             .startAngle(startAngle)
             .endAngle(endAngle);
 
@@ -41,7 +41,7 @@ class Record {
 
         // record
         node.append("circle")
-            .attr("r", width / 2)
+            .attr("r", this.radius)
 
         // inner part of record
         node.append("path")
@@ -120,14 +120,14 @@ class Record {
             .attr("x1", 0)
             .attr("y1", 0)
             .attr("x2", 0)
-            .attr("y2", -((height / 2) + (height / 2 * 0.3)))
+            .attr("y2", -(this.radius * 1.2 ))
             .style("stroke", "#bfbfbf")
             .style("stroke-width", "3px")
             .style("stroke-dasharray", "3px");
 
         timeLine.append("text")
             .text("0:00")
-            .attr("x", -((height / 2) + (height / 2 * 0.55)))
+            .attr("x", -(this.radius * 1.3))
             .attr("y", 10)
             .style("transform", "rotate(90deg)")
             .style("font-size", "30px")
@@ -139,7 +139,7 @@ class Record {
     artistLabels(node, index, path, startAngle, endAngle, angle) {
         // artist label line goes from arc centroid to 100 + radius of record 
         const centroid = path.centroid();
-        const radius = (this.width / 2);
+        const radius = (this.radius);
         const hypo = Math.hypot(centroid[0], centroid[1])
         const scaler = (radius + (65 * ((index + 1) % 3))) / hypo;
 
@@ -184,8 +184,8 @@ class Record {
             let endAngle = (d.endTime / duration) * circum;
 
             let path = d3.arc()
-                .innerRadius(((this.width / 2) - ((i + 1) * this.arcWidth)) - this.options.outerPadding)
-                .outerRadius(((this.width / 2) - (i * this.arcWidth)) - this.options.outerPadding)
+                .innerRadius(((this.radius) - ((i + 1) * this.arcWidth)) - this.options.outerPadding)
+                .outerRadius(((this.radius) - (i * this.arcWidth)) - this.options.outerPadding)
                 .startAngle(startAngle)
                 .endAngle(endAngle);
 
@@ -236,8 +236,8 @@ class Record {
                         endAngle = interpolate(t);
 
                         let path = d3.arc()
-                            .innerRadius(((this.width / 2) - ((i + 1) * this.arcWidth)) - this.options.outerPadding)
-                            .outerRadius(((this.width / 2) - (i * this.arcWidth)) - this.options.outerPadding)
+                            .innerRadius(((this.radius) - ((i + 1) * this.arcWidth)) - this.options.outerPadding)
+                            .outerRadius(((this.radius) - (i * this.arcWidth)) - this.options.outerPadding)
                             .startAngle(startAngle)
                             .endAngle(endAngle);
 
@@ -300,8 +300,8 @@ class Record {
                     endAngle = endAngle > angleRad ? angleRad : endAngle;
 
                     let path = d3.arc()
-                        .innerRadius(((this.width / 2) - ((i + 1) * this.arcWidth)) - this.options.outerPadding)
-                        .outerRadius(((this.width / 2) - (i * this.arcWidth)) - this.options.outerPadding)
+                        .innerRadius(((this.radius) - ((i + 1) * this.arcWidth)) - this.options.outerPadding)
+                        .outerRadius(((this.radius) - (i * this.arcWidth)) - this.options.outerPadding)
                         .startAngle(startAngle)
                         .endAngle(endAngle);
 
@@ -348,8 +348,9 @@ class Record {
             const height = options.height - 500;
             this.width = width;
             this.height = height;
+            this.radius = width / 1.8;
 
-            const arcWidth = ((width - (options.outerPadding + options.innerPadding + 50)) / 2) / tracks.length;
+            const arcWidth = (((this.radius*2) - (options.outerPadding + options.innerPadding + 50)) / 2) / tracks.length;
             this.arcWidth = arcWidth;
 
             this.svg = d3.select("body")
