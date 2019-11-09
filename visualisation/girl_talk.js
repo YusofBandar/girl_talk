@@ -11,6 +11,9 @@ class Record {
         }
 
         this.colors = ["#9bd5f3", "#ecb60f", "#b75dc5", "#4dbd2c","#b72d44"]
+        this.PLAYING = 1;
+        this.PAUSED = 0;
+        this.STOPPED = -1;
 
         this._init();
     }
@@ -174,7 +177,15 @@ class Record {
             .style("transform", `rotate(${-1.57 + ((startAngle + endAngle) / 2)}rad)`)
     }
 
-    end(trackEls,duration) {
+    resume(){
+        this.state = this.PLAYING;
+        this.audio.play();
+    }
+
+    stop(trackEls,duration) {
+
+        this.state = this.STOPPED;
+
         const circum = 2 * Math.PI;
 
         trackEls.each((m, i,nodes) => {
@@ -254,17 +265,16 @@ class Record {
     }
 
     pause(){
-        this.playing = false;
+        this.state = this.PAUSED;
         this.audio.pause();
     }
 
     play() {
-        this.playing = true;
+        this.state = this.PLAYING;
 
         let audio = new Audio(this.audioPath);
         this.audio = audio;
-        let t;
-
+        
         audio.addEventListener("loadedmetadata", () => {
             audio.play();
 
@@ -281,7 +291,7 @@ class Record {
             )
 
 
-            t = d3.timer((elapsed) => {
+            this.t = d3.timer((elapsed) => {
 
                 elapsed = (audio.currentTime * 1000) * 1;
 
@@ -333,8 +343,8 @@ class Record {
 
                 // if at the end of track remove all arcs and labels
                 if (elapsed > duration) {
-                    t.stop()
-                    this.end(trackEls,duration);
+                    this.t.stop()
+                    this.stop(trackEls,duration);
                 }
             }, 150);
         })
@@ -344,6 +354,7 @@ class Record {
     _init() {
         d3.json(this.dataPath).then((track) => {
 
+            this.state = this.STOPPED
             this.data = track;
 
             const options = this.options;
@@ -369,13 +380,13 @@ class Record {
                 .style("transform", () => {
                     return `translate(${options.width / 2}px,${options.height / 2}px)`
                 }).on("click",()=>{
-
-                    if(!this.playing){
+                    if(this.state == this.STOPPED){
                         this.play();
-                    }else{
+                    }else if(this.state == this.PAUSED){
+                        this.resume();
+                    }else if(this.state == this.PLAYING){
                         this.pause();
                     }
-                    
                 })
 
 
@@ -395,11 +406,6 @@ class Record {
     }
 }
 
-
-
-//const trackPath = "../data/all_day/this_is_the_remix.json";
-//const audioPath = "../audio/This_is_the_Remix.mp3";
-//new Record(trackPath, audioPath);
 
 const albumPath = "../data/all_day.json"
 
