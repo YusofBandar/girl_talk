@@ -10,7 +10,7 @@ class Record {
             innerPadding: 150
         }
 
-        this.colors = ["#9bd5f3", "#ecb60f", "#b75dc5", "#4dbd2c"]
+        this.colors = ["#9bd5f3", "#ecb60f", "#b75dc5", "#4dbd2c","#b72d44"]
 
         this._init();
     }
@@ -253,8 +253,16 @@ class Record {
         })
     }
 
+    pause(){
+        this.playing = false;
+        this.audio.pause();
+    }
+
     play() {
+        this.playing = true;
+
         let audio = new Audio(this.audioPath);
+        this.audio = audio;
         let t;
 
         audio.addEventListener("loadedmetadata", () => {
@@ -361,7 +369,13 @@ class Record {
                 .style("transform", () => {
                     return `translate(${options.width / 2}px,${options.height / 2}px)`
                 }).on("click",()=>{
-                    this.play();
+
+                    if(!this.playing){
+                        this.play();
+                    }else{
+                        this.pause();
+                    }
+                    
                 })
 
 
