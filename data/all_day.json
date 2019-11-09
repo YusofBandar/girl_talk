@@ -21,7 +21,7 @@
         {
             "title":"Jump On Stage",
             "dataPath":"../data/all_day/jump_on_stage.json",
-            "audioPath": "../audio/jump_on_stage.mp3"
+            "audioPath": "../audio/Jump_On_Stage.mp3"
         },
         {
             "title":"This is the Remix",
