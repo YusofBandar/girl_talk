@@ -44,12 +44,14 @@ class Album {
                         .append("div")
                         .attr("id", album.title);
 
+                    let size = Math.max(window.outerWidth,window.outerHeight) + 100;
+
                     d3.select(this)
                         .transition()
                         .duration(800)
                         .ease(d3.easeExp)
-                        .style("width", `${window.innerWidth - 100}px`)
-                        .style("height", `${window.innerWidth - 100}px`)
+                        .style("width", `${size}px`)
+                        .style("height", `${size - 100}px`)
                         .style("padding", "0px")
                         .style("z-index","-99")
                         .style("position","fixed")
