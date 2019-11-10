@@ -44,7 +44,8 @@ class Album {
                     scope.selected = true;
                     records = d3.select("body")
                         .append("div")
-                        .attr("id", album.title);
+                        .attr("id", album.title)
+                        .attr("class","centre");
 
                     size = Math.max(window.outerWidth,window.outerHeight) + 100;
 
