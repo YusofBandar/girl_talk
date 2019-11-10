@@ -12,7 +12,7 @@ class Album {
 
             const albumWidth = window.innerWidth < 450 ? 250 : 350;
 
-            let scope= this;
+            let scope = this;
             let records;
             let size;
             let artWork = d3.select("body")
@@ -22,22 +22,22 @@ class Album {
                 .style("height", `${albumWidth}px`)
                 .style("padding", "100px")
                 .on("mouseover", function () {
-                    if(!scope.selected){
+                    if (!scope.selected) {
                         d3.select(this)
-                        .transition()
-                        .duration(1000)
-                        .style("width", `${albumWidth + 50}px`)
-                        .style("height", `${albumWidth + 50}px`);
+                            .transition()
+                            .duration(1000)
+                            .style("width", `${albumWidth + 50}px`)
+                            .style("height", `${albumWidth + 50}px`);
                     }
                 })
                 .on("mouseout", function () {
                     console.log(scope.selected);
-                    if(!scope.selected){
+                    if (!scope.selected) {
                         d3.select(this)
-                        .transition()
-                        .duration(1000)
-                        .style("width", `${albumWidth}px`)
-                        .style("height", `${albumWidth}px`);
+                            .transition()
+                            .duration(1000)
+                            .style("width", `${albumWidth}px`)
+                            .style("height", `${albumWidth}px`);
                     }
                 })
                 .on("click", function () {
@@ -45,11 +45,26 @@ class Album {
                     records = d3.select("body")
                         .append("div")
                         .attr("id", album.title)
-                        .attr("class","centre");
+                        .attr("class", "centre")
 
-                    size = Math.max(window.outerWidth,window.outerHeight) + 100;
 
-                 
+                    size = Math.max(window.outerWidth, window.outerHeight) + 100;
+
+                    d3.select("body").append("div")
+                        .attr("class", "screen")
+                        .style("width", `${size}px`)
+                        .style("height", `${size - 100}px`)
+                        .style("padding", "0px")
+                        .style("z-index", "-50")
+                        .style("position", "fixed")
+                        .style("background-color", "#000000cf")
+                        .style("opacity","0")
+                        .transition()
+                        .duration(800)
+                        .ease(d3.easeExp)
+                        .style("opacity","1");
+
+
                     d3.select(this)
                         .transition()
                         .duration(800)
@@ -57,8 +72,8 @@ class Album {
                         .style("width", `${size}px`)
                         .style("height", `${size - 100}px`)
                         .style("padding", "0px")
-                        .style("z-index","-99")
-                        .style("position","fixed")
+                        .style("z-index", "-99")
+                        .style("position", "fixed")
                         .on("end", () => {
                             album.tracks.forEach(track => {
                                 new Record(records, track.dataPath, track.audioPath);
@@ -66,25 +81,25 @@ class Album {
                         })
                 })
 
-                
 
-                window.addEventListener("scroll", ()=>{
-                    let top  = window.pageYOffset || document.body.scrollTop;
-                    let recordsHeight = album.tracks.length * 2000;
-                    let dy = this.mapNumRange(top,0,recordsHeight,0,size);
-                    console.log(dy);
-                    artWork.style("top",`${-dy}px`);
-                });
+
+            window.addEventListener("scroll", () => {
+                let top = window.pageYOffset || document.body.scrollTop;
+                let recordsHeight = album.tracks.length * 2000;
+                let dy = this.mapNumRange(top, 0, recordsHeight, 0, size);
+                console.log(dy);
+                artWork.style("top", `${-dy}px`);
+            });
 
         }).catch((err) => {
             console.log(err)
         })
     }
 
-    mapNumRange (num, inMin, inMax, outMin, outMax){
+    mapNumRange(num, inMin, inMax, outMin, outMax) {
         return (((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin);
     }
-  
+
 }
 
 
