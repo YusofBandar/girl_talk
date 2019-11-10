@@ -1,5 +1,6 @@
 class Record {
-    constructor(dataPath, audioPath) {
+    constructor(root,dataPath, audioPath) {
+        this.root = root;
         this.dataPath = dataPath;
         this.audioPath = audioPath;
 
@@ -405,7 +406,7 @@ class Record {
             const arcWidth = (((this.radius * 2) - (options.outerPadding + options.innerPadding + 50)) / 2) / tracks.length;
             this.arcWidth = arcWidth;
 
-            this.svg = d3.select("body")
+            this.svg = this.root
                 .append("svg")
                 .attr("width", options.width)
                 .attr("height", options.height)

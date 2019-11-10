@@ -40,14 +40,27 @@ class Album {
                 })
                 .on("click", function () {
                     scope.selected = true;
-                   
+                    let div = d3.select("body")
+                        .append("div")
+                        .attr("id", album.title);
+
                     d3.select(this)
                         .transition()
                         .duration(800)
                         .ease(d3.easeExp)
                         .style("width", `${window.innerWidth - 100}px`)
                         .style("height", `${window.innerWidth - 100}px`)
-                        .style("padding", "0px");
+                        .style("padding", "0px")
+                        .style("z-index","-99")
+                        .style("position","fixed")
+                        .on("end", () => {
+                            album.tracks.forEach(track => {
+                                new Record(div, track.dataPath, track.audioPath);
+                            });
+                        })
+
+
+
                 })
 
         }).catch((err) => {
