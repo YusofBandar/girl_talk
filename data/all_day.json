@@ -32,6 +32,11 @@
             "title":"On and On",
             "dataPath":"../data/all_day/on_and_on.json",
             "audioPath": "../audio/On_and_On.mp3"
+        },
+        {
+            "title":"Get It Get It",
+            "dataPath":"../data/all_day/get_it_get_it.json",
+            "audioPath": "../audio/Get_It_Get_It.mp3"
         }
     ]
 }
