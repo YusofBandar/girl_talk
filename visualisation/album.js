@@ -57,7 +57,7 @@ class Album {
                         .style("padding", "0px")
                         .style("z-index", "-50")
                         .style("position", "fixed")
-                        .style("background-color", "#000000cf")
+                        .style("background-color", "#0000006e")
                         .style("opacity","0")
                         .transition()
                         .duration(800)
