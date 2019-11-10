@@ -45,11 +45,8 @@ class Record {
 
         // record
         node.append("circle")
-            .attr("r", this.radius * 1.01)
-            .attr("fill", "#ffffff")
-        node.append("circle")
             .attr("r", this.radius)
-            
+            .style("filter","url(#softGlow)");
 
         // inner part of record
         node.append("path")
