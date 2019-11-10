@@ -13,6 +13,8 @@ class Album {
             const albumWidth = window.innerWidth < 450 ? 250 : 350;
 
             let scope= this;
+            let records;
+            let size;
             let artWork = d3.select("body")
                 .append("img")
                 .attr("src", album.artWork)
@@ -40,12 +42,13 @@ class Album {
                 })
                 .on("click", function () {
                     scope.selected = true;
-                    let div = d3.select("body")
+                    records = d3.select("body")
                         .append("div")
                         .attr("id", album.title);
 
-                    let size = Math.max(window.outerWidth,window.outerHeight) + 100;
+                    size = Math.max(window.outerWidth,window.outerHeight) + 100;
 
+                 
                     d3.select(this)
                         .transition()
                         .duration(800)
@@ -57,18 +60,30 @@ class Album {
                         .style("position","fixed")
                         .on("end", () => {
                             album.tracks.forEach(track => {
-                                new Record(div, track.dataPath, track.audioPath);
+                                new Record(records, track.dataPath, track.audioPath);
                             });
                         })
-
-
-
                 })
+
+                
+
+                window.addEventListener("scroll", ()=>{
+                    let top  = window.pageYOffset || document.body.scrollTop;
+                    let recordsHeight = album.tracks.length * 2000;
+                    let dy = this.mapNumRange(top,0,recordsHeight,0,size);
+                    console.log(dy);
+                    artWork.style("top",`${-dy}px`);
+                });
 
         }).catch((err) => {
             console.log(err)
         })
     }
+
+    mapNumRange (num, inMin, inMax, outMin, outMax){
+        return (((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin);
+    }
+  
 }
 
 
