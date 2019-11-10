@@ -10,13 +10,13 @@ class Album{
         d3.json(this.albumPath).then((album) =>{
             this.album = album;
             
-            console.log();
+            const albumWidth = window.innerWidth < 450 ? 250 : 350;
 
             d3.select("body")
                 .append("img")
                 .attr("src",album.artWork)
-                .style("width","350px")
-                .style("height","350px")
+                .style("width",`${albumWidth}px`)
+                .style("height",`${albumWidth}px`)
                 .style("padding","50px")
 
         }).catch((err) => {
