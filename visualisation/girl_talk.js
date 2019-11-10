@@ -1,5 +1,5 @@
 class Record {
-    constructor(root,dataPath, audioPath) {
+    constructor(root, dataPath, audioPath) {
         this.root = root;
         this.dataPath = dataPath;
         this.audioPath = audioPath;
@@ -45,7 +45,11 @@ class Record {
 
         // record
         node.append("circle")
+            .attr("r", this.radius * 1.01)
+            .attr("fill", "#ffffff")
+        node.append("circle")
             .attr("r", this.radius)
+            
 
         // inner part of record
         node.append("path")
@@ -132,7 +136,8 @@ class Record {
             .attr("x", 0)
             .attr("y", 0)
             .style("font-size", "15px")
-            .style("font-family", "arial");
+            .style("font-family", "arial")
+            .style("fill","#ffffff");
 
         label.append("text")
             .attr("class", "label_track")
@@ -140,7 +145,8 @@ class Record {
             .attr("x", 0)
             .attr("y", 0)
             .style("font-size", "10px")
-            .style("font-family", "arial");
+            .style("font-family", "arial")
+            .style("fill","#c5c5c5");
 
         return label;
     }
@@ -167,6 +173,7 @@ class Record {
             .style("transform", "rotate(90deg)")
             .style("font-size", "30px")
             .style("font-family", "arial")
+            .style("fill","#ffffff");
 
         return timeLine;
     }
