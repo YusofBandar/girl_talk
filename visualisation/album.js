@@ -12,12 +12,26 @@ class Album{
             
             const albumWidth = window.innerWidth < 450 ? 250 : 350;
 
-            d3.select("body")
+            let artWork = d3.select("body")
                 .append("img")
                 .attr("src",album.artWork)
                 .style("width",`${albumWidth}px`)
                 .style("height",`${albumWidth}px`)
-                .style("padding","50px")
+                .style("padding","100px")
+                .on("mouseover",function(){
+                    d3.select(this)
+                        .transition()
+                        .duration(1000)
+                        .style("width",`${albumWidth + 50}px`)
+                        .style("height",`${albumWidth + 50}px`)
+                })
+                .on("mouseout",function(){
+                    d3.select(this)
+                        .transition()
+                        .duration(1000)
+                        .style("width",`${albumWidth}px`)
+                        .style("height",`${albumWidth}px`)
+                })
 
         }).catch((err) => {
             console.log(err)
