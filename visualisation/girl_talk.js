@@ -440,14 +440,4 @@ class Record {
 }
 
 
-const albumPath = "../data/all_day.json"
-
-d3.json(albumPath).then((album) => {
-    album.tracks.forEach(track => {
-        new Record(track.dataPath, track.audioPath);
-    });
-}).catch((err) => {
-    console.log(err);
-})
-
 
