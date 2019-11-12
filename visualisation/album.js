@@ -46,6 +46,7 @@ class Album {
                         .append("div")
                         .attr("id", album.title)
                         .attr("class", "centre")
+                        .style("width","90%");
 
 
                     size = Math.max(window.outerWidth, window.outerHeight) + 100;
@@ -58,13 +59,13 @@ class Album {
                         .style("z-index", "-50")
                         .style("position", "fixed")
                         .style("background-color", "#0000006e")
-                        .style("opacity","0")
+                        .style("opacity", "0")
                         .transition()
                         .duration(800)
                         .ease(d3.easeExp)
-                        .style("opacity","1")
+                        .style("opacity", "1")
                         .style("backdrop-filter", "blur(15px)")
-                        
+
 
 
                     d3.select(this)
@@ -78,7 +79,17 @@ class Album {
                         .style("position", "fixed")
                         .on("end", () => {
                             album.tracks.forEach(track => {
-                                new Record(records, track.dataPath, track.audioPath);
+                                let record = records
+                                    .append("div")
+                                    .attr("id", track.title)
+                                    .attr("class","record");
+
+                                record.append("h1")
+                                    .text(track.title);
+
+                                new Record(record, track.dataPath, track.audioPath);
+
+
                             });
                         })
                 })
