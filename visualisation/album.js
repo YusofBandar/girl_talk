@@ -85,7 +85,8 @@ class Album {
                                     .attr("class","record");
 
                                 record.append("h1")
-                                    .text(track.title);
+                                    .text(track.title)
+                                    .style("order","999999999");
 
                                 new Record(record, track.dataPath, track.audioPath);
 
