@@ -46,7 +46,7 @@ class Album {
                         .append("div")
                         .attr("id", album.title)
                         .attr("class", "centre")
-                        .style("width","100%");
+                        .style("width", "100%");
 
 
                     size = Math.max(window.outerWidth, window.outerHeight) + 100;
@@ -66,9 +66,14 @@ class Album {
                         .style("opacity", "1")
                         .style("backdrop-filter", "blur(15px)")
 
-
+                    let coords = d3.select(this).node().getBoundingClientRect();
 
                     d3.select(this)
+                        .style("position", "fixed")
+                        .style("top", `${coords.top}px`)
+                        .style("right", `${coords.right}px`)
+                        .style("bottom", `${coords.bottom}px`)
+                        .style("left", `${coords.left}px`)
                         .transition()
                         .duration(800)
                         .ease(d3.easeExp)
@@ -76,23 +81,26 @@ class Album {
                         .style("height", `${size - 100}px`)
                         .style("padding", "0px")
                         .style("z-index", "-99")
-                        .style("position", "fixed")
+                        .style("top", "0px")
+                        .style("right", "0px")
+                        .style("bottom", "0px")
+                        .style("left", "0px")
                         .on("end", () => {
                             album.tracks.forEach(track => {
                                 let record = records
                                     .append("div")
                                     .attr("id", track.title)
-                                    .attr("class","record");
+                                    .attr("class", "record");
 
                                 record.append("h1")
                                     .text(track.title);
-                                    
+
 
                                 new Record(record, track.dataPath, track.audioPath);
 
 
                             });
-                        })
+                        }).style("position", "fixed")
                 })
 
 
