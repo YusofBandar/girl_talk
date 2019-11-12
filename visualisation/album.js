@@ -62,7 +62,9 @@ class Album {
                         .transition()
                         .duration(800)
                         .ease(d3.easeExp)
-                        .style("opacity","1");
+                        .style("opacity","1")
+                        .style("backdrop-filter", "blur(15px)")
+                        
 
 
                     d3.select(this)
