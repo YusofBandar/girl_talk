@@ -46,7 +46,7 @@ class Album {
                         .append("div")
                         .attr("id", album.title)
                         .attr("class", "centre")
-                        .style("width","90%");
+                        .style("width","100%");
 
 
                     size = Math.max(window.outerWidth, window.outerHeight) + 100;
@@ -85,10 +85,8 @@ class Album {
                                     .attr("class","record");
 
                                 record.append("h1")
-                                    .text(track.title)
-                                    .style("order","999999999")
-                                    .style("font-size", "90px")
-                                    .style("color","#ffffff");
+                                    .text(track.title);
+                                    
 
                                 new Record(record, track.dataPath, track.audioPath);
 

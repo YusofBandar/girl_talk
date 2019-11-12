@@ -9,8 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
 
     <style>
-
-        body{
+        body {
             font-family: 'Liu Jian Mao Cao', cursive;
         }
 
@@ -22,12 +21,30 @@
             padding: 0px;
         }
 
-        .record {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-around;
-            width: 100%;
+        .record h1{
+            font-size: 4.5em;
+            color: white;
+        }
+
+        @media (min-width: 1300px) {
+            .record {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                width: 100%;
+            }
+
+            .record h1{
+                order: 9999999;
+            }
+        }
+
+        @media (max-width: 1300px) {
+            .record {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
