@@ -17,6 +17,8 @@ class Album {
             let size;
             let artWork = d3.select("body")
                 .append("img")
+                .attr("class","artwork")
+                .attr("id",`artwork_${album.title}`)
                 .attr("src", album.artWork)
                 .style("width", `${albumWidth}px`)
                 .style("height", `${albumWidth}px`)
@@ -41,6 +43,21 @@ class Album {
                     }
                 })
                 .on("click", function () {
+
+
+                    let selected = d3.select(this);
+
+                    let artworks = d3.select("body").selectAll(".artwork");
+                    artworks.each(function(){
+                        let el = d3.select(this);
+                        let selectedId = selected.attr("id");
+
+                        if(el.attr("id") !== selectedId){
+                            el.style("z-index", "-100")
+                                .style("visiblity")
+                        }
+                    })
+
                     scope.selected = true;
                     records = d3.select("body")
                         .append("div")
@@ -66,9 +83,11 @@ class Album {
                         .style("opacity", "1")
                         .style("backdrop-filter", "blur(15px)")
 
-                    let coords = d3.select(this).node().getBoundingClientRect();
+                    let coords = selected.node().getBoundingClientRect();
 
-                    d3.select(this)
+                   
+
+                    selected
                         .style("position", "fixed")
                         .style("top", `${coords.top}px`)
                         .style("right", `${coords.right}px`)
