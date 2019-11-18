@@ -20,6 +20,7 @@
             align-items: center;
             margin: 0px;
             padding: 0px;
+            
         }
 
         .record h1{
@@ -27,24 +28,27 @@
             color: white;
         }
 
-        @media (min-width: 1300px) {
+        @media (min-width: 2000px) {
             .record {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
                 width: 100%;
+                justify-content: center;
             }
 
             .record h1{
+                flex: 3;
                 order: 9999999;
             }
         }
 
-        @media (max-width: 1300px) {
+        @media (max-width: 2000px) {
             .record {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                justify-content: center;
             }
         }
     </style>
@@ -55,21 +59,7 @@
     <script src="./girl_talk.js"></script>
     <script src="./album.js"></script>
 
-    <svg width="0" height="0" viewBox="0 0 0 0" xmlns="http://www.w3.org/2000/svg" version="1.1">
-        <defs>
-            <filter id="softGlow" height="300%" width="300%" x="-75%" y="-75%">
-                <feMorphology operator="dilate" radius="1" in="SourceAlpha" result="thicken" />
-                <feGaussianBlur in="thicken" stdDeviation="13" result="blurred" />
-                <feFlood flood-color="rgb(255,255,255)" result="glowColor" />
-                <feComposite in="glowColor" in2="blurred" operator="in" result="softGlow_colored" />
-
-                <feMerge>
-                    <feMergeNode in="softGlow_colored" />
-                    <feMergeNode in="SourceGraphic" />
-                </feMerge>
-            </filter>
-        </defs>
-    </svg>
+    
 
 </body>
 
