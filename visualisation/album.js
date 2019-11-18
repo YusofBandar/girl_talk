@@ -53,8 +53,7 @@ class Album {
                         let selectedId = selected.attr("id");
 
                         if (el.attr("id") !== selectedId) {
-                            el.style("z-index", "-100")
-                                .style("visiblity")
+                            el.style("z-index", "-100");
                         }
                     })
 
@@ -106,6 +105,16 @@ class Album {
                         .style("bottom", "0px")
                         .style("left", "0px")
                         .on("end", () => {
+
+                            artworks.each(function () {
+                                let el = d3.select(this);
+                                let selectedId = selected.attr("id");
+        
+                                if (el.attr("id") !== selectedId) {
+                                    el.style("display","none")
+                                }
+                            })
+
 
                             d3.select("body")
                                 .style("background-color", "black")
