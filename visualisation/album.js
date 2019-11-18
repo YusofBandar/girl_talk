@@ -106,6 +106,7 @@ class Album {
                         .style("left", "0px")
                         .on("end", () => {
 
+                            // hide other albums
                             artworks.each(function () {
                                 let el = d3.select(this);
                                 let selectedId = selected.attr("id");
@@ -119,6 +120,7 @@ class Album {
                             d3.select("body")
                                 .style("background-color", "black")
 
+                            // add records
                             album.tracks.forEach(track => {
                                 let record = records
                                     .append("div")
@@ -128,11 +130,11 @@ class Album {
                                 record.append("h1")
                                     .text(track.title);
 
-
                                 new Record(record, track.dataPath, track.audioPath);
-
-
                             });
+
+                            // scroll to the top
+                            window.scrollTo(0, 0);
                         }).style("position", "fixed")
                 })
 
