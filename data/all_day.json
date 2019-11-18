@@ -37,6 +37,11 @@
             "title":"Get It Get It",
             "dataPath":"../data/all_day/get_it_get_it.json",
             "audioPath": "../audio/Get_It_Get_It.mp3"
+        },
+        {
+            "title":"Down for the Count",
+            "dataPath":"../data/all_day/down_for_the_count.json",
+            "audioPath": "../audio/Down_for_the_Count.mp3"
         }
     ]
 }
