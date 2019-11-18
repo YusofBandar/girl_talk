@@ -17,8 +17,8 @@ class Album {
             let size;
             let artWork = d3.select("body")
                 .append("img")
-                .attr("class","artwork")
-                .attr("id",`artwork_${album.title}`)
+                .attr("class", "artwork")
+                .attr("id", `artwork_${album.title}`)
                 .attr("src", album.artWork)
                 .style("width", `${albumWidth}px`)
                 .style("height", `${albumWidth}px`)
@@ -48,11 +48,11 @@ class Album {
                     let selected = d3.select(this);
 
                     let artworks = d3.select("body").selectAll(".artwork");
-                    artworks.each(function(){
+                    artworks.each(function () {
                         let el = d3.select(this);
                         let selectedId = selected.attr("id");
 
-                        if(el.attr("id") !== selectedId){
+                        if (el.attr("id") !== selectedId) {
                             el.style("z-index", "-100")
                                 .style("visiblity")
                         }
@@ -66,9 +66,10 @@ class Album {
                         .style("width", "100%");
 
 
-                    size = Math.max(window.outerWidth, window.outerHeight) + 100;
+                    size = Math.max(window.outerWidth, window.outerHeight) + 500;
 
-                    d3.select("body").append("div")
+                    d3.select("body")
+                        .append("div")
                         .attr("class", "screen")
                         .style("width", `${size}px`)
                         .style("height", `${size - 100}px`)
@@ -85,7 +86,7 @@ class Album {
 
                     let coords = selected.node().getBoundingClientRect();
 
-                   
+
 
                     selected
                         .style("position", "fixed")
@@ -105,6 +106,10 @@ class Album {
                         .style("bottom", "0px")
                         .style("left", "0px")
                         .on("end", () => {
+
+                            d3.select("body")
+                                .style("background-color", "black")
+
                             album.tracks.forEach(track => {
                                 let record = records
                                     .append("div")
@@ -128,7 +133,6 @@ class Album {
                 let top = window.pageYOffset || document.body.scrollTop;
                 let recordsHeight = album.tracks.length * 2000;
                 let dy = this.mapNumRange(top, 0, recordsHeight, 0, size);
-                console.log(dy);
                 artWork.style("top", `${-dy}px`);
             });
 
@@ -146,7 +150,7 @@ class Album {
 
 
 
-let albums = ["../data/all_day.json"];
+let albums = ["../data/all_day.json", "../data/test.json"];
 
 albums.forEach(album => {
     new Album(album)
