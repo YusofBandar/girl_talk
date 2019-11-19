@@ -110,9 +110,9 @@ class Album {
                             artworks.each(function () {
                                 let el = d3.select(this);
                                 let selectedId = selected.attr("id");
-        
+
                                 if (el.attr("id") !== selectedId) {
-                                    el.style("display","none")
+                                    el.style("display", "none")
                                 }
                             })
 
@@ -130,7 +130,8 @@ class Album {
                                 record.append("h1")
                                     .text(track.title);
 
-                                new Record(record, track.dataPath, track.audioPath);
+                                const size = 0.5 * window.innerWidth;
+                                new Record(record, track.dataPath, track.audioPath, { width: size, height: size });
                             });
 
                             // scroll to the top
