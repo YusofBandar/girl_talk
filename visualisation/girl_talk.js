@@ -40,8 +40,8 @@ class Record {
             .attr("xlink:href", "../album_art/All_Day.jpg")
             .attr("x", 0)
             .attr("y", 0)
-            .attr("width", 400)
-            .attr("height", 400)
+            .attr("width", this.options.width)
+            .attr("height", this.options.height)
 
         // record
         node.append("circle")
@@ -158,14 +158,14 @@ class Record {
             .attr("x1", 0)
             .attr("y1", 0)
             .attr("x2", 0)
-            .attr("y2", -(this.radius * 1.2))
+            .attr("y2", -(this.radius * 1.5))
             .style("stroke", "#bfbfbf")
             .style("stroke-width", "3px")
             .style("stroke-dasharray", "3px");
 
         timeLine.append("text")
             .text("0:00")
-            .attr("x", -(this.radius * 1.3))
+            .attr("x", -(this.radius * 1.6))
             .attr("y", 10)
             .style("transform", "rotate(90deg)")
             .style("font-size", "30px")
@@ -412,6 +412,7 @@ class Record {
 
             this.svg = this.root
                 .append("svg")
+                .attr("viewBox","0 0 1000 1000")
                 .attr("width", options.width)
                 .attr("height", options.height)
                 .append("g")
