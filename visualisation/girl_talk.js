@@ -1,15 +1,17 @@
 class Record {
-    constructor(root, dataPath, audioPath) {
+    constructor(root, dataPath, audioPath,options) {
         this.root = root;
         this.dataPath = dataPath;
         this.audioPath = audioPath;
 
-        this.options = {
+        let defaults = {
             width: 1000,
             height: 1000,
             outerPadding: 5,
             innerPadding: 150
         }
+
+        this.options= Object.assign({}, defaults, options);
 
         this.colors = ["#9bd5f3", "#ecb60f", "#b75dc5", "#4dbd2c", "#b72d44"]
         this.PLAYING = 1;
@@ -30,7 +32,7 @@ class Record {
         return path;
     }
 
-    record(node, width, height) {
+    record(node) {
         node.append("defs")
             .append("pattern")
             .attr("id", "albumArt")
@@ -401,11 +403,11 @@ class Record {
             const tracks = track.tracks;
 
             //record height and width
-            const width = options.width - 500;
-            const height = options.height - 500;
+            const width = 500;
+            const height = 500;
             this.width = width;
             this.height = height;
-            this.radius = width / 1.8;
+            this.radius = width / 2;
 
             const arcWidth = (((this.radius * 2) - (options.outerPadding + options.innerPadding + 50)) / 2) / tracks.length;
             this.arcWidth = arcWidth;
@@ -417,7 +419,7 @@ class Record {
                 .attr("height", options.height)
                 .append("g")
                 .style("transform", () => {
-                    return `translate(${options.width / 2}px,${options.height / 2}px)`
+                    return "translate(500px,500px)"
                 }).on("click", () => {
                     if (this.state == this.STOPPED) {
                         this.play();
