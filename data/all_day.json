@@ -42,6 +42,11 @@
             "title":"Down for the Count",
             "dataPath":"../data/all_day/down_for_the_count.json",
             "audioPath": "../audio/Down_for_the_Count.mp3"
+        },
+        {
+            "title":"Make Me Wanna",
+            "dataPath":"../data/all_day/make_me_wanna.json",
+            "audioPath": "../audio/Make_Me_Wanna.mp3"
         }
     ]
 }
