@@ -18,7 +18,7 @@ class Album {
             let artWork = d3.select("body")
                 .append("img")
                 .attr("class", "artwork")
-                .attr("id", `artwork_${album.title}`)
+                .attr("id", album.title.replace(" ",""))
                 .attr("src", album.artWork)
                 .style("width", `${albumWidth}px`)
                 .style("height", `${albumWidth}px`)
@@ -43,7 +43,7 @@ class Album {
                     }
                 })
                 .on("click", function () {
-
+                    history.pushState({album: album.title}, album.title, `?album=${album.title}`)
 
                     let selected = d3.select(this);
 
@@ -138,8 +138,6 @@ class Album {
                             window.scrollTo(0, 0);
                         }).style("position", "fixed")
                 })
-
-
 
             window.addEventListener("scroll", () => {
                 let top = window.pageYOffset || document.body.scrollTop;
