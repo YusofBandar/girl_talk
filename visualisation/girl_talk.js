@@ -1,5 +1,5 @@
 class Record {
-    constructor(root, dataPath, audioPath,options) {
+    constructor(root, dataPath, audioPath, options) {
         this.root = root;
         this.dataPath = dataPath;
         this.audioPath = audioPath;
@@ -11,7 +11,7 @@ class Record {
             innerPadding: 150
         }
 
-        this.options= Object.assign({}, defaults, options);
+        this.options = Object.assign({}, defaults, options);
 
         this.colors = ["#9bd5f3", "#ecb60f", "#b75dc5", "#4dbd2c", "#b72d44"]
         this.PLAYING = 1;
@@ -48,7 +48,7 @@ class Record {
         // record
         node.append("circle")
             .attr("r", this.radius)
-            .style("fill","black")
+            .style("fill", "black")
 
         // inner part of record
         node.append("path")
@@ -136,7 +136,7 @@ class Record {
             .attr("y", 0)
             .style("font-size", "15px")
             .style("font-family", "arial")
-            .style("fill","#ffffff");
+            .style("fill", "#ffffff");
 
         label.append("text")
             .attr("class", "label_track")
@@ -145,7 +145,7 @@ class Record {
             .attr("y", 0)
             .style("font-size", "10px")
             .style("font-family", "arial")
-            .style("fill","#c5c5c5");
+            .style("fill", "#c5c5c5");
 
         return label;
     }
@@ -172,7 +172,7 @@ class Record {
             .style("transform", "rotate(90deg)")
             .style("font-size", "30px")
             .style("font-family", "arial")
-            .style("fill","#ffffff");
+            .style("fill", "#ffffff");
 
         return timeLine;
     }
@@ -414,7 +414,7 @@ class Record {
 
             this.svg = this.root
                 .append("svg")
-                .attr("viewBox","0 0 1000 1000")
+                .attr("viewBox", "0 0 1000 1000")
                 .attr("width", options.width)
                 .attr("height", options.height)
                 .append("g")
@@ -429,6 +429,7 @@ class Record {
                         this.pause();
                     }
                 })
+                .style("opacity", 0);
 
 
             this.record(this.svg, width, height);
@@ -438,6 +439,11 @@ class Record {
                 let trackArc = this.trackArc(i, this.svg, width, height, arcWidth);
                 this.trackLabel(trackArc, track)
             });
+
+            this.svg.transition()
+                .duration(800)
+                .ease(d3.easeExp)
+                .style("opacity", 1);
 
 
             this.timer = this.timeLine(this.svg, width, height);

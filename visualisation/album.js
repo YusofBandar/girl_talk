@@ -18,7 +18,7 @@ class Album {
             let artWork = d3.select("body")
                 .append("img")
                 .attr("class", "artwork")
-                .attr("id", album.title.replace(" ",""))
+                .attr("id", album.title.replace(" ", ""))
                 .attr("src", album.artWork)
                 .style("width", `${albumWidth}px`)
                 .style("height", `${albumWidth}px`)
@@ -43,7 +43,7 @@ class Album {
                     }
                 })
                 .on("click", function () {
-                    history.pushState({album: album.title}, album.title, `?album=${album.title}`)
+                    history.pushState({ album: album.title }, album.title, `?album=${album.title}`)
 
                     let selected = d3.select(this);
 
@@ -128,8 +128,13 @@ class Album {
                                     .attr("class", "record");
 
                                 record.append("h1")
-                                    .text(track.title);
-
+                                    .text(track.title)
+                                    .style("opacity", 0)
+                                    .transition()
+                                    .duration(800)
+                                    .ease(d3.easeExp)
+                                    .style("opacity",1);
+                                    
                                 const size = 0.5 * window.innerWidth;
                                 new Record(record, track.dataPath, track.audioPath, { width: size, height: size });
                             });
