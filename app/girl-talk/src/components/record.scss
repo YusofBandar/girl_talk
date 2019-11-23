@@ -1,0 +1,13 @@
+.v-record{
+    .r-wrapper{
+        transform: translate(500px,500px);
+
+        .r-disk{
+            fill: black;
+        }
+
+        .r-innerDisk{
+            fill: rgb(226, 225, 225);
+        }
+    }
+}
