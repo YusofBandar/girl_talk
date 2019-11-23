@@ -12,7 +12,7 @@ class Track extends Component {
 
         return (
             <g>
-            <text>TESTING</text>
+                <path></path>
             </g>
         );
     }

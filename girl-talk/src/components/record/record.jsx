@@ -32,7 +32,11 @@ class Record extends Component {
                 <g className="r-wrapper">
                     <circle className="r-disk" r={this.width / 2}></circle>
                     <circle className="r-innerDisk" r={this.innerPadding}></circle>
-                    <Track></Track>
+                    {
+                        this.tracks.map((track) => {
+                            return <Track key={track.title}></Track>
+                        })
+                    }
                 </g>
             </svg>
         );

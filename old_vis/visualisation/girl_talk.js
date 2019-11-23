@@ -412,6 +412,8 @@ class Record {
             const arcWidth = (((this.radius * 2) - (options.outerPadding + options.innerPadding + 50)) / 2) / tracks.length;
             this.arcWidth = arcWidth;
 
+            console.log(arcWidth);
+
             this.svg = this.root
                 .append("svg")
                 .attr("viewBox", "0 0 1000 1000")
