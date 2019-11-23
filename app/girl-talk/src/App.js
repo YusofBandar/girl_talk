@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Record from "./components/record"
+import Record from "./components/record/record";
 
 function App() {
   return (
