@@ -35,7 +35,7 @@ class Album extends Component {
             <div>
                 {
                     this.state.tracks.map((track) => {
-                        return <h2>{track.track}</h2>
+                        return <Record key={track.title} track={track} width="1000px" height="1000px"></Record>
                     })
                 }
             </div>

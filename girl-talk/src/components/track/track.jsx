@@ -12,7 +12,7 @@ class Track extends Component {
 
         return (
             <g>
-                <path></path>
+                <path style={{fill : this.props.colour}}></path>
             </g>
         );
     }
