@@ -12,7 +12,7 @@ class Track extends Component {
 
         return (
             <g>
-                <path style={{fill : this.props.colour}} d={this.props.path()}></path>
+                <path onMouseEnter={this.props.hover} onMouseLeave={this.props.blur} style={{fill : this.props.colour}} d={this.props.path()}></path>
             </g>
         );
     }

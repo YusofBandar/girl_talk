@@ -45,6 +45,14 @@ class Record extends Component {
         return [startAngle,endAngle];
     }
 
+    arcHover(){
+        console.log("arc hover");
+    }
+
+    arcBlur(){
+        console.log("arc Blur")
+    }
+
     render() {
         const track = this.track;
         const tracks = this.track.tracks;
@@ -60,7 +68,9 @@ class Record extends Component {
                         tracks.map((sample, index) => {
                             const angles = this.angles(sample.startTime,sample.endTime,track.duration);
                             const arcPath = this.d3Arc(index,this.radius,arcWidth,angles[0],angles[1],this.outerPadding);
-                            return <Track key={sample.track} path={arcPath} colour={this.colours[index % this.colours.length]}></Track>
+                            return <Track key={sample.track} path={arcPath} colour={this.colours[index % this.colours.length]}
+                            hover={this.arcHover} blur={this.arcBlur}
+                            ></Track>
                         })
                     }
                 </g>
