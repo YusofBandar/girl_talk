@@ -20,7 +20,14 @@ class Record extends Component {
     constructor(props) {
         super(props);
         this.track = props.track;
+
         this.arcWidth = this.arcWidth.bind(this);
+
+        this.d3Arc = this.d3Arc.bind(this);
+        this.angles = this.angles.bind(this);
+
+        this.arcHover = this.arcHover.bind(this);
+        this.arcBlur = this.arcBlur.bind(this);
     }
 
     arcWidth(radius, innerPadding, outerPadding, numTracks) {
