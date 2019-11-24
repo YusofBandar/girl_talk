@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as d3 from "d3";
 
 import './record.scss';
 
@@ -8,17 +9,17 @@ class Record extends Component {
 
     width = 500;
     height = 500;
-    
+
     innerPadding = this.width / 15;
     outerPadding = this.width / 100;
-    
+
     radius = this.width / 2;
-    
+
     colours = ["#9bd5f3", "#ecb60f", "#b75dc5", "#4dbd2c", "#b72d44"];
 
     constructor(props) {
         super(props);
-        this.tracks = props.track.tracks;
+        this.track = props.track;
         this.arcWidth = this.arcWidth.bind(this);
     }
 
@@ -27,9 +28,28 @@ class Record extends Component {
         return arcWidth.toFixed(2);
     }
 
-    render() {
+    d3Arc(index, radius, arcWidth, startAngle, endAngle, outerPadding) {
+        let path = d3.arc()
+            .innerRadius(((radius) - ((index + 1) * arcWidth)) - outerPadding)
+            .outerRadius(((radius) - (index * arcWidth)) - outerPadding)
+            .startAngle(startAngle)
+            .endAngle(endAngle);
+        return path;
+    }
 
-        console.log(this.arcWidth(this.radius, this.innerPadding, this.outerPadding, this.tracks.length))
+    angles(startTime,endTime,duration) {
+        const circum = 2 * Math.PI;
+
+        let startAngle = (startTime / duration) * circum;
+        let endAngle = (endTime / duration) * circum;
+        return [startAngle,endAngle];
+    }
+
+    render() {
+        const track = this.track;
+        const tracks = this.track.tracks;
+
+        const arcWidth =  this.arcWidth(this.radius, this.innerPadding, this.outerPadding,tracks.length)
 
         return (
             <svg className="v-record" viewBox="0 0 1000 1000" width={this.props.width} height={this.props.height}>
@@ -37,8 +57,10 @@ class Record extends Component {
                     <circle className="r-disk" r={this.width / 2}></circle>
                     <circle className="r-innerDisk" r={this.innerPadding}></circle>
                     {
-                        this.tracks.map((track,index) => {
-                            return <Track key={track.title} colour={this.colours[index % this.colours.length]}></Track>
+                        tracks.map((sample, index) => {
+                            const angles = this.angles(sample.startTime,sample.endTime,track.duration);
+                            const arcPath = this.d3Arc(index,this.radius,arcWidth,angles[0],angles[1],this.outerPadding);
+                            return <Track key={sample.track} path={arcPath} colour={this.colours[index % this.colours.length]}></Track>
                         })
                     }
                 </g>
