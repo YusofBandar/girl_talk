@@ -17,6 +17,11 @@ class Record extends Component {
 
     colours = ["#9bd5f3", "#ecb60f", "#b75dc5", "#4dbd2c", "#b72d44"];
 
+    state = {
+        hoverTrack: -1,
+        count: 20
+    }
+
     constructor(props) {
         super(props);
         this.track = props.track;
@@ -44,27 +49,27 @@ class Record extends Component {
         return path;
     }
 
-    angles(startTime,endTime,duration) {
+    angles(startTime, endTime, duration) {
         const circum = 2 * Math.PI;
 
         let startAngle = (startTime / duration) * circum;
         let endAngle = (endTime / duration) * circum;
-        return [startAngle,endAngle];
+        return [startAngle, endAngle];
     }
 
-    arcHover(){
-        console.log("arc hover");
+    arcHover(index) {
+        this.setState({hoverTrack:index})
     }
 
-    arcBlur(){
-        console.log("arc Blur")
+    arcBlur() {
+        this.setState({hoverTrack: -1});
     }
 
     render() {
         const track = this.track;
         const tracks = this.track.tracks;
 
-        const arcWidth =  this.arcWidth(this.radius, this.innerPadding, this.outerPadding,tracks.length)
+        const arcWidth = this.arcWidth(this.radius, this.innerPadding, this.outerPadding, tracks.length)
 
         return (
             <svg className="v-record" viewBox="0 0 1000 1000" width={this.props.width} height={this.props.height}>
@@ -73,10 +78,17 @@ class Record extends Component {
                     <circle className="r-innerDisk" r={this.innerPadding}></circle>
                     {
                         tracks.map((sample, index) => {
-                            const angles = this.angles(sample.startTime,sample.endTime,track.duration);
-                            const arcPath = this.d3Arc(index,this.radius,arcWidth,angles[0],angles[1],this.outerPadding);
-                            return <Track key={sample.track} path={arcPath} colour={this.colours[index % this.colours.length]}
-                            hover={this.arcHover} blur={this.arcBlur}
+                            const angles = this.angles(sample.startTime, sample.endTime, track.duration);
+                            const arcPath = this.d3Arc(index, this.radius, arcWidth, angles[0], angles[1], this.outerPadding);
+
+                            let blur = false;
+
+                            if (index !== this.state.hoverTrack && this.state.hoverTrack > -1) {
+                                blur = true;
+                            }
+
+                            return <Track key={sample.track} path={arcPath} index={index} blur={blur}
+                                colour={this.colours[index % this.colours.length]} onHover={this.arcHover} onBlur={this.arcBlur}
                             ></Track>
                         })
                     }

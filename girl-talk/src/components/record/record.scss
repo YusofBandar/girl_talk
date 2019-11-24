@@ -9,5 +9,10 @@
         .r-innerDisk{
             fill: rgb(226, 225, 225);
         }
+
+        .r-blur{
+            transition: opacity 0.1s ease-out;
+            opacity: 0.2;
+        }
     }
 }
