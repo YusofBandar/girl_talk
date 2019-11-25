@@ -27,8 +27,6 @@ class Record extends Component {
         this.track = props.track;
 
         this.arcWidth = this.arcWidth.bind(this);
-
-        this.d3Arc = this.d3Arc.bind(this);
         this.angles = this.angles.bind(this);
 
         this.arcHover = this.arcHover.bind(this);
@@ -40,15 +38,6 @@ class Record extends Component {
         return arcWidth.toFixed(2);
     }
 
-    d3Arc(index, radius, arcWidth, startAngle, endAngle, outerPadding) {
-        let path = d3.arc()
-            .innerRadius(((radius) - ((index + 1) * arcWidth)) - outerPadding)
-            .outerRadius(((radius) - (index * arcWidth)) - outerPadding)
-            .startAngle(startAngle)
-            .endAngle(endAngle);
-        return path;
-    }
-
     angles(startTime, endTime, duration) {
         const circum = 2 * Math.PI;
 
@@ -58,11 +47,11 @@ class Record extends Component {
     }
 
     arcHover(index) {
-        this.setState({hoverTrack:index})
+        this.setState({ hoverTrack: index })
     }
 
     arcBlur() {
-        this.setState({hoverTrack: -1});
+        this.setState({ hoverTrack: -1 });
     }
 
     render() {
@@ -79,16 +68,15 @@ class Record extends Component {
                     {
                         tracks.map((sample, index) => {
                             const angles = this.angles(sample.startTime, sample.endTime, track.duration);
-                            const arcPath = this.d3Arc(index, this.radius, arcWidth, angles[0], angles[1], this.outerPadding);
-
+                            
                             let blur = false;
 
                             if (index !== this.state.hoverTrack && this.state.hoverTrack > -1) {
                                 blur = true;
                             }
 
-                            return <Track key={sample.track} path={arcPath} index={index} blur={blur}
-                                colour={this.colours[index % this.colours.length]} onHover={this.arcHover} onBlur={this.arcBlur}
+                            return <Track key={sample.track} index={index} radius={this.radius} arcWidth={arcWidth} angles={[angles[0], angles[1]]}
+                                padding={this.outerPadding} blur={blur} colour={this.colours[index % this.colours.length]} onHover={this.arcHover} onBlur={this.arcBlur}
                             ></Track>
                         })
                     }
