@@ -15,6 +15,18 @@
             opacity: 0.2;
         }
 
+        .r-timeline{
+            stroke: #bfbfbf;
+            stroke-width: 3px;
+            stroke-dasharray: 3px;
+        }
+        
+        .r-time{
+            transform: rotate(90deg);
+            font-size: 30px;
+            fill: darkgoldenrod;
+        }
+
         .r-label{
             .r-line{
                 stroke: #ababab;

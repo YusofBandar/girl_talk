@@ -4,6 +4,7 @@ import * as d3 from "d3";
 import './record.scss';
 
 import Track from "../track/track";
+import Timeline from "./timeline/timeline";
 
 class Record extends Component {
 
@@ -68,7 +69,7 @@ class Record extends Component {
                     {
                         tracks.map((sample, index) => {
                             const angles = this.angles(sample.startTime, sample.endTime, track.duration);
-                            
+
                             let blur = false;
 
                             if (index !== this.state.hoverTrack && this.state.hoverTrack > -1) {
@@ -80,6 +81,7 @@ class Record extends Component {
                             ></Track>
                         })
                     }
+                    <Timeline radius={this.radius} time="0:00"></Timeline>
                 </g>
             </svg>
         );

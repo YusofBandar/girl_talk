@@ -10,7 +10,6 @@ class Track extends Component {
 
     constructor(props) {
         super(props);
-        console.log("track", props);
 
         this.hover = this.hover.bind(this);
         this.blur = this.blur.bind(this);
