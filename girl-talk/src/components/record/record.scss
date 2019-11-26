@@ -14,5 +14,13 @@
             transition: opacity 0.1s ease-out;
             opacity: 0.2;
         }
+
+        .r-label{
+            .r-line{
+                stroke: #ababab;
+                stroke-width: 2px;
+            }
+        }
+        
     }
 }

@@ -10,7 +10,8 @@ class Track extends Component {
 
     constructor(props) {
         super(props);
-        console.log("props",props);
+        console.log("track",props);
+
         this.hover = this.hover.bind(this);
         this.blur = this.blur.bind(this);
         this.d3Arc = this.d3Arc.bind(this);
@@ -37,11 +38,11 @@ class Track extends Component {
 
         const props = this.props;
         const arc = this.d3Arc(props.index,props.radius,props.arcWidth,props.angles[0],props.angles[1],props.padding);
-
+        
         return (
             <g>
                 <path className={classNames({ 'r-blur': this.props.blur })} onMouseEnter={this.hover} onMouseLeave={this.blur} style={{ fill: this.props.colour }} d={arc()}></path>
-                <Label></Label>
+                <Label index={props.index} radius={props.radius} angles={props.angles} centroid={arc.centroid()} artist={props.track.artist} track={props.track.track}></Label>
             </g>
         );
     }

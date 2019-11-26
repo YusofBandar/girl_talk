@@ -75,7 +75,7 @@ class Record extends Component {
                                 blur = true;
                             }
 
-                            return <Track key={sample.track} index={index} radius={this.radius} arcWidth={arcWidth} angles={[angles[0], angles[1]]}
+                            return <Track key={sample.track} index={index} radius={this.radius} arcWidth={arcWidth} angles={[angles[0], angles[1]]} track={sample}
                                 padding={this.outerPadding} blur={blur} colour={this.colours[index % this.colours.length]} onHover={this.arcHover} onBlur={this.arcBlur}
                             ></Track>
                         })
