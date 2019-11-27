@@ -20,7 +20,12 @@ class Record extends Component {
 
     state = {
         hoverTrack: -1,
-        count: 20
+        count: 20,
+        currentAngle: 0
+    }
+
+    componentDidMount() {
+        
     }
 
     constructor(props) {
@@ -28,8 +33,7 @@ class Record extends Component {
         this.track = props.track;
 
         this.arcWidth = this.arcWidth.bind(this);
-        this.angles = this.angles.bind(this);
-
+        
         this.arcHover = this.arcHover.bind(this);
         this.arcBlur = this.arcBlur.bind(this);
     }
@@ -37,20 +41,6 @@ class Record extends Component {
     arcWidth(radius, innerPadding, outerPadding, numTracks) {
         const arcWidth = (((radius * 2) - (outerPadding + innerPadding + 50)) / 2) / numTracks;
         return arcWidth.toFixed(2);
-    }
-
-    angles(startTime, endTime, duration) {
-        const circum = 2 * Math.PI;
-
-        let startAngle = (startTime / duration) * circum;
-        let endAngle = (endTime / duration) * circum;
-
-        // for testing
-        const currentAngle = 3.8
-         // dont display track arcs until we have reached the correct point
-         startAngle = startAngle > currentAngle ? currentAngle : startAngle;
-         endAngle = endAngle > currentAngle ? currentAngle : endAngle;
-        return [startAngle, endAngle];
     }
 
     arcHover(index) {
@@ -74,20 +64,18 @@ class Record extends Component {
                     <circle className="r-innerDisk" r={this.innerPadding}></circle>
                     {
                         tracks.map((sample, index) => {
-                            const angles = this.angles(sample.startTime, sample.endTime, track.duration);
-
                             let blur = false;
 
                             if (index !== this.state.hoverTrack && this.state.hoverTrack > -1) {
                                 blur = true;
                             }
 
-                            return <Track key={sample.track} index={index} radius={this.radius} arcWidth={arcWidth} angle="3.8" angles={[angles[0], angles[1]]} track={sample}
+                            return <Track key={sample.track} index={index} radius={this.radius} arcWidth={arcWidth} angle="3.8" track={sample} duration={track.duration}
                                 padding={this.outerPadding} blur={blur} colour={this.colours[index % this.colours.length]} onHover={this.arcHover} onBlur={this.arcBlur}
                             ></Track>
                         })
                     }
-                    <Timeline radius={this.radius} time="0:00" angle="3.8"></Timeline>
+                    <Timeline radius={this.radius} time="0:00" angle={this.state.currentAngle}></Timeline>
                 </g>
             </svg>
         );
