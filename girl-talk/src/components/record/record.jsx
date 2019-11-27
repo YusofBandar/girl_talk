@@ -44,6 +44,12 @@ class Record extends Component {
 
         let startAngle = (startTime / duration) * circum;
         let endAngle = (endTime / duration) * circum;
+
+        // for testing
+        const currentAngle = 3.8
+         // dont display track arcs until we have reached the correct point
+         startAngle = startAngle > currentAngle ? currentAngle : startAngle;
+         endAngle = endAngle > currentAngle ? currentAngle : endAngle;
         return [startAngle, endAngle];
     }
 
@@ -76,12 +82,12 @@ class Record extends Component {
                                 blur = true;
                             }
 
-                            return <Track key={sample.track} index={index} radius={this.radius} arcWidth={arcWidth} angles={[angles[0], angles[1]]} track={sample}
+                            return <Track key={sample.track} index={index} radius={this.radius} arcWidth={arcWidth} angle="3.8" angles={[angles[0], angles[1]]} track={sample}
                                 padding={this.outerPadding} blur={blur} colour={this.colours[index % this.colours.length]} onHover={this.arcHover} onBlur={this.arcBlur}
                             ></Track>
                         })
                     }
-                    <Timeline radius={this.radius} time="0:00"></Timeline>
+                    <Timeline radius={this.radius} time="0:00" angle="3.8"></Timeline>
                 </g>
             </svg>
         );
