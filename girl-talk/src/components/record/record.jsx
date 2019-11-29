@@ -20,12 +20,11 @@ class Record extends Component {
 
     state = {
         hoverTrack: -1,
-        count: 20,
-        currentAngle: 0
+        elapsed: 1
     }
 
     componentDidMount() {
-        
+        //this.play();
     }
 
     constructor(props) {
@@ -36,6 +35,27 @@ class Record extends Component {
         
         this.arcHover = this.arcHover.bind(this);
         this.arcBlur = this.arcBlur.bind(this);
+
+        this.play = this.play.bind(this);
+    }
+
+    play(){
+        let audio = new Audio(this.props.audioPath);
+        this.audio = audio;
+
+        audio.addEventListener("loadedmetadata", () => {
+            audio.play();
+
+            let timer = d3.timer((elapsed) => {
+                elapsed = (audio.currentTime * 1000) * 10;
+                this.setState({elapsed : elapsed});
+
+                 // if at the end of track remove all arcs and labels
+                 if (elapsed > this.track.duration) {
+                    timer.stop()
+                }
+            })
+        });
     }
 
     arcWidth(radius, innerPadding, outerPadding, numTracks) {
@@ -70,12 +90,12 @@ class Record extends Component {
                                 blur = true;
                             }
 
-                            return <Track key={sample.track} index={index} radius={this.radius} arcWidth={arcWidth} angle="3.8" track={sample} duration={track.duration}
+                            return <Track key={sample.track} index={index} radius={this.radius} arcWidth={arcWidth} elapsed={this.state.elapsed} track={sample} duration={track.duration}
                                 padding={this.outerPadding} blur={blur} colour={this.colours[index % this.colours.length]} onHover={this.arcHover} onBlur={this.arcBlur}
                             ></Track>
                         })
                     }
-                    <Timeline radius={this.radius} time="0:00" angle={this.state.currentAngle}></Timeline>
+                    <Timeline radius={this.radius} duration={track.duration} elapsed={this.state.elapsed}></Timeline>
                 </g>
             </svg>
         );

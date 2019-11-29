@@ -18,24 +18,24 @@ class Album extends Component {
 
     async readJson(path) {
         return await d3.json(path);
-      }
-    
-      async componentWillMount() {
+    }
+
+    async componentWillMount() {
         this.album.tracks.forEach(async (track) => {
-          let data = await this.readJson(track.dataPath);
-          let tracks = this.state.tracks;
-          tracks.push(data);
-          this.setState({ tracks });
+            let data = await this.readJson(track.dataPath);
+            let tracks = this.state.tracks;
+            tracks.push(data);
+            this.setState({ tracks });
         })
-      }
+    }
 
 
     render() {
         return (
             <div>
                 {
-                    this.state.tracks.map((track) => {
-                        return <Record key={track.track} track={track} width="1000px" height="1000px"></Record>
+                    this.state.tracks.map((track,i) => {
+                        return <Record key={track.track} track={track} audioPath={this.album.tracks[i].audioPath} width="1000px" height="1000px"></Record>
                     })
                 }
             </div>

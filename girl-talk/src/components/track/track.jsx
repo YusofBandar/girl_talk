@@ -15,6 +15,7 @@ class Track extends Component {
         this.blur = this.blur.bind(this);
 
         this.angles = this.angles.bind(this);
+        this.angle = this.angle.bind(this);
         this.d3Arc = this.d3Arc.bind(this);
     }
 
@@ -38,6 +39,15 @@ class Track extends Component {
         return [startAngle, endAngle];
     }
 
+    angle(elapsed, duration) {
+        // used to calculate radians
+        const circum = 2 * Math.PI;
+
+        // time of the track converted into an angle
+        // 360deg = track duration
+        return (elapsed / duration) * circum;
+    }
+
     d3Arc(index, radius, arcWidth, startAngle, endAngle, outerPadding) {
         let path = d3.arc()
             .innerRadius(((radius) - ((index + 1) * arcWidth)) - outerPadding)
@@ -50,8 +60,9 @@ class Track extends Component {
     render() {
 
         const props = this.props;
-        const angles = this.angles(props.track.startTime,props.track.endTime,"3",props.duration);
+        const angles = this.angles(props.track.startTime, props.track.endTime, this.angle(props.elapsed, props.duration), props.duration);
         const arc = this.d3Arc(props.index, props.radius, props.arcWidth, angles[0], angles[1], props.padding);
+
 
         return (
             <g className={classNames({ 'r-blur': this.props.blur })}>
