@@ -12,7 +12,11 @@ class Label extends Component {
     }
 
     isVisible(startAngle, currentAngle){
-        return startAngle != currentAngle ? {visibility: "visible"} : { visibility: "hidden"};
+        if(currentAngle === 0){
+            return { visibility: "hidden"}
+        }
+
+        return (startAngle != currentAngle) ? {visibility: "visible"} : { visibility: "hidden"};
     }
 
 

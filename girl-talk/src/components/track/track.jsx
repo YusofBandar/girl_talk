@@ -45,7 +45,7 @@ class Track extends Component {
 
         // time of the track converted into an angle
         // 360deg = track duration
-        return (elapsed / duration) * circum;
+        return ((elapsed / duration) * circum).toFixed(2);
     }
 
     d3Arc(index, radius, arcWidth, startAngle, endAngle, outerPadding) {
