@@ -79,7 +79,7 @@ class Record extends Component {
 
         return (
             <svg className="v-record" viewBox="0 0 1000 1000" width={this.props.width} height={this.props.height}>
-                <g className="r-wrapper">
+                <g className="r-wrapper" onClick={this.play}>
                     <circle className="r-disk" r={this.width / 2}></circle>
                     <circle className="r-innerDisk" r={this.innerPadding}></circle>
                     {
@@ -99,7 +99,7 @@ class Record extends Component {
                             }
 
                             return <Track key={sample.track} elapsed={this.state.elapsed} track={sample} duration={track.duration}
-                                blur={blur} onHover={this.arcHover} onBlur={this.arcBlur} config={config}
+                                blur={blur} onHover={this.arcHover} onBlur={this.arcBlur} config={config} 
                             ></Track>
                         })
                     }
