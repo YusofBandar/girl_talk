@@ -43,6 +43,7 @@ class Record extends Component {
         this.arcBlur = this.arcBlur.bind(this);
 
         this.loadAudio = this.loadAudio.bind(this);
+        this.timelineDrag = this.timelineDrag.bind(this);
 
         this.recordClick = this.recordClick.bind(this);
         this.play = this.play.bind(this);
@@ -75,7 +76,7 @@ class Record extends Component {
         let timer = d3.timer(() => {
             let elapsed = (this.audio.currentTime * 1000);
             this.setState({elapsed : elapsed});
-
+            
             // if at the end of track remove all arcs and labels
             if (elapsed > this.track.duration) {
                 timer.stop()
@@ -84,7 +85,7 @@ class Record extends Component {
                     this.setState({ end: true })
 
                     d3.timeout(() => {
-                        //this.setState({elapsed : 0})
+                        this.setState({elapsed : 0})
                     }, 3000)
                 }, 5000)
 
@@ -104,6 +105,15 @@ class Record extends Component {
     arcBlur() {
         this.setState({ hoverTrack: -1 });
     }
+
+    timelineDrag(time){
+        console.log("dragging",time);
+        this.audio.currentTime = time/1000;
+
+        let elapsed = (this.audio.currentTime * 1000);
+        this.setState({elapsed : elapsed});
+    }
+
 
     render() {
         const track = this.track;
@@ -137,7 +147,7 @@ class Record extends Component {
                             ></Track>
                         })
                     }
-                    <Timeline radius={this.radius} duration={track.duration} elapsed={this.state.elapsed}></Timeline>
+                    <Timeline radius={this.radius} duration={track.duration} elapsed={this.state.elapsed} onDrag={this.timelineDrag}></Timeline>
                 </g>
             </svg>
         );

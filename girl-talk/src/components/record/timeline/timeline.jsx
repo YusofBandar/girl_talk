@@ -11,6 +11,22 @@ class Timeline extends Component {
 
         this.angle = this.angle.bind(this);
         this.time = this.time.bind(this);
+
+        this.onDrag = this.onDrag.bind(this);
+        this.timeline = React.createRef();
+
+    }
+
+    componentDidMount(){
+        const node = this.timeline.current;
+        const self = this;
+        d3.select(node).call(d3.drag()
+                .on("drag", function () {
+                    let angle = 180 - Math.atan2(d3.event.x, d3.event.y) * 180 / Math.PI;
+                    let draggedTime = ((angle / 360) * self.props.duration);
+                    self.props.onDrag(draggedTime);
+                })
+            )
     }
 
     time(elapsed){
@@ -30,9 +46,13 @@ class Timeline extends Component {
         return (elapsed / duration) * circum;
     }
 
+    onDrag(){
+        console.log("dragging");
+    }
+
     render() {
         return (
-            <g style={{ transform: `rotate(${this.angle(this.props.elapsed,this.props.duration)}rad)` }} >
+            <g ref={this.timeline} style={{ transform: `rotate(${this.angle(this.props.elapsed,this.props.duration)}rad)` }} >
                 <line className="r-timeline" x0="0px" x1="0px" y1="0px" y2={this.props.radius * -1.5}></line>
                 <text className="r-time" x={this.props.radius * -1.6} y="10">{this.time(this.props.elapsed)}</text>
             </g>
