@@ -20,7 +20,7 @@ class Track extends Component {
     }
 
     hover() {
-        this.props.onHover(this.props.index);
+        this.props.onHover(this.props.config.index);
     }
 
     blur() {
