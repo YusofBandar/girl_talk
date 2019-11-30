@@ -8,9 +8,11 @@ class Label extends Component {
 
 
     constructor(props) {
-        super(props);
+        super(props);   
+    }
 
-        
+    isVisible(startAngle, currentAngle){
+        return startAngle != currentAngle ? {visibility: "visible"} : { visibility: "hidden"};
     }
 
 
@@ -25,7 +27,7 @@ class Label extends Component {
         const origin = `${centroid[0] * scaler}px ${centroid[1] * scaler}px`;
         const rotate = `rotate(${-1.57 + ((props.angles[0] + props.angles[1]) / 2)}rad)`;
         return (
-            <g className="r-label">
+            <g className="r-label" style={this.isVisible(props.angles[0],props.currentAngle)}>
                 <line className="r-line" x1={centroid[0]} y1={centroid[1]} x2={centroid[0] * scaler} y2={centroid[1] * scaler}></line>
                 <g style={
                     {
