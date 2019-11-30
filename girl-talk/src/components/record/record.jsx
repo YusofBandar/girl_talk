@@ -54,15 +54,15 @@ class Record extends Component {
     recordClick() {
         if (this.state.state === this.PAUSED) {
             this.play();
-            this.setState({ state: this.PLAYING })
+            this.setState({ state: this.PLAYING });
         } else {
             this.pause();
-            this.setState({ state: this.PAUSED })
+            this.setState({ state: this.PAUSED });
         }
     }
 
     pause() {
-        this.state = this.PAUSED;
+        this.setState({state: this.PAUSED});
         this.audio.pause();
     }
 
