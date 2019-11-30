@@ -15,6 +15,11 @@
             opacity: 0.2;
         }
 
+        .r-end{
+            transition: opacity 2s ease-out;
+            opacity: 0;
+        }
+
         .r-timeline{
             stroke: #bfbfbf;
             stroke-width: 3px;

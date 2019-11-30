@@ -72,7 +72,7 @@ class Track extends Component {
 
 
         return (
-            <g className={classNames({ 'r-blur': this.props.blur })}>
+            <g className={classNames({ 'r-blur': this.props.blur, "r-end": this.props.end })}>
                 <path onMouseEnter={this.hover} onMouseLeave={this.blur} style={{ fill: config.colour }} d={arc()}></path>
                 <Label config={labelConfig} angles={angles} centroid={arc.centroid()} track={props.track}></Label>
             </g>

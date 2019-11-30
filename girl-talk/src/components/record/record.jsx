@@ -20,7 +20,8 @@ class Record extends Component {
 
     state = {
         hoverTrack: -1,
-        elapsed: 1
+        elapsed: 1,
+        end: false
     }
 
     componentDidMount() {
@@ -46,13 +47,22 @@ class Record extends Component {
         audio.addEventListener("loadedmetadata", () => {
             audio.play();
 
-            let timer = d3.timer((elapsed) => {
-                elapsed = (audio.currentTime * 1000) * 10;
+            this.timer = d3.timer((elapsed) => {
+                elapsed = (audio.currentTime * 1000) * 20;
                 this.setState({elapsed : elapsed});
 
                  // if at the end of track remove all arcs and labels
                  if (elapsed > this.track.duration) {
-                    timer.stop()
+                    this.timer.stop()
+
+                    d3.timeout(() => {
+                        this.setState({end: true})
+
+                        d3.timeout(() => {
+                            this.setState({elapsed : 0})
+                        },3000)
+                    },5000)
+                    
                 }
             })
         });
@@ -99,7 +109,7 @@ class Record extends Component {
                             }
 
                             return <Track key={sample.track} elapsed={this.state.elapsed} track={sample} duration={track.duration}
-                                blur={blur} onHover={this.arcHover} onBlur={this.arcBlur} config={config} 
+                                blur={blur} end={this.state.end} onHover={this.arcHover} onBlur={this.arcBlur} config={config} 
                             ></Track>
                         })
                     }
