@@ -16,7 +16,7 @@ class Label extends Component {
             return { visibility: "hidden"}
         }
 
-        return (startAngle != currentAngle) ? {visibility: "visible"} : { visibility: "hidden"};
+        return (startAngle !== currentAngle) ? {visibility: "visible"} : { visibility: "hidden"};
     }
 
 
