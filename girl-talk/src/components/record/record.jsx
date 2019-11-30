@@ -85,7 +85,7 @@ class Record extends Component {
                     this.setState({ end: true })
 
                     d3.timeout(() => {
-                        this.setState({elapsed : 0})
+                        this.setState({elapsed : 0, end:false})
                     }, 3000)
                 }, 5000)
 
@@ -107,7 +107,6 @@ class Record extends Component {
     }
 
     timelineDrag(time){
-        console.log("dragging",time);
         this.audio.currentTime = time/1000;
 
         let elapsed = (this.audio.currentTime * 1000);
