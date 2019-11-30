@@ -90,8 +90,16 @@ class Record extends Component {
                                 blur = true;
                             }
 
-                            return <Track key={sample.track} index={index} radius={this.radius} arcWidth={arcWidth} elapsed={this.state.elapsed} track={sample} duration={track.duration}
-                                padding={this.outerPadding} blur={blur} colour={this.colours[index % this.colours.length]} onHover={this.arcHover} onBlur={this.arcBlur}
+                            const config = {
+                                index: index,
+                                radius: this.radius,
+                                arcWidth: arcWidth,
+                                padding: this.outerPadding,
+                                colour: this.colours[index % this.colours.length]
+                            }
+
+                            return <Track key={sample.track} elapsed={this.state.elapsed} track={sample} duration={track.duration}
+                                blur={blur} onHover={this.arcHover} onBlur={this.arcBlur} config={config}
                             ></Track>
                         })
                     }

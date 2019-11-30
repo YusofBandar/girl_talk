@@ -60,14 +60,21 @@ class Track extends Component {
     render() {
 
         const props = this.props;
+        const config = props.config;
+
         const angles = this.angles(props.track.startTime, props.track.endTime, this.angle(props.elapsed, props.duration), props.duration);
-        const arc = this.d3Arc(props.index, props.radius, props.arcWidth, angles[0], angles[1], props.padding);
+        const arc = this.d3Arc(config.index, config.radius, config.arcWidth, angles[0], angles[1], config.padding);
+
+        const labelConfig = {
+            index : config.index,
+            radius: config.radius
+        }
 
 
         return (
             <g className={classNames({ 'r-blur': this.props.blur })}>
-                <path onMouseEnter={this.hover} onMouseLeave={this.blur} style={{ fill: this.props.colour }} d={arc()}></path>
-                <Label index={props.index} radius={props.radius} angles={angles} centroid={arc.centroid()} artist={props.track.artist} track={props.track.track}></Label>
+                <path onMouseEnter={this.hover} onMouseLeave={this.blur} style={{ fill: config.colour }} d={arc()}></path>
+                <Label config={labelConfig} angles={angles} centroid={arc.centroid()} track={props.track}></Label>
             </g>
         );
     }

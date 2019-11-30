@@ -10,7 +10,7 @@ class Label extends Component {
     constructor(props) {
         super(props);
 
-
+        
     }
 
 
@@ -20,7 +20,7 @@ class Label extends Component {
         
         const centroid = props.centroid;
         const hypo = Math.hypot(centroid[0], centroid[1])
-        const scaler = (props.radius + (65 * ((props.index + 1) % 3))) / hypo;
+        const scaler = (props.config.radius + (65 * ((props.config.index + 1) % 3))) / hypo;
 
         const origin = `${centroid[0] * scaler}px ${centroid[1] * scaler}px`;
         const rotate = `rotate(${-1.57 + ((props.angles[0] + props.angles[1]) / 2)}rad)`;
@@ -33,8 +33,8 @@ class Label extends Component {
                         "transform": rotate
                     }
                 }>
-                    <text x={(centroid[0] * scaler) + 3} y={(centroid[1] * scaler) + 1}>{props.track}</text>
-                    <text x={(centroid[0] * scaler) + 3} y={(centroid[1] * scaler) + 15}>{props.artist}</text>
+                    <text x={(centroid[0] * scaler) + 3} y={(centroid[1] * scaler) + 1}>{props.track.track}</text>
+                    <text x={(centroid[0] * scaler) + 3} y={(centroid[1] * scaler) + 15}>{props.track.artist}</text>
                 </g>
             </g>
         );
