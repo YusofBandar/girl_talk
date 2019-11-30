@@ -125,6 +125,7 @@ class Record extends Component {
                 <g className="r-wrapper" onClick={this.recordClick}>
                     <circle className="r-disk" r={this.width / 2}></circle>
                     <circle className="r-innerDisk" r={this.innerPadding}></circle>
+                    <circle r={this.innerPadding/3}></circle>
                     {
                         tracks.map((sample, index) => {
                             let blur = false;
