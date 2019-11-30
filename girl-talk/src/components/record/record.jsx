@@ -8,6 +8,9 @@ import Timeline from "./timeline/timeline";
 
 class Record extends Component {
 
+    PAUSED = 0;
+    PLAYING = 1;
+
     width = 500;
     height = 500;
 
@@ -21,11 +24,13 @@ class Record extends Component {
     state = {
         hoverTrack: -1,
         elapsed: 1,
-        end: false
+        end: false,
+        state: this.PAUSED
     }
 
     componentDidMount() {
         //this.play();
+        this.loadAudio();
     }
 
     constructor(props) {
@@ -33,39 +38,58 @@ class Record extends Component {
         this.track = props.track;
 
         this.arcWidth = this.arcWidth.bind(this);
-        
+
         this.arcHover = this.arcHover.bind(this);
         this.arcBlur = this.arcBlur.bind(this);
 
+        this.loadAudio = this.loadAudio.bind(this);
+
+        this.recordClick = this.recordClick.bind(this);
         this.play = this.play.bind(this);
+        this.pause = this.pause.bind(this);
     }
 
-    play(){
+
+    recordClick() {
+        if (this.state.state === this.PAUSED) {
+            this.play();
+            this.setState({ state: this.PLAYING })
+        } else {
+            this.pause();
+            this.setState({ state: this.PAUSED })
+        }
+    }
+
+    pause() {
+        this.state = this.PAUSED;
+        this.audio.pause();
+    }
+
+    loadAudio() {
         let audio = new Audio(this.props.audioPath);
         this.audio = audio;
+    }
 
-        audio.addEventListener("loadedmetadata", () => {
-            audio.play();
+    play() {
+        this.audio.play()
+        let timer = d3.timer(() => {
+            let elapsed = (this.audio.currentTime * 1000);
+            this.setState({elapsed : elapsed});
 
-            this.timer = d3.timer((elapsed) => {
-                elapsed = (audio.currentTime * 1000) * 20;
-                this.setState({elapsed : elapsed});
+            // if at the end of track remove all arcs and labels
+            if (elapsed > this.track.duration) {
+                timer.stop()
 
-                 // if at the end of track remove all arcs and labels
-                 if (elapsed > this.track.duration) {
-                    this.timer.stop()
+                d3.timeout(() => {
+                    this.setState({ end: true })
 
                     d3.timeout(() => {
-                        this.setState({end: true})
+                        //this.setState({elapsed : 0})
+                    }, 3000)
+                }, 5000)
 
-                        d3.timeout(() => {
-                            this.setState({elapsed : 0})
-                        },3000)
-                    },5000)
-                    
-                }
-            })
-        });
+            }
+        })
     }
 
     arcWidth(radius, innerPadding, outerPadding, numTracks) {
@@ -89,7 +113,7 @@ class Record extends Component {
 
         return (
             <svg className="v-record" viewBox="0 0 1000 1000" width={this.props.width} height={this.props.height}>
-                <g className="r-wrapper" onClick={this.play}>
+                <g className="r-wrapper" onClick={this.recordClick}>
                     <circle className="r-disk" r={this.width / 2}></circle>
                     <circle className="r-innerDisk" r={this.innerPadding}></circle>
                     {
@@ -109,7 +133,7 @@ class Record extends Component {
                             }
 
                             return <Track key={sample.track} elapsed={this.state.elapsed} track={sample} duration={track.duration}
-                                blur={blur} end={this.state.end} onHover={this.arcHover} onBlur={this.arcBlur} config={config} 
+                                blur={blur} end={this.state.end} onHover={this.arcHover} onBlur={this.arcBlur} config={config}
                             ></Track>
                         })
                     }
