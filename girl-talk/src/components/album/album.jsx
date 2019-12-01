@@ -11,24 +11,32 @@ class Album extends Component {
     state = {
         tracks: [],
         size: 350,
-        hover: false
+        hover: false,
+        clicked: false
     }
 
     constructor(props) {
         super(props);
 
         this.album = this.props.album;
+        this.renderTracks = this.renderTracks.bind(this);
 
         this.hover = this.hover.bind(this);
         this.blur = this.blur.bind(this);
+
+        this.onClick = this.onClick.bind(this);
     }
 
-    hover(){
-        this.setState({hover : true});
+    hover() {
+        this.setState({ hover: true });
     }
 
-    blur(){
-        this.setState({hover: false});
+    blur() {
+        this.setState({ hover: false });
+    }
+
+    onClick() {
+        this.setState({ clicked: true })
     }
 
     async readJson(path) {
@@ -44,20 +52,28 @@ class Album extends Component {
         })
     }
 
+    renderTracks() {
+        if(this.state.clicked){
+            return this.state.tracks.map((track, i) => {
+                return <Record key={track.track} track={track} audioPath={this.album.tracks[i].audioPath} width="1000px" height="1000px"></Record>
+            })
+        }
+    }
+
 
     render() {
         return (
-            <div>
+            <React.Fragment>
                 {
-                    <div className={classNames({ 'v-album': true, "r-bigger": this.state.hover })}>
-                        <img  id="AllDay" src={this.album.artWork} onMouseOver={this.hover} onMouseOut={this.blur} ></img>
+                    <img className={classNames({ 'v-album': true, "r-bigger": (this.state.hover && !this.state.clicked), "r-screen": this.state.clicked })} src={this.album.artWork} onClick={this.onClick} onMouseOver={this.hover} onMouseOut={this.blur} ></img>
+                }
+                {
+                    <div>
+                        {this.renderTracks()}
                     </div>
                     
-                    /*this.state.tracks.map((track,i) => {
-                        return <Record key={track.track} track={track} audioPath={this.album.tracks[i].audioPath} width="1000px" height="1000px"></Record>
-                    })*/
                 }
-            </div>
+            </React.Fragment>
         );
     }
 }

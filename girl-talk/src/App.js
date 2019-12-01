@@ -3,6 +3,8 @@ import * as d3 from "d3";
 
 import Album from "./components/album/album";
 
+import './app.scss';
+
 class App extends Component {
 
   albumPaths = ["./data/all_day.json"];
@@ -26,8 +28,12 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Girl Talk</h1>
+      <div className="centre">
+        {
+          this.state.albums.map((album) => {
+            return <Album key={album.title} album={album}></Album>
+          })
+        }
         {
           this.state.albums.map((album) => {
             return <Album key={album.title} album={album}></Album>
