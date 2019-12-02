@@ -36,7 +36,7 @@ class Album extends Component {
     }
 
     onClick() {
-        this.setState({ clicked: true })
+        this.setState({ clicked: true });
     }
 
     async readJson(path) {
@@ -53,7 +53,7 @@ class Album extends Component {
     }
 
     renderTracks() {
-        if(this.state.clicked){
+        if (this.state.clicked) {
             return this.state.tracks.map((track, i) => {
                 return <Record key={track.track} track={track} audioPath={this.album.tracks[i].audioPath} width="1000px" height="1000px"></Record>
             })
@@ -65,13 +65,13 @@ class Album extends Component {
         return (
             <React.Fragment>
                 {
-                    <img className={classNames({ 'v-album': true, "r-bigger": (this.state.hover && !this.state.clicked), "r-screen": this.state.clicked })} src={this.album.artWork} onClick={this.onClick} onMouseOver={this.hover} onMouseOut={this.blur} ></img>
+                    <img className={classNames({ 'v-album': true, "r-bigger": (this.state.hover && !this.state.clicked)})} src={this.album.artWork} onClick={this.onClick} onMouseOver={this.hover} onMouseOut={this.blur} ></img>
                 }
                 {
-                    <div>
+                    <div className="centre v-records">
                         {this.renderTracks()}
                     </div>
-                    
+
                 }
             </React.Fragment>
         );

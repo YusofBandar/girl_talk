@@ -12,6 +12,10 @@
     }
 }
 
+.v-records{
+    position: absolute;
+}
+
 .v-album{
     padding: 100px;
     width: 350px;
@@ -23,10 +27,5 @@
     &.r-bigger{
         transition: transform 0.8s ease-out;
         transform: scale(1.3);    
-    }
-
-    &.r-screen{        
-        transition: transform 0.8s ease-out;
-        transform: scale(7);
     }
 }
