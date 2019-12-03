@@ -1,45 +1,21 @@
 import React, { Component } from 'react';
-import * as d3 from "d3";
 
-import Album from "./components/album/album";
+import { Redirect,Route, BrowserRouter as Router, Switch } from "react-router-dom"
+
+import Index from "./pages/index";
 
 import './app.scss';
 
 class App extends Component {
-
-  albumPaths = ["./data/all_day.json"];
-
-  state = {
-    albums: []
-  }
-
-  async readJson(path) {
-    return await d3.json(path);
-  }
-
-  async componentWillMount() {
-    this.albumPaths.forEach(async (path) => {
-      let album = await this.readJson(path);
-      let albums = this.state.albums;
-      albums.push(album);
-      this.setState({ albums });
-    })
-  }
-
   render() {
     return (
-      <div className="centre">
-        {
-          this.state.albums.map((album) => {
-            return <Album key={album.title} album={album}></Album>
-          })
-        }
-        {
-          this.state.albums.map((album) => {
-            return <Album key={album.title} album={album}></Album>
-          })
-        }
-      </div>
+      <Router>
+        <Switch>
+          <Route path="/index" component={Index} />
+          <Redirect exact to="/index" />
+        </Switch>
+
+      </Router>
     );
   }
 }
