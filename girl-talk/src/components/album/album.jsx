@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import * as d3 from "d3";
 import classNames from 'classnames/bind';
 
@@ -12,7 +13,6 @@ class Album extends Component {
         tracks: [],
         size: 350,
         hover: false,
-        clicked: false
     }
 
     constructor(props) {
@@ -23,8 +23,6 @@ class Album extends Component {
 
         this.hover = this.hover.bind(this);
         this.blur = this.blur.bind(this);
-
-        this.onClick = this.onClick.bind(this);
     }
 
     hover() {
@@ -33,10 +31,6 @@ class Album extends Component {
 
     blur() {
         this.setState({ hover: false });
-    }
-
-    onClick() {
-        this.setState({ clicked: true });
     }
 
     async readJson(path) {
@@ -65,13 +59,10 @@ class Album extends Component {
         return (
             <React.Fragment>
                 {
-                    <img className={classNames({ 'v-album': true, "r-bigger": (this.state.hover && !this.state.clicked)})} src={this.album.artWork} onClick={this.onClick} onMouseOver={this.hover} onMouseOut={this.blur} ></img>
-                }
-                {
-                    <div className="centre v-records">
-                        {this.renderTracks()}
-                    </div>
-
+                    <Link to="/view">
+                        <img className={classNames({ 'v-album': true, "r-bigger": this.state.hover })} 
+                        src={this.album.artWork} onMouseOver={this.hover} onMouseOut={this.blur} ></img>
+                    </Link>
                 }
             </React.Fragment>
         );
