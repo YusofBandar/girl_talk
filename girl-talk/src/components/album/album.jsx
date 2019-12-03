@@ -19,8 +19,7 @@ class Album extends Component {
         super(props);
 
         this.album = this.props.album;
-        this.renderTracks = this.renderTracks.bind(this);
-
+    
         this.hover = this.hover.bind(this);
         this.blur = this.blur.bind(this);
     }
@@ -46,20 +45,11 @@ class Album extends Component {
         })
     }
 
-    renderTracks() {
-        if (this.state.clicked) {
-            return this.state.tracks.map((track, i) => {
-                return <Record key={track.track} track={track} audioPath={this.album.tracks[i].audioPath} width="1000px" height="1000px"></Record>
-            })
-        }
-    }
-
-
     render() {
         return (
             <React.Fragment>
                 {
-                    <Link to="/view">
+                    <Link to={`/view/${this.album.title}`}>
                         <img className={classNames({ 'v-album': true, "r-bigger": this.state.hover })} 
                         src={this.album.artWork} onMouseOver={this.hover} onMouseOut={this.blur} ></img>
                     </Link>

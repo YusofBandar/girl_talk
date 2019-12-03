@@ -13,7 +13,7 @@ class App extends Component {
       <Router>
         <Switch>
           <Route path="/index" component={Index} />
-          <Route path="/view" component={View} />
+          <Route path="/view/:track" component={View} />
           <Redirect exact to="/index" />
         </Switch>
       </Router>
