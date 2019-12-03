@@ -14,7 +14,6 @@ class App extends Component {
           <Route path="/index" component={Index} />
           <Redirect exact to="/index" />
         </Switch>
-
       </Router>
     );
   }
