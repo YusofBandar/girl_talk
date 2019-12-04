@@ -10,7 +10,6 @@ import Record from "../record/record";
 class Album extends Component {
 
     state = {
-        tracks: [],
         size: 350,
         hover: false,
     }
@@ -32,18 +31,7 @@ class Album extends Component {
         this.setState({ hover: false });
     }
 
-    async readJson(path) {
-        return await d3.json(path);
-    }
-
-    async componentWillMount() {
-        this.album.tracks.forEach(async (track) => {
-            let data = await this.readJson(track.dataPath);
-            let tracks = this.state.tracks;
-            tracks.push(data);
-            this.setState({ tracks });
-        })
-    }
+    
 
     render() {
         return (
