@@ -10,11 +10,15 @@ class View extends Component {
     constructor(props) {
         super(props);
         this.params = this.props.match.params;
+
+        this.backgroundSyle = this.backgroundSyle.bind(this);
+        this.handleScroll = this.handleScroll.bind(this);
     }
 
 
     state = {
-        tracks: []
+        tracks: [],
+        backgroundY: 0
     }
 
     async readJson(path) {
@@ -25,6 +29,8 @@ class View extends Component {
         if (!this.params.album) {
             return;
         }
+
+        window.addEventListener('scroll', this.handleScroll);
 
         let path = decodeURI(this.params.album).replace(" ", "_").toLowerCase();
         this.album = await this.readJson(`/data/${path}.json`);
@@ -38,10 +44,32 @@ class View extends Component {
         })
     }
 
+    handleScroll() {
+        let top = window.pageYOffset || document.body.scrollTop;
+        let recordsHeight = this.album.tracks.length * 2000;
+        let dy = this.mapNumRange(top, 0, recordsHeight, 0, window.outerWidth + 500);
+
+        this.setState({backgroundY : dy});
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll);
+    }
+
+    backgroundSyle(){
+
+        return {
+            backgroundImage: "url('../album_art/All_Day.jpg')",
+            top: `${-(this.state.backgroundY)}px`,
+            height: "4000px",
+            width: "4000px"
+        };
+    }
+
     render() {
         return (
             <React.Fragment>
-                <div className="v-background" style={{ backgroundImage: "url('../album_art/All_Day.jpg')" }}></div>
+                <div className="v-background" style={this.backgroundSyle()}></div>
                 <div className="centre">
                     {
                         this.state.tracks.map((track, i) => {
@@ -51,6 +79,10 @@ class View extends Component {
                 </div>
             </React.Fragment>
         );
+    }
+
+    mapNumRange(num, inMin, inMax, outMin, outMax) {
+        return (((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin);
     }
 }
 
