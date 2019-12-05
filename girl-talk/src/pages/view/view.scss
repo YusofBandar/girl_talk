@@ -2,13 +2,15 @@
     background-size: 100%;
     position: fixed;
 
-    animation: blurOut ease 2s ;
+    filter: blur(16px);
+
+    animation: fadeIn ease 2s ;
     animation-iteration-count: 1; 
     animation-fill-mode: forwards; 
 }
 
 
-@keyframes blurOut {
-    0% {filter: blur(0px);}
-    100% {filter: blur(16px);}
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
  }
