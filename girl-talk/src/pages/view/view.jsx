@@ -69,7 +69,8 @@ class View extends Component {
     render() {
         return (
             <React.Fragment>
-                <div className="v-background" style={this.backgroundSyle()}></div>
+                <div className="r-background" style={this.backgroundSyle()}></div>
+                <div className="r-screen" style={{height: "4000px", width:"4000px"}}></div>
                 <div className="centre">
                     {
                         this.state.tracks.map((track, i) => {

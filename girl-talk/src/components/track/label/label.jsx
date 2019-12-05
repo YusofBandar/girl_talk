@@ -40,8 +40,8 @@ class Label extends Component {
                         "transform": rotate
                     }
                 }>
-                    <text x={(centroid[0] * scaler) + 3} y={(centroid[1] * scaler) + 1}>{props.track.track}</text>
-                    <text x={(centroid[0] * scaler) + 3} y={(centroid[1] * scaler) + 15}>{props.track.artist}</text>
+                    <text className="r-track" x={(centroid[0] * scaler) + 3} y={(centroid[1] * scaler) + 1}>{props.track.track}</text>
+                    <text className="r-artist" x={(centroid[0] * scaler) + 3} y={(centroid[1] * scaler) + 15}>{props.track.artist}</text>
                 </g>
             </g>
         );
