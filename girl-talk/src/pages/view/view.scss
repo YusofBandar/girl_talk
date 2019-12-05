@@ -20,6 +20,29 @@
     background-color: rgb(0, 0, 0);
 }
 
+.r-recordWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 999999999999;
+    width: 100%;
+
+    @media (max-width: 1000px) {
+        flex-direction: column-reverse;
+    }
+
+    .r-title{
+        font-size: 4.0em;
+        color: white;
+        min-width: 30%;
+
+        animation: fadeIn ease 2s ;
+        animation-iteration-count: 1; 
+        animation-fill-mode: forwards; 
+    }
+}
+
 
 @keyframes fadeIn2 {
     0% {opacity: 0;}
