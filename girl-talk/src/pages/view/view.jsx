@@ -57,9 +57,9 @@ class View extends Component {
     }
 
     backgroundSyle(){
-
+        if(!this.album) return {};
         return {
-            backgroundImage: "url('../album_art/All_Day.jpg')",
+            backgroundImage: `url(${this.album.artWork})`,
             top: `${-(this.state.backgroundY)}px`,
             height: "4000px",
             width: "4000px"
