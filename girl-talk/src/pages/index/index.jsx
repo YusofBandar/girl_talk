@@ -34,21 +34,6 @@ class Index extends Component {
             return <Album key={album.title} album={album}></Album>
           })
         }
-        {
-          this.state.albums.map((album) => {
-            return <Album key={album.title} album={album}></Album>
-          })
-        }
-                {
-          this.state.albums.map((album) => {
-            return <Album key={album.title} album={album}></Album>
-          })
-        }
-                {
-          this.state.albums.map((album) => {
-            return <Album key={album.title} album={album}></Album>
-          })
-        }
       </div>
     );
   }
