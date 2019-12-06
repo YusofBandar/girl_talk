@@ -52,6 +52,11 @@
             "title": "Steady Shock",
             "dataPath": "../data/all_day/steady_shock.json",
             "audioPath": "../audio/Steady_Shock.mp3"
+        },
+        {
+            "title": "Triple Double",
+            "dataPath": "../data/all_day/triple_double.json",
+            "audioPath": "../audio/Triple_Double.mp3"
         }
     ]
 }
