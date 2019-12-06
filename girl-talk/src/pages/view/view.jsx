@@ -32,7 +32,8 @@ class View extends Component {
 
         window.addEventListener('scroll', this.handleScroll);
 
-        let path = decodeURI(this.params.album).replace(" ", "_").toLowerCase();
+        let path = decodeURI(this.params.album).replace(/\s/g, "_").toLowerCase();
+        console.log(path);
         this.album = await this.readJson(`/data/${path}.json`);
 
         this.album.tracks.forEach(async (track) => {
