@@ -1,4 +1,5 @@
 .v-record{
+
     .r-wrapper{
         transform: translate(500px,500px);
 
@@ -17,7 +18,17 @@
 }
 
 .v-album{
-    padding: 150px;
+
+    animation: fadeIn ease 3s ;
+    animation-iteration-count: 1; 
+    animation-fill-mode: forwards;
+
+    @keyframes fadeIn {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+     }
+
+    padding: 35%;
     width: 350px;
     height: 350px;
 

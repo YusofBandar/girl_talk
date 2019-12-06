@@ -1,8 +1,12 @@
 .v-record{
 
+    width: 50%;
+    height: auto;
+
+    padding: 1%;
     animation: fadeIn ease 2s ;
     animation-iteration-count: 1; 
-    animation-fill-mode: forwards; 
+    animation-fill-mode: forwards;
 
     @keyframes fadeIn {
         0% {opacity: 0;}
