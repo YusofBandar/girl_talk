@@ -1,0 +1,193 @@
+{
+    "duration": 323000,
+    "album": "All Day",
+    "track": "That's Right",
+    "tracks": [
+        {
+            "startTime": 0,
+            "endTime": 18000,
+            "artist": "Rihanna",
+            "track": "Rude Boy"
+        },
+        {
+            "startTime": 0,
+            "endTime": 19000,
+            "artist": "Sir Mix-a-Lot",
+            "track": "Posse on Broadway"
+        },
+        {
+            "startTime": 0,
+            "endTime": 15000,
+            "artist": "Boogie Down Productions",
+            "track": "South Bronx"
+        },
+        {
+            "startTime": 0,
+            "endTime": 18000,
+            "artist": "Whodini",
+            "track": "I'm a Ho"
+        },
+        {
+            "startTime": 2000,
+            "endTime": 41000,
+            "artist": "Fabolous",
+            "track": "Can't Deny It"
+        },
+        {
+            "startTime": 18000,
+            "endTime": 20000,
+            "artist": "Jay-Z",
+            "track": "On to the Next One"
+        },
+        {
+            "startTime": 20000,
+            "endTime": 21000,
+            "artist": "DMX",
+            "track": "What's My Name?"
+        },
+        {
+            "startTime": 21000,
+            "endTime": 110000,
+            "artist": "Slim",
+            "track": "Break U Down (Remix)"
+        },
+        {
+            "startTime": 21000,
+            "endTime": 95000,
+            "artist": "Peter Gabriel",
+            "track": "In Your Eyes"
+        },
+        {
+            "startTime": 25000,
+            "endTime": 63000,
+            "artist": "Foxy Brown",
+            "track": "Hot Spot"
+        },
+        {
+            "startTime": 31000,
+            "endTime": 63000,
+            "artist": "Nine Inch Nails",
+            "track": "Closer"
+        },
+        {
+            "startTime": 63000,
+            "endTime": 111000,
+            "artist": "OMG Girlz",
+            "track": "Haterz"
+        },
+        {
+            "startTime": 69000,
+            "endTime": 80000,
+            "artist": "Swizz Beatz",
+            "track": "Guilty"
+        },
+        {
+            "startTime": 70000,
+            "endTime": 153000,
+            "artist": "DJ Amaze",
+            "track": "I Wanna Rock"
+        },
+        {
+            "startTime": 79000,
+            "endTime": 100000,
+            "artist": "Kid Cudi",
+            "track": "Make Her Say"
+        },
+        {
+            "startTime": 81000,
+            "endTime": 82000,
+            "artist": "50 Cent",
+            "track": "Window Shopper"
+        },
+        {
+            "startTime": 82000,
+            "endTime": 83000,
+            "artist": "E-40",
+            "track": "Break Ya Ankles"
+        },
+        {
+            "startTime": 83000,
+            "endTime": 84000,
+            "artist": "Cassidy",
+            "track": "B-Boy Stance"
+        },
+        {
+            "startTime": 84000,
+            "endTime": 85000,
+            "artist": "Nas",
+            "track": "Got Ur Self A…"
+        },
+        {
+            "startTime": 86000,
+            "endTime": 87000,
+            "artist": "Nicki Minaj",
+            "track": "Your Love"
+        },
+        {
+            "startTime": 101000,
+            "endTime": 153000,
+            "artist": "Spacehog",
+            "track": "In the Meantime"
+        },
+        {
+            "startTime": 111000,
+            "endTime": 132000,
+            "artist": "Terror Squad",
+            "track": "Lean Back"
+        },
+        {
+            "startTime": 155000,
+            "endTime": 161000,
+            "artist": "Ester Dean",
+            "track": "Drop It Low"
+        },
+        {
+            "startTime": 162000,
+            "endTime": 163000,
+            "artist": "Uncle Louie",
+            "track": "I Like Funky Music"
+        },
+        {
+            "startTime": 164000,
+            "endTime": 164000,
+            "artist": "Beastie Boys",
+            "track": "Paul Revere"
+        },
+        {
+            "startTime": 164000,
+            "endTime": 242000,
+            "artist": "Beyoncé",
+            "track": "Single Ladies (Put a Ring on It)"
+        },
+        {
+            "startTime": 164000,
+            "endTime": 213000,
+            "artist": "MC Shan",
+            "track": "The Honey Drippers)"
+        },
+        {
+            "startTime": 172000,
+            "endTime": 321000,
+            "artist": "M.O.P.",
+            "track": "Ante Up"
+        },
+        {
+            "startTime": 233000,
+            "endTime": 321000,
+            "artist": "Whodini",
+            "track": "Friends"
+        },
+        {
+            "startTime": 244000,
+            "endTime": 321000,
+            "artist": "Miley Cyrus",
+            "track": "Party in the U.S.A."
+        },
+        {
+            "startTime": 321000,
+            "endTime": 322000,
+            "artist": "Dr. Dre",
+            "track": "The Next Episode"
+        }
+    ]
+}

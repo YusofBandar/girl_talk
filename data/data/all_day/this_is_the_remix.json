@@ -1,0 +1,241 @@
+{
+    "duration": 362000,
+    "album": "All Day",
+    "track": "This is the Remix",
+    "tracks": [
+        {
+            "startTime": 0,
+            "endTime": 3000,
+            "artist": "Mr. Cheeks",
+            "track": "Lights, Camera, Action!"
+        },
+        {
+            "startTime": 0,
+            "endTime": 3000,
+            "artist": "Herbie Hancock",
+            "track": "Rockit"
+        },
+        {
+            "startTime": 0,
+            "endTime": 40000,
+            "artist": "Lady GaGa",
+            "track": "LoveGame"
+        },
+        {
+            "startTime": 4000,
+            "endTime": 53000,
+            "artist": "Bananarama",
+            "track": "Cruel Summer"
+        },
+        {
+            "startTime": 4000,
+            "endTime": 40000,
+            "artist": "Justin Timberlake",
+            "track": "SexyBack"
+        },
+        {
+            "startTime": 9000,
+            "endTime": 40000,
+            "artist": "Diddy-Dirty Money",
+            "track": "Hello Good Morning"
+        },
+        {
+            "startTime": 12000,
+            "endTime": 14000,
+            "artist": "Swizz Beatz",
+            "track": "It's Me Bitches"
+        },
+        {
+            "startTime": 41000,
+            "endTime": 112000,
+            "artist": "Snoop Dogg",
+            "track": "Gangsta Luv"
+        },
+        {
+            "startTime": 46000,
+            "endTime": 113000,
+            "artist": "Lil' Kim",
+            "track": "The Jump Off"
+        },
+        {
+            "startTime": 55000,
+            "endTime": 57000,
+            "artist": "Genesis",
+            "track": "Tonight, Tonight, Tonight"
+        },
+        {
+            "startTime": 59000,
+            "endTime": 126000,
+            "artist": "The Jackson 5",
+            "track": "I Want You Back"
+        },
+        {
+            "startTime": 66000,
+            "endTime": 68000,
+            "artist": "N.W.A",
+            "track": "Straight Outta Compton"
+        },
+        {
+            "startTime": 113000,
+            "endTime": 114000,
+            "artist": "George Michael",
+            "track": "Freedom! '90"
+        },
+        {
+            "startTime": 114000,
+            "endTime": 118000,
+            "artist": "Busta Rhymes",
+            "track": "Stop the Party"
+        },
+        {
+            "startTime": 116000,
+            "endTime": 118000,
+            "artist": "Billy Squier",
+            "track": "The Big Beat"
+        },
+        {
+            "startTime": 116000,
+            "endTime": 134000,
+            "artist": "Gang Starr",
+            "track": "DWYCK"
+        },
+        {
+            "startTime": 118000,
+            "endTime": 127000,
+            "artist": "DMX",
+            "track": "Party Up (Up in Here)"
+        },
+        {
+            "startTime": 126000,
+            "endTime": 127000,
+            "artist": "Beastie Boys",
+            "track": "Intergalactic"
+        },
+        {
+            "startTime": 128000,
+            "endTime": 224000,
+            "artist": "Toadies",
+            "track": "Possum Kingdom"
+        },
+        {
+            "startTime": 135000,
+            "endTime": 136000,
+            "artist": "2 Live Crew",
+            "track": "Banned in the U.S.A."
+        },
+        {
+            "startTime": 136000,
+            "endTime": 154000,
+            "artist": "B.o.B",
+            "track": "Nothin' on You"
+        },
+        {
+            "startTime": 155000,
+            "endTime": 173000,
+            "artist": "Method Man & Redman",
+            "track": "Tear It Off"
+        },
+        {
+            "startTime": 176000,
+            "endTime": 205000,
+            "artist": "DJ Jubilee",
+            "track": "Get Ready, Ready!"
+        },
+        {
+            "startTime": 209000,
+            "endTime": 282000,
+            "artist": "Lil Jon and the East Side Boyz",
+            "track": "Get Low"
+        },
+        {
+            "startTime": 222000,
+            "endTime": 282000,
+            "artist": "Simon and Garfunkel",
+            "track": "Cecilia"
+        },
+        {
+            "startTime": 237000,
+            "endTime": 263000,
+            "artist": "U2",
+            "track": "Sunday Bloody Sunday"
+        },
+        {
+            "startTime": 263000,
+            "endTime": 265000,
+            "artist": "Third Eye Blind",
+            "track": "Semi-Charmed Life"
+        },
+        {
+            "startTime": 265000,
+            "endTime": 287000,
+            "artist": "Kid 'n Play",
+            "track": "Rollin' with Kid 'n Play"
+        },
+        {
+            "startTime": 283000,
+            "endTime": 351000,
+            "artist": "Fabolous",
+            "track": "Young'n (Holla Back)"
+        },
+        {
+            "startTime": 287000,
+            "endTime": 287000,
+            "artist": "Heavy D & the Boyz",
+            "track": "We Got Our Own Thang"
+        },
+        {
+            "startTime": 288000,
+            "endTime": 291000,
+            "artist": "The Grateful Dead",
+            "track": "Casey Jones"
+        },
+        {
+            "startTime": 291000,
+            "endTime": 291000,
+            "artist": "Ice Cube",
+            "track": "The Nigga Ya Love to Hate"
+        },
+        {
+            "startTime": 292000,
+            "endTime": 352000,
+            "artist": "INXS",
+            "track": "Need You Tonight"
+        },
+        {
+            "startTime": 335000,
+            "endTime": 352000,
+            "artist": "Main Source",
+            "track": "Looking at the Front Door"
+        },
+        {
+            "startTime": 336000,
+            "endTime": 358000,
+            "artist": "The Clash",
+            "track": "Should I Stay or Should I Go"
+        },
+        {
+            "startTime": 337000,
+            "endTime": 353000,
+            "artist": "LL Cool J",
+            "track": "Jingling Baby (Remixed But Still Jingling)"
+        },
+        {
+            "startTime": 338000,
+            "endTime": 356000,
+            "artist": "Marva Whitney",
+            "track": "Unwind Yourself"
+        },
+        {
+            "startTime": 353000,
+            "endTime": 362000,
+            "artist": "Lisa Lisa and Cult Jam",
+            "track": "Let the Beat Hit 'Em"
+        },
+        {
+            "startTime": 355000,
+            "endTime": 357000,
+            "artist": "The Notorious B.I.G.",
+            "track": "Nasty Girl"
+        }
+    ]
+}
