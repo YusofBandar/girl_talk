@@ -57,6 +57,11 @@
             "title": "Triple Double",
             "dataPath": "../data/all_day/triple_double.json",
             "audioPath": "../audio/Triple_Double.mp3"
+        },
+        {
+            "title": "Every Day",
+            "dataPath": "../data/all_day/every_day.json",
+            "audioPath": "../audio/Every_Day.mp3"
         }
     ]
 }

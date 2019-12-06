@@ -1,8 +1,8 @@
 const fs = require("fs");
 const readline = require("readline");
 
-const sourceFile = "./all_day/steady_shock.txt";
-const targetFile = "./all_day/steady_shock.json";
+const sourceFile = "./all_day/every_day.txt";
+const targetFile = "./all_day/every_day.json";
 
 const readInterface = readline.createInterface({
     input: fs.createReadStream(sourceFile)
