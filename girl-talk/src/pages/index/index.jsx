@@ -7,7 +7,7 @@ import './index.scss';
 
 class Index extends Component {
 
-  albumPaths = ["./data/all_day.json"];
+  albumPaths = ["./data/all_day.json","./data/feed_the_animals.json"];
 
   state = {
     albums: []
