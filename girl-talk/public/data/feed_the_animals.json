@@ -3,6 +3,10 @@
     "released": "June 19, 2008",
     "artWork": "../album_art/Feed_the_Animals.jpg",
     "tracks": [
-      
+        {
+            "title": "Play Your Part (Pt. 1)",
+            "dataPath": "../data/feed_the_animals/play_your_part_(pt1).json",
+            "audioPath": "../audio/Play_Your_Part_(Pt1).mp3"
+        }
     ]
 }
