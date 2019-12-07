@@ -94,8 +94,8 @@ class View extends Component {
                 <div className="centre">
                     {
                         this.state.tracks.map((track, i) => {
-                            return <div className="r-recordWrapper">
-                            <Record key={track.track} track={track} audioPath={this.album.tracks[i].audioPath} width="1000px" height="1000px"></Record>
+                            return <div  key={track.track} className="r-recordWrapper">
+                            <Record track={track} audioPath={this.album.tracks[i].audioPath} width="1000px" height="1000px"></Record>
                             <div className="r-title">{track.track}</div>
                             </div>
                         })
