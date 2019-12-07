@@ -33,11 +33,11 @@ class View extends Component {
             return;
         }
 
+       let path = decodeURI(this.params.album).replace(/\s/g, "_").toLowerCase();
+        this.album = await this.readJson(`/data/${path}.json`);
+        
         window.addEventListener('scroll', this.handleScroll);
 
-        let path = decodeURI(this.params.album).replace(/\s/g, "_").toLowerCase();
-        this.album = await this.readJson(`/data/${path}.json`);
-    
         this.album.tracks.forEach(async (track) => {
             let data = await this.readJson(track.dataPath);
 
