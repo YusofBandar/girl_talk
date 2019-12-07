@@ -7,6 +7,11 @@
             "title": "Play Your Part (Pt. 1)",
             "dataPath": "../data/feed_the_animals/play_your_part_(pt1).json",
             "audioPath": "../audio/Play_Your_Part_(Pt1).mp3"
+        },
+        {
+            "title": "Shut the Club Down",
+            "dataPath": "../data/feed_the_animals/shut_the_club_down.json",
+            "audioPath": "../audio/Shut_the_Club_Down.mp3"
         }
     ]
 }
