@@ -11,7 +11,10 @@ class View extends Component {
         super(props);
         this.params = this.props.match.params;
 
+        this.screenSize = this.screenSize.bind(this);
         this.backgroundSyle = this.backgroundSyle.bind(this);
+        this.screenStyle = this.screenStyle.bind(this);
+
         this.handleScroll = this.handleScroll.bind(this);
     }
 
@@ -33,9 +36,8 @@ class View extends Component {
         window.addEventListener('scroll', this.handleScroll);
 
         let path = decodeURI(this.params.album).replace(/\s/g, "_").toLowerCase();
-        console.log(path);
         this.album = await this.readJson(`/data/${path}.json`);
-
+    
         this.album.tracks.forEach(async (track) => {
             let data = await this.readJson(track.dataPath);
 
@@ -59,11 +61,28 @@ class View extends Component {
 
     backgroundSyle(){
         if(!this.album) return {};
+        const size = this.screenSize();
+        
         return {
             backgroundImage: `url(${this.album.artWork})`,
             top: `${-(this.state.backgroundY)}px`,
-            height: "4000px",
-            width: "4000px"
+            width: `${size[0]}px`,
+            height: `${size[1]}px`
+        };
+    }
+
+    screenSize(){
+        let height = Math.max( document.body.scrollHeight, document.body.offsetHeight);
+        let width = Math.max( document.body.scrollWidth, document.body.offsetWidth);
+
+        return [width,height];
+    }
+
+    screenStyle(){
+        const size = this.screenSize();
+        return {
+            width: `${size[0]}px`,
+            height: `${size[1]}px`
         };
     }
 
@@ -71,7 +90,7 @@ class View extends Component {
         return (
             <React.Fragment>
                 <div className="r-background" style={this.backgroundSyle()}></div>
-                <div className="r-screen" style={{height: "4000px", width:"4000px"}}></div>
+                <div className="r-screen" style={this.screenStyle()}></div>
                 <div className="centre">
                     {
                         this.state.tracks.map((track, i) => {
