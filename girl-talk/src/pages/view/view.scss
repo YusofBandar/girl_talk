@@ -36,10 +36,20 @@
         }
     }
 
+    @media (min-width: 1001px){
+
+        .r-title {
+            padding-right: 40px;
+            max-width: 300px;
+        }
+        
+    }
+
     .r-title{
         font-size: 4.0em;
         color: white;
-    
+        text-align: center;
+
         animation: fadeIn ease 2s ;
         animation-iteration-count: 1; 
         animation-fill-mode: forwards; 
