@@ -14,7 +14,7 @@ class Record extends Component {
     width = 500;
     height = 500;
 
-    innerPadding = this.width / 15;
+    innerPadding = this.width / 10;
     outerPadding = this.width / 100;
 
     radius = this.width / 2;
@@ -23,7 +23,7 @@ class Record extends Component {
 
     state = {
         hoverTrack: -1,
-        elapsed: 1,
+        elapsed: 0,
         end: false,
         state: this.PAUSED
     }
@@ -62,7 +62,7 @@ class Record extends Component {
     }
 
     pause() {
-        this.setState({state: this.PAUSED});
+        this.setState({ state: this.PAUSED });
         this.audio.pause();
     }
 
@@ -75,8 +75,8 @@ class Record extends Component {
         this.audio.play()
         let timer = d3.timer(() => {
             let elapsed = (this.audio.currentTime * 1000);
-            this.setState({elapsed : elapsed});
-            
+            this.setState({ elapsed: elapsed });
+
             // if at the end of track remove all arcs and labels
             if (elapsed > this.track.duration) {
                 timer.stop()
@@ -85,7 +85,7 @@ class Record extends Component {
                     this.setState({ end: true })
 
                     d3.timeout(() => {
-                        this.setState({elapsed : 0, end:false})
+                        this.setState({ elapsed: 0, end: false })
                     }, 3000)
                 }, 5000)
 
@@ -106,11 +106,11 @@ class Record extends Component {
         this.setState({ hoverTrack: -1 });
     }
 
-    timelineDrag(time){
-        this.audio.currentTime = time/1000;
+    timelineDrag(time) {
+        this.audio.currentTime = time / 1000;
 
         let elapsed = (this.audio.currentTime * 1000);
-        this.setState({elapsed : elapsed});
+        this.setState({ elapsed: elapsed });
     }
 
 
@@ -121,35 +121,45 @@ class Record extends Component {
         const arcWidth = this.arcWidth(this.radius, this.innerPadding, this.outerPadding, tracks.length)
 
         return (
-            <svg className="v-record" viewBox="0 0 1000 1000" width={this.props.width} height={this.props.height}>
-                <g className="r-wrapper" onClick={this.recordClick}>
-                    <circle className="r-disk" r={this.width / 2}></circle>
-                    <circle className="r-innerDisk" r={this.innerPadding}></circle>
-                    <circle r={this.innerPadding/3}></circle>
-                    {
-                        tracks.map((sample, index) => {
-                            let blur = false;
+            <React.Fragment>
 
-                            if (index !== this.state.hoverTrack && this.state.hoverTrack > -1) {
-                                blur = true;
-                            }
+                <svg className="v-record" viewBox="0 0 1000 1000" width={this.props.width} height={this.props.height}>
+                    <g className="r-wrapper" onClick={this.recordClick}>
+                        <circle className="r-disk" r={this.width / 2}></circle>
+                        <circle className="r-innerDisk" r={this.innerPadding}></circle>
+                        <circle r={this.innerPadding / 3}></circle>
+                        <foreignObject x={-this.width/2} y={-this.height/2} width={this.width} height={this.height}>
+                            <div id="vinyl-record-main" style={{ width: this.width, height: this.height}}></div>
+                            <div id="vinyl-record-inner" style={{ width: this.width, height: this.height}}></div>
+                        </foreignObject>
+                        <foreignObject x={-this.innerPadding/2} y={-this.innerPadding/2} width={this.innerPadding} height={this.innerPadding}>
+                            <div id="vinyl-record-inner" style={{ width: this.innerPadding, height: this.innerPadding}}></div>
+                        </foreignObject>
+                        {
+                            tracks.map((sample, index) => {
+                                let blur = false;
 
-                            const config = {
-                                index: index,
-                                radius: this.radius,
-                                arcWidth: arcWidth,
-                                padding: this.outerPadding,
-                                colour: this.colours[index % this.colours.length]
-                            }
+                                if (index !== this.state.hoverTrack && this.state.hoverTrack > -1) {
+                                    blur = true;
+                                }
 
-                            return <Track key={sample.track} elapsed={this.state.elapsed} track={sample} duration={track.duration}
-                                blur={blur} end={this.state.end} onHover={this.arcHover} onBlur={this.arcBlur} config={config}
-                            ></Track>
-                        })
-                    }
-                    <Timeline radius={this.radius} duration={track.duration} elapsed={this.state.elapsed} onDrag={this.timelineDrag}></Timeline>
-                </g>
-            </svg>
+                                const config = {
+                                    index: index,
+                                    radius: this.radius,
+                                    arcWidth: arcWidth,
+                                    padding: this.outerPadding,
+                                    colour: this.colours[index % this.colours.length]
+                                }
+
+                                return <Track key={sample.track} elapsed={this.state.elapsed} track={sample} duration={track.duration}
+                                    blur={blur} end={this.state.end} onHover={this.arcHover} onBlur={this.arcBlur} config={config}
+                                ></Track>
+                            })
+                        }
+                        <Timeline radius={this.radius} duration={track.duration} elapsed={this.state.elapsed} onDrag={this.timelineDrag}></Timeline>
+                    </g>
+                </svg>
+            </React.Fragment>
         );
     }
 }
