@@ -12,6 +12,11 @@
             "title": "Shut the Club Down",
             "dataPath": "../data/feed_the_animals/shut_the_club_down.json",
             "audioPath": "../audio/Shut_the_Club_Down.mp3"
+        },
+        {
+            "title": "Still Here",
+            "dataPath": "../data/feed_the_animals/still_here.json",
+            "audioPath": "../audio/Still_Here.mp3"
         }
     ]
 }

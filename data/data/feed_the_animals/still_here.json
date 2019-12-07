@@ -1,0 +1,145 @@
+{
+    "duration": 237000,
+    "album": "Feed the Animals",
+    "track": "Still Here",
+    "tracks": [
+        {
+            "startTime": 0,
+            "endTime": 23000,
+            "artist": "Procol Harum",
+            "track": "A Whiter Shade of Pale"
+        },
+        {
+            "startTime": 0,
+            "endTime": 34000,
+            "artist": "YoungBloodZ",
+            "track": "Damn!"
+        },
+        {
+            "startTime": 0,
+            "endTime": 31000,
+            "artist": "Kanye West",
+            "track": "Good Life"
+        },
+        {
+            "startTime": 23000,
+            "endTime": 98000,
+            "artist": "BLACKstreet",
+            "track": "No Diggity"
+        },
+        {
+            "startTime": 31000,
+            "endTime": 66000,
+            "artist": "Michael Jackson",
+            "track": "Stranger in Moscow"
+        },
+        {
+            "startTime": 34000,
+            "endTime": 77000,
+            "artist": "Kanye West",
+            "track": "Flashing Lights"
+        },
+        {
+            "startTime": 77000,
+            "endTime": 117000,
+            "artist": "Radiohead",
+            "track": "15 Step"
+        },
+        {
+            "startTime": 88000,
+            "endTime": 128000,
+            "artist": "Webbie",
+            "track": "Independent"
+        },
+        {
+            "startTime": 98000,
+            "endTime": 129000,
+            "artist": "The Band",
+            "track": "The Weight"
+        },
+        {
+            "startTime": 101000,
+            "endTime": 119000,
+            "artist": "Yung Joc",
+            "track": "It's Goin' Down"
+        },
+        {
+            "startTime": 119000,
+            "endTime": 149000,
+            "artist": "Fatman Scoop",
+            "track": "Jump and Spread Out"
+        },
+        {
+            "startTime": 129000,
+            "endTime": 130000,
+            "artist": "Ben Folds Five",
+            "track": "Battle of Who Could Care Less"
+        },
+        {
+            "startTime": 130000,
+            "endTime": 184000,
+            "artist": "Ace of Base",
+            "track": "All That She Wants"
+        },
+        {
+            "startTime": 130000,
+            "endTime": 183000,
+            "artist": "Lil Scrappy",
+            "track": "Money in the Bank"
+        },
+        {
+            "startTime": 130000,
+            "endTime": 204000,
+            "artist": "Cassidy",
+            "track": "My Drink n My 2 Step"
+        },
+        {
+            "startTime": 183000,
+            "endTime": 214000,
+            "artist": "Fergie",
+            "track": "London Bridge"
+        },
+        {
+            "startTime": 183000,
+            "endTime": 215000,
+            "artist": "Kenny Loggins",
+            "track": "Footloose"
+        },
+        {
+            "startTime": 185000,
+            "endTime": 232000,
+            "artist": "Gorilla Zoe",
+            "track": "Hood Figga"
+        },
+        {
+            "startTime": 214000,
+            "endTime": 215000,
+            "artist": "Salt-n-Pepa",
+            "track": "Whatta Man"
+        },
+        {
+            "startTime": 215000,
+            "endTime": 232000,
+            "artist": "Beastie Boys",
+            "track": "So What'cha Want"
+        },
+        {
+            "startTime": 220000,
+            "endTime": 237000,
+            "artist": "50 Cent",
+            "track": "I Get Money"
+        },
+        {
+            "startTime": 220000,
+            "endTime": 237000,
+            "artist": "Queen",
+            "track": "We Will Rock You"
+        },
+        {
+            "startTime": 221000,
+            "endTime": 237000,
+            "artist": "Cat Stevens",
+            "track": "Here Comes My Baby"
+        }
+    ]
+}
