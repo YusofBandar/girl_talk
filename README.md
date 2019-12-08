@@ -7,7 +7,7 @@
  
  To view full visulisation please visit
  
- For a simpler view see the static folder
+ For a simpler view see the [static folder](https://github.com/YusofBandar/girl_talk/tree/master/static)
  
  ### Data
  
