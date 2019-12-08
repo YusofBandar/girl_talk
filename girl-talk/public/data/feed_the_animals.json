@@ -27,6 +27,11 @@
             "title": "Set It Off",
             "dataPath": "../data/feed_the_animals/set_it_off.json",
             "audioPath": "../audio/Set_It_Off.mp3"
+        },
+        {
+            "title": "No Pause",
+            "dataPath": "../data/feed_the_animals/no_pause.json",
+            "audioPath": "../audio/No_Pause.mp3"
         }
     ]
 }
