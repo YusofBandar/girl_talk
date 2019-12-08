@@ -34,6 +34,10 @@ class Record extends Component {
         this.setState({loaded : true});
     }
 
+    componentWillUnmount(){
+        this.pause();
+    }
+
     constructor(props) {
         super(props);
         this.track = props.track;
