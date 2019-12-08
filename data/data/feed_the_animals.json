@@ -32,6 +32,11 @@
             "title": "No Pause",
             "dataPath": "../data/feed_the_animals/no_pause.json",
             "audioPath": "../audio/No_Pause.mp3"
+        },
+        {
+            "title": "Like This",
+            "dataPath": "../data/feed_the_animals/like_this.json",
+            "audioPath": "../audio/Like_This.mp3"
         }
     ]
 }

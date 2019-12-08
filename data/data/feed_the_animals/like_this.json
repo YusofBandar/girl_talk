@@ -1,0 +1,193 @@
+{
+    "duration": 201000,
+    "album": "Feed the Animals",
+    "track": "Like This",
+    "tracks": [
+        {
+            "startTime": 0,
+            "endTime": 55000,
+            "artist": "Beyoncé",
+            "track": "Get Me Bodied"
+        },
+        {
+            "startTime": 0,
+            "endTime": 16000,
+            "artist": "James Gang",
+            "track": "Funk #49"
+        },
+        {
+            "startTime": 5000,
+            "endTime": 34000,
+            "artist": "LL Cool J",
+            "track": "Mama Said Knock You Out"
+        },
+        {
+            "startTime": 18000,
+            "endTime": 35000,
+            "artist": "En Vogue",
+            "track": "Free Your Mind"
+        },
+        {
+            "startTime": 18000,
+            "endTime": 71000,
+            "artist": "Soul II Soul",
+            "track": "Back to Life (However Do You Want Me)"
+        },
+        {
+            "startTime": 18000,
+            "endTime": 32000,
+            "artist": "The Bangles",
+            "track": "Walk Like an Egyptian"
+        },
+        {
+            "startTime": 26000,
+            "endTime": 27000,
+            "artist": "Rick Astley",
+            "track": "Never Gonna Give You Up"
+        },
+        {
+            "startTime": 35000,
+            "endTime": 36000,
+            "artist": "Hi-Five",
+            "track": "I Just Can't Handle It (Extended 12 Mix)"
+        },
+        {
+            "startTime": 36000,
+            "endTime": 55000,
+            "artist": "The Jackson 5",
+            "track": "Dancing Machine"
+        },
+        {
+            "startTime": 37000,
+            "endTime": 66000,
+            "artist": "Beastie Boys",
+            "track": "Body Movin'"
+        },
+        {
+            "startTime": 54000,
+            "endTime": 66000,
+            "artist": "Nine Inch Nails",
+            "track": "Down in It"
+        },
+        {
+            "startTime": 56000,
+            "endTime": 72000,
+            "artist": "Rick Derringer",
+            "track": "Rock and Roll, Hoochie Koo"
+        },
+        {
+            "startTime": 59000,
+            "endTime": 73000,
+            "artist": "The Crooklyn Clan",
+            "track": "Bounce One Time (To the Beat)"
+        },
+        {
+            "startTime": 59000,
+            "endTime": 70000,
+            "artist": "Trick Daddy",
+            "track": "Drop (Low, Low, Low)"
+        },
+        {
+            "startTime": 59000,
+            "endTime": 70000,
+            "artist": "Busta Rhymes",
+            "track": "What It Is"
+        },
+        {
+            "startTime": 61000,
+            "endTime": 62000,
+            "artist": "Gwen Stefani",
+            "track": "Serious"
+        },
+        {
+            "startTime": 62000,
+            "endTime": 63000,
+            "artist": "Bubba Sparxxx",
+            "track": "Ms. New Booty"
+        },
+        {
+            "startTime": 72000,
+            "endTime": 119000,
+            "artist": "Pras",
+            "track": "Ghetto Supastar (That Is What You Are)"
+        },
+        {
+            "startTime": 73000,
+            "endTime": 108000,
+            "artist": "Yo La Tengo",
+            "track": "Autumn Sweater"
+        },
+        {
+            "startTime": 92000,
+            "endTime": 108000,
+            "artist": "Southside Movement",
+            "track": "Save the World"
+        },
+        {
+            "startTime": 109000,
+            "endTime": 144000,
+            "artist": "Mims",
+            "track": "Like This"
+        },
+        {
+            "startTime": 109000,
+            "endTime": 122000,
+            "artist": "Janet Jackson",
+            "track": "Nasty"
+        },
+        {
+            "startTime": 109000,
+            "endTime": 141000,
+            "artist": "Eric B. & Rakim",
+            "track": "Paid in Full"
+        },
+        {
+            "startTime": 111000,
+            "endTime": 123000,
+            "artist": "Diana Ross",
+            "track": "Upside Down"
+        },
+        {
+            "startTime": 114000,
+            "endTime": 125000,
+            "artist": "Eve",
+            "track": "Tambourine"
+        },
+        {
+            "startTime": 126000,
+            "endTime": 127000,
+            "artist": "K7",
+            "track": "Come Baby Come"
+        },
+        {
+            "startTime": 128000,
+            "endTime": 146000,
+            "artist": "The Carpenters",
+            "track": "Superstar"
+        },
+        {
+            "startTime": 146000,
+            "endTime": 200000,
+            "artist": "Metallica",
+            "track": "One"
+        },
+        {
+            "startTime": 155000,
+            "endTime": 192000,
+            "artist": "Lil Mama",
+            "track": "Lip Gloss"
+        },
+        {
+            "startTime": 192000,
+            "endTime": 200000,
+            "artist": "Soulja Boy Tell 'Em",
+            "track": "Donk"
+        },
+        {
+            "startTime": 201000,
+            "endTime": 201000,
+            "artist": "Big Boi",
+            "track": "Royal Flush"
+        }
+    ]
+}
