@@ -47,6 +47,11 @@
             "title": "Hands in the Air",
             "dataPath": "../data/feed_the_animals/hands_in_the_air.json",
             "audioPath": "../audio/Hands_in_the_Air.mp3"
+        },
+        {
+            "title": "In Step",
+            "dataPath": "../data/feed_the_animals/in_step.json",
+            "audioPath": "../audio/In_Step.mp3"
         }
     ]
 }
