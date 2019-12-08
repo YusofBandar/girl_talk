@@ -62,6 +62,11 @@
             "title": "Here's the Thing",
             "dataPath": "../data/feed_the_animals/heres_the_thing.json",
             "audioPath": "../audio/Heres_the_Thing.mp3"
+        },
+        {
+            "title": "Don't Stop",
+            "dataPath": "../data/feed_the_animals/dont_stop.json",
+            "audioPath": "../audio/Dont_Stop.mp3"
         }
     ]
 }
