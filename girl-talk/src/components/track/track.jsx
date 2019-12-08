@@ -19,6 +19,28 @@ class Track extends Component {
         this.d3Arc = this.d3Arc.bind(this);
     }
 
+
+    render() {
+        const props = this.props;
+        const config = props.config;
+
+        const angles = this.angles(props.track.startTime, props.track.endTime, this.angle(props.elapsed, props.duration), props.duration);
+        const arc = this.d3Arc(config.index, config.radius, config.arcWidth, angles[0], angles[1], config.padding);
+
+        const labelConfig = {
+            index: config.index,
+            radius: config.radius
+        }
+
+
+        return (
+            <g className={classNames({ 'r-blur': this.props.blur, "r-end": this.props.end })}>
+                <path onMouseEnter={this.hover} onMouseLeave={this.blur} style={{ fill: config.colour }} d={arc()}></path>
+                <Label config={labelConfig} angles={angles} currentAngle={this.angle(props.elapsed, props.duration)} centroid={arc.centroid()} track={props.track}></Label>
+            </g>
+        );
+    }
+
     hover() {
         this.props.onHover(this.props.config.index);
     }
@@ -55,28 +77,6 @@ class Track extends Component {
             .startAngle(startAngle)
             .endAngle(endAngle);
         return path;
-    }
-
-    render() {
-
-        const props = this.props;
-        const config = props.config;
-
-        const angles = this.angles(props.track.startTime, props.track.endTime, this.angle(props.elapsed, props.duration), props.duration);
-        const arc = this.d3Arc(config.index, config.radius, config.arcWidth, angles[0], angles[1], config.padding);
-
-        const labelConfig = {
-            index : config.index,
-            radius: config.radius
-        }
-
-
-        return (
-            <g className={classNames({ 'r-blur': this.props.blur, "r-end": this.props.end })}>
-                <path onMouseEnter={this.hover} onMouseLeave={this.blur} style={{ fill: config.colour }} d={arc()}></path>
-                <Label config={labelConfig} angles={angles} currentAngle={this.angle(props.elapsed, props.duration)} centroid={arc.centroid()} track={props.track}></Label>
-            </g>
-        );
     }
 }
 

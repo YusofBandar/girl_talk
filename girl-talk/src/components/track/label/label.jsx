@@ -1,25 +1,12 @@
 import React, { Component } from 'react';
-import * as d3 from "d3";
 
 import './label.scss';
 
 
 class Label extends Component {
-
-
     constructor(props) {
         super(props); 
     }
-
-    isVisible(startAngle, currentAngle){
-        if(currentAngle < 0.01){
-            return { visibility: "hidden"}
-        }
-
-        return (startAngle !== currentAngle) ? {visibility: "visible"} : { visibility: "hidden"};
-    }
-
-
 
     render() {
         const props = this.props;
@@ -45,6 +32,14 @@ class Label extends Component {
                 </g>
             </g>
         );
+    }
+
+    isVisible(startAngle, currentAngle){
+        if(currentAngle < 0.01){
+            return { visibility: "hidden"}
+        }
+
+        return (startAngle !== currentAngle) ? {visibility: "visible"} : { visibility: "hidden"};
     }
 }
 

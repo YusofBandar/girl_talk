@@ -27,10 +27,6 @@ class View extends Component {
         height: 0
     }
 
-    async readJson(path) {
-        return await d3.json(path);
-    }
-
     async componentDidMount() {
         if (!this.params.album) {
             return;
@@ -56,6 +52,31 @@ class View extends Component {
 
     componentWillUnmount() {
         window.removeEventListener('resize', this.screenSize);
+        window.removeEventListener('scroll', this.handleScroll);
+    }
+
+    render() {
+        return (
+            <React.Fragment>
+                <div className="r-background" style={this.backgroundSyle(this.state.width, this.state.height)}></div>
+                <div className="r-screen" style={{ width: this.state.width, height: this.state.height }}></div>
+                <div className="centre">
+                    {
+                        this.state.tracks.map((track, i) => {
+                            return <div key={track.data.track} className="r-recordWrapper">
+                                <Record track={track.data} audio={track.audio} width="1000px" height="1000px"></Record>
+                                <div className="r-title">{track.data.track}</div>
+                            </div>
+                        })
+                    }
+
+                </div>
+            </React.Fragment>
+        );
+    }
+
+    async readJson(path) {
+        return await d3.json(path);
     }
 
     loadAudio(audioPath) {
@@ -77,10 +98,6 @@ class View extends Component {
         this.setState({ backgroundY: dy });
     }
 
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll);
-    }
-
     backgroundSyle(width, height) {
         if (!this.album) return {};
 
@@ -97,26 +114,6 @@ class View extends Component {
         let width = Math.max(document.body.scrollWidth, document.body.offsetWidth);
 
         this.setState({ width, height });
-    }
-
-    render() {
-        return (
-            <React.Fragment>
-                <div className="r-background" style={this.backgroundSyle(this.state.width, this.state.height)}></div>
-                <div className="r-screen" style={{ width: this.state.width, height: this.state.height }}></div>
-                <div className="centre">
-                    {
-                        this.state.tracks.map((track, i) => {
-                            return <div key={track.data.track} className="r-recordWrapper">
-                                <Record track={track.data} audio={track.audio} width="1000px" height="1000px"></Record>
-                                <div className="r-title">{track.data.track}</div>
-                            </div>
-                        })
-                    }
-
-                </div>
-            </React.Fragment>
-        );
     }
 
     mapNumRange(num, inMin, inMax, outMin, outMax) {

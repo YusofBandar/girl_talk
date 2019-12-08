@@ -7,14 +7,10 @@ import './index.scss';
 
 class Index extends Component {
 
-  albumPaths = ["./data/all_day.json","./data/feed_the_animals.json"];
+  albumPaths = ["./data/all_day.json", "./data/feed_the_animals.json"];
 
   state = {
     albums: []
-  }
-
-  async readJson(path) {
-    return await d3.json(path);
   }
 
   async componentWillMount() {
@@ -24,6 +20,10 @@ class Index extends Component {
       albums.push(album);
       this.setState({ albums });
     })
+  }
+
+  async readJson(path) {
+    return await d3.json(path);
   }
 
   render() {

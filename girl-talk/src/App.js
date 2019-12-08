@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, Link } from "react-router-dom";
+import { HashRouter, Route} from "react-router-dom";
 
 import Index from "./pages/index/index";
 import View from "./pages/view/view";
