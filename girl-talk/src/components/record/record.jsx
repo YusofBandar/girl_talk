@@ -25,17 +25,20 @@ class Record extends Component {
         hoverTrack: -1,
         elapsed: 0,
         end: false,
-        state: this.PAUSED
+        state: this.PAUSED,
+        loaded: false
     }
 
-    componentDidMount() {
-        //this.play();
-        this.loadAudio();
+    async componentDidMount() {
+        await this.loadAudio();
+        this.setState({loaded : true});
     }
 
     constructor(props) {
         super(props);
         this.track = props.track;
+
+        this.isVisible = this.isVisible.bind(this);
 
         this.arcWidth = this.arcWidth.bind(this);
 
@@ -67,8 +70,14 @@ class Record extends Component {
     }
 
     loadAudio() {
-        let audio = new Audio(this.props.audioPath);
-        this.audio = audio;
+        return new Promise((resolve, reject) => {
+            let audio = new Audio(this.props.audioPath);
+            audio.addEventListener("canplaythrough", event => {
+                this.audio = audio;
+                resolve(audio);
+            });
+            audio.load(); 
+        })
     }
 
     play() {
@@ -113,6 +122,10 @@ class Record extends Component {
         this.setState({ elapsed: elapsed });
     }
 
+    isVisible(){
+       return this.state.loaded ? {visibility : "visible"} : {visibility : "hidden"};
+    }
+
 
     render() {
         const track = this.track;
@@ -121,45 +134,42 @@ class Record extends Component {
         const arcWidth = this.arcWidth(this.radius, this.innerPadding, this.outerPadding, tracks.length)
 
         return (
-            <React.Fragment>
+            <svg style={this.isVisible()} className="v-record" viewBox="0 0 1000 1000" width={this.props.width} height={this.props.height}>
+                <g className="r-wrapper" onClick={this.recordClick}>
+                    <circle className="r-disk" r={this.width / 2}></circle>
+                    <circle className="r-innerDisk" r={this.innerPadding}></circle>
+                    <circle r={this.innerPadding / 3}></circle>
+                    <foreignObject x={-this.width / 2} y={-this.height / 2} width={this.width} height={this.height}>
+                        <div id="vinyl-record-main" style={{ width: this.width, height: this.height }}></div>
+                        <div id="vinyl-record-inner" style={{ width: this.width, height: this.height }}></div>
+                    </foreignObject>
+                    <foreignObject x={-this.innerPadding / 2} y={-this.innerPadding / 2} width={this.innerPadding} height={this.innerPadding}>
+                        <div id="vinyl-record-inner" style={{ width: this.innerPadding, height: this.innerPadding }}></div>
+                    </foreignObject>
+                    {
+                        tracks.map((sample, index) => {
+                            let blur = false;
 
-                <svg className="v-record" viewBox="0 0 1000 1000" width={this.props.width} height={this.props.height}>
-                    <g className="r-wrapper" onClick={this.recordClick}>
-                        <circle className="r-disk" r={this.width / 2}></circle>
-                        <circle className="r-innerDisk" r={this.innerPadding}></circle>
-                        <circle r={this.innerPadding / 3}></circle>
-                        <foreignObject x={-this.width/2} y={-this.height/2} width={this.width} height={this.height}>
-                            <div id="vinyl-record-main" style={{ width: this.width, height: this.height}}></div>
-                            <div id="vinyl-record-inner" style={{ width: this.width, height: this.height}}></div>
-                        </foreignObject>
-                        <foreignObject x={-this.innerPadding/2} y={-this.innerPadding/2} width={this.innerPadding} height={this.innerPadding}>
-                            <div id="vinyl-record-inner" style={{ width: this.innerPadding, height: this.innerPadding}}></div>
-                        </foreignObject>
-                        {
-                            tracks.map((sample, index) => {
-                                let blur = false;
+                            if (index !== this.state.hoverTrack && this.state.hoverTrack > -1) {
+                                blur = true;
+                            }
 
-                                if (index !== this.state.hoverTrack && this.state.hoverTrack > -1) {
-                                    blur = true;
-                                }
+                            const config = {
+                                index: index,
+                                radius: this.radius,
+                                arcWidth: arcWidth,
+                                padding: this.outerPadding,
+                                colour: this.colours[index % this.colours.length]
+                            }
 
-                                const config = {
-                                    index: index,
-                                    radius: this.radius,
-                                    arcWidth: arcWidth,
-                                    padding: this.outerPadding,
-                                    colour: this.colours[index % this.colours.length]
-                                }
-
-                                return <Track key={sample.track} elapsed={this.state.elapsed} track={sample} duration={track.duration}
-                                    blur={blur} end={this.state.end} onHover={this.arcHover} onBlur={this.arcBlur} config={config}
-                                ></Track>
-                            })
-                        }
-                        <Timeline radius={this.radius} duration={track.duration} elapsed={this.state.elapsed} onDrag={this.timelineDrag}></Timeline>
-                    </g>
-                </svg>
-            </React.Fragment>
+                            return <Track key={sample.track} elapsed={this.state.elapsed} track={sample} duration={track.duration}
+                                blur={blur} end={this.state.end} onHover={this.arcHover} onBlur={this.arcBlur} config={config}
+                            ></Track>
+                        })
+                    }
+                    <Timeline radius={this.radius} duration={track.duration} elapsed={this.state.elapsed} onDrag={this.timelineDrag}></Timeline>
+                </g>
+            </svg>
         );
     }
 }
