@@ -72,7 +72,7 @@ class Record extends Component {
     loadAudio() {
         return new Promise((resolve, reject) => {
             let audio = new Audio(this.props.audioPath);
-            audio.addEventListener("canplaythrough", event => {
+            audio.addEventListener("canplay", event => {
                 this.audio = audio;
                 resolve(audio);
             });
