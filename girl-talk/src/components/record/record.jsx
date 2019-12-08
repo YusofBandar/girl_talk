@@ -26,35 +26,27 @@ class Record extends Component {
         elapsed: 0,
         end: false,
         state: this.PAUSED,
-        loaded: false
     }
 
-    async componentDidMount() {
-        await this.loadAudio();
-        this.setState({loaded : true});
-    }
-
-    componentWillUnmount(){
-        this.pause();
-    }
-
+  
     constructor(props) {
         super(props);
         this.track = props.track;
-
-        this.isVisible = this.isVisible.bind(this);
+        this.audio = props.audio;
 
         this.arcWidth = this.arcWidth.bind(this);
-
         this.arcHover = this.arcHover.bind(this);
         this.arcBlur = this.arcBlur.bind(this);
 
-        this.loadAudio = this.loadAudio.bind(this);
         this.timelineDrag = this.timelineDrag.bind(this);
 
         this.recordClick = this.recordClick.bind(this);
         this.play = this.play.bind(this);
         this.pause = this.pause.bind(this);
+    }
+
+    componentWillUnmount(){
+        this.pause();
     }
 
 
@@ -71,17 +63,6 @@ class Record extends Component {
     pause() {
         this.setState({ state: this.PAUSED });
         this.audio.pause();
-    }
-
-    loadAudio() {
-        return new Promise((resolve, reject) => {
-            let audio = new Audio(this.props.audioPath);
-            audio.addEventListener("canplay", event => {
-                this.audio = audio;
-                resolve(audio);
-            });
-            audio.load(); 
-        })
     }
 
     play() {
@@ -126,11 +107,6 @@ class Record extends Component {
         this.setState({ elapsed: elapsed });
     }
 
-    isVisible(){
-       return this.state.loaded ? {visibility : "visible"} : {visibility : "hidden"};
-    }
-
-
     render() {
         const track = this.track;
         const tracks = this.track.tracks;
@@ -138,7 +114,7 @@ class Record extends Component {
         const arcWidth = this.arcWidth(this.radius, this.innerPadding, this.outerPadding, tracks.length)
 
         return (
-            <svg style={this.isVisible()} className="v-record" viewBox="0 0 1000 1000" width={this.props.width} height={this.props.height}>
+            <svg className="v-record" viewBox="0 0 1000 1000" width={this.props.width} height={this.props.height}>
                 <g className="r-wrapper" onClick={this.recordClick}>
                     <circle className="r-disk" r={this.width / 2}></circle>
                     <circle className="r-innerDisk" r={this.innerPadding}></circle>

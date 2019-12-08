@@ -14,6 +14,8 @@ class View extends Component {
         this.screenSize = this.screenSize.bind(this);
         this.backgroundSyle = this.backgroundSyle.bind(this);
 
+        this.loadAudio = this.loadAudio.bind(this);
+
         this.handleScroll = this.handleScroll.bind(this);
     }
 
@@ -43,9 +45,10 @@ class View extends Component {
 
         this.album.tracks.forEach(async (track) => {
             let data = await this.readJson(track.dataPath);
+            let audio = await this.loadAudio(track.audioPath);
 
             let tracks = this.state.tracks;
-            tracks.push(data);
+            tracks.push({ data, audio });
             this.setState({ tracks });
             this.screenSize();
         })
@@ -53,7 +56,18 @@ class View extends Component {
 
     componentWillUnmount() {
         window.removeEventListener('resize', this.screenSize);
-      }
+    }
+
+    loadAudio(audioPath) {
+        return new Promise((resolve, reject) => {
+            let audio = new Audio(audioPath);
+            audio.addEventListener("canplay", event => {
+                this.audio = audio;
+                resolve(audio);
+            });
+            audio.load();
+        })
+    }
 
     handleScroll() {
         let top = window.pageYOffset || document.body.scrollTop;
@@ -67,9 +81,9 @@ class View extends Component {
         window.removeEventListener('scroll', this.handleScroll);
     }
 
-    backgroundSyle(width,height) {
+    backgroundSyle(width, height) {
         if (!this.album) return {};
-    
+
         return {
             backgroundImage: `url(${this.album.artWork})`,
             top: `${-(this.state.backgroundY)}px`,
@@ -82,20 +96,20 @@ class View extends Component {
         let height = Math.max(document.body.scrollHeight, document.body.offsetHeight);
         let width = Math.max(document.body.scrollWidth, document.body.offsetWidth);
 
-        this.setState({width,height});
+        this.setState({ width, height });
     }
 
     render() {
         return (
             <React.Fragment>
-                <div className="r-background" style={this.backgroundSyle(this.state.width,this.state.height)}></div>
-                <div className="r-screen" style={{width : this.state.width, height : this.state.height}}></div>
+                <div className="r-background" style={this.backgroundSyle(this.state.width, this.state.height)}></div>
+                <div className="r-screen" style={{ width: this.state.width, height: this.state.height }}></div>
                 <div className="centre">
                     {
                         this.state.tracks.map((track, i) => {
-                            return <div key={track.track} className="r-recordWrapper">
-                                <Record track={track} audioPath={this.album.tracks[i].audioPath} width="1000px" height="1000px"></Record>
-                                <div className="r-title">{track.track}</div>
+                            return <div key={track.data.track} className="r-recordWrapper">
+                                <Record track={track.data} audio={track.audio} width="1000px" height="1000px"></Record>
+                                <div className="r-title">{track.data.track}</div>
                             </div>
                         })
                     }
