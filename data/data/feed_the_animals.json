@@ -19,9 +19,14 @@
             "audioPath": "../audio/Still_Here.mp3"
         },
         {
-            "title": "Still Here",
+            "title": "What it's All About",
             "dataPath": "../data/feed_the_animals/what_its_all_about.json",
             "audioPath": "../audio/What_its_All_About.mp3"
+        },
+        {
+            "title": "Set It Off",
+            "dataPath": "../data/feed_the_animals/set_it_off.json",
+            "audioPath": "../audio/Set_It_Off.mp3"
         }
     ]
 }
