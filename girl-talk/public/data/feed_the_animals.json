@@ -37,6 +37,11 @@
             "title": "Like This",
             "dataPath": "../data/feed_the_animals/like_this.json",
             "audioPath": "../audio/Like_This.mp3"
+        },
+        {
+            "title": "Give Me a Beat",
+            "dataPath": "../data/feed_the_animals/give_me_a_beat.json",
+            "audioPath": "../audio/Give_Me_a_Beat.mp3"
         }
     ]
 }
