@@ -1,0 +1,145 @@
+{
+    "duration": 244000,
+    "album": "Feed the Animals",
+    "track": "Let Me See You",
+    "tracks": [
+        {
+            "startTime": 0,
+            "endTime": 13000,
+            "artist": "Donna Summer",
+            "track": "Bad Girls"
+        },
+        {
+            "startTime": 0,
+            "endTime": 29000,
+            "artist": "Cameo",
+            "track": "Word Up!"
+        },
+        {
+            "startTime": 2000,
+            "endTime": 30000,
+            "artist": "Dem Franchize Boyz",
+            "track": "Lean wit It, Rock wit It"
+        },
+        {
+            "startTime": 15000,
+            "endTime": 23000,
+            "artist": "Gwen Stefani",
+            "track": "The Sweet Escape"
+        },
+        {
+            "startTime": 30000,
+            "endTime": 67000,
+            "artist": "Bizarre Inc",
+            "track": "I'm Gonna Get You"
+        },
+        {
+            "startTime": 30000,
+            "endTime": 67000,
+            "artist": "R. Kelly",
+            "track": "I'm a Flirt (Remix)"
+        },
+        {
+            "startTime": 68000,
+            "endTime": 73000,
+            "artist": "Donnie Iris",
+            "track": "Love Is Like a Rock"
+        },
+        {
+            "startTime": 73000,
+            "endTime": 75000,
+            "artist": "Daft Punk",
+            "track": "Harder, Better, Faster, Stronger"
+        },
+        {
+            "startTime": 73000,
+            "endTime": 134000,
+            "artist": "Tone Lōc",
+            "track": "Wild Thing"
+        },
+        {
+            "startTime": 75000,
+            "endTime": 119000,
+            "artist": "Fleetwood Mac",
+            "track": "Gypsy"
+        },
+        {
+            "startTime": 89000,
+            "endTime": 90000,
+            "artist": "INXS",
+            "track": "What You Need"
+        },
+        {
+            "startTime": 90000,
+            "endTime": 120000,
+            "artist": "Trina",
+            "track": "I Got a Thang for You"
+        },
+        {
+            "startTime": 120000,
+            "endTime": 192000,
+            "artist": "Justin Timberlake",
+            "track": "LoveStoned/I Think She Knows (Interlude)"
+        },
+        {
+            "startTime": 124000,
+            "endTime": 192000,
+            "artist": "The Jets",
+            "track": "Crush on You"
+        },
+        {
+            "startTime": 135000,
+            "endTime": 163000,
+            "artist": "Rick Ross",
+            "track": "Hustlin'"
+        },
+        {
+            "startTime": 138000,
+            "endTime": 173000,
+            "artist": "David Bowie",
+            "track": "Rebel Rebel"
+        },
+        {
+            "startTime": 164000,
+            "endTime": 193000,
+            "artist": "Luke",
+            "track": "I Wanna Rock"
+        },
+        {
+            "startTime": 178000,
+            "endTime": 242000,
+            "artist": "M.I.A.",
+            "track": "Boyz"
+        },
+        {
+            "startTime": 193000,
+            "endTime": 222000,
+            "artist": "The Cranberries",
+            "track": "Dreams"
+        },
+        {
+            "startTime": 214000,
+            "endTime": 243000,
+            "artist": "Bachman-Turner Overdrive",
+            "track": "Takin' Care of Business"
+        },
+        {
+            "startTime": 222000,
+            "endTime": 243000,
+            "artist": "Michael Jackson",
+            "track": "P.Y.T. (Pretty Young Thing)"
+        },
+        {
+            "startTime": 232000,
+            "endTime": 243000,
+            "artist": "Chicago",
+            "track": "Saturday in the Park"
+        },
+        {
+            "startTime": 236000,
+            "endTime": 244000,
+            "artist": "Quad City DJs",
+            "track": "C'mon N' Ride It (The Train)"
+        }
+    ]
+}

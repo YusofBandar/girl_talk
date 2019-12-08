@@ -52,6 +52,11 @@
             "title": "In Step",
             "dataPath": "../data/feed_the_animals/in_step.json",
             "audioPath": "../audio/In_Step.mp3"
+        },
+        {
+            "title": "Let Me See You",
+            "dataPath": "../data/feed_the_animals/let_me_see_you.json",
+            "audioPath": "../audio/Let_Me_See_You.mp3"
         }
     ]
 }
