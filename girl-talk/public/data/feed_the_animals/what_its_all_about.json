@@ -1,0 +1,217 @@
+{
+    "duration": 255000,
+    "album": "Feed the Animals",
+    "track": "What its All About",
+    "tracks": [
+        {
+            "startTime": 0,
+            "endTime": 11000,
+            "artist": "Beyoncé",
+            "track": "Ring the Alarm"
+        },
+        {
+            "startTime": 0,
+            "endTime": 21000,
+            "artist": "DJ Funk",
+            "track": "Here We Go"
+        },
+        {
+            "startTime": 0,
+            "endTime": 18000,
+            "artist": "Queen",
+            "track": "We Will Rock You"
+        },
+        {
+            "startTime": 5000,
+            "endTime": 18000,
+            "artist": "Beastie Boys",
+            "track": "So What'cha Want"
+        },
+        {
+            "startTime": 18000,
+            "endTime": 21000,
+            "artist": "Phil Collins",
+            "track": "In the Air Tonight"
+        },
+        {
+            "startTime": 20000,
+            "endTime": 95000,
+            "artist": "Busta Rhymes",
+            "track": "Woo Hah!! Got You All in Check"
+        },
+        {
+            "startTime": 21000,
+            "endTime": 64000,
+            "artist": "The Police",
+            "track": "Every Little Thing She Does Is Magic"
+        },
+        {
+            "startTime": 40000,
+            "endTime": 92000,
+            "artist": "The Cure",
+            "track": "Close to Me"
+        },
+        {
+            "startTime": 64000,
+            "endTime": 80000,
+            "artist": "Ini Kamoze",
+            "track": "Here Comes the Hotstepper"
+        },
+        {
+            "startTime": 65000,
+            "endTime": 92000,
+            "artist": "Wilson Pickett",
+            "track": "Land of a Thousand Dances"
+        },
+        {
+            "startTime": 93000,
+            "endTime": 95000,
+            "artist": "Rotary Connection",
+            "track": "Memory Band"
+        },
+        {
+            "startTime": 95000,
+            "endTime": 136000,
+            "artist": "Faith No More",
+            "track": "Epic"
+        },
+        {
+            "startTime": 95000,
+            "endTime": 112000,
+            "artist": "Mike Jones",
+            "track": "Drop & Gimme 50"
+        },
+        {
+            "startTime": 96000,
+            "endTime": 116000,
+            "artist": "DJ Assault",
+            "track": "Ass 'n' Titties"
+        },
+        {
+            "startTime": 98000,
+            "endTime": 117000,
+            "artist": "Kidz in the Hall",
+            "track": "Drivin' Down the Block"
+        },
+        {
+            "startTime": 117000,
+            "endTime": 136000,
+            "artist": "Junior Reid",
+            "track": "One Blood"
+        },
+        {
+            "startTime": 119000,
+            "endTime": 139000,
+            "artist": "Boogie Down Productions",
+            "track": "Criminal Minded"
+        },
+        {
+            "startTime": 138000,
+            "endTime": 149000,
+            "artist": "Yung Joc  Brandy \"Ms. B\" Hambrick",
+            "track": "I Know You See It"
+        },
+        {
+            "startTime": 139000,
+            "endTime": 149000,
+            "artist": "Paula Cole",
+            "track": "I Don't Want to Wait"
+        },
+        {
+            "startTime": 139000,
+            "endTime": 208000,
+            "artist": "Tones on Tail",
+            "track": "Go!"
+        },
+        {
+            "startTime": 144000,
+            "endTime": 149000,
+            "artist": "Beanie Sigel",
+            "track": "Roc the Mic"
+        },
+        {
+            "startTime": 149000,
+            "endTime": 192000,
+            "artist": "Argent",
+            "track": "Hold Your Head Up"
+        },
+        {
+            "startTime": 149000,
+            "endTime": 192000,
+            "artist": "Wu-Tang Clan",
+            "track": "C.R.E.A.M."
+        },
+        {
+            "startTime": 171000,
+            "endTime": 189000,
+            "artist": "Terence Trent D'Arby",
+            "track": "Wishing Well"
+        },
+        {
+            "startTime": 192000,
+            "endTime": 207000,
+            "artist": "N.W.A",
+            "track": "Dopeman"
+        },
+        {
+            "startTime": 197000,
+            "endTime": 197000,
+            "artist": "50 Cent",
+            "track": "What Up Gangsta?"
+        },
+        {
+            "startTime": 197000,
+            "endTime": 200000,
+            "artist": "Genesis",
+            "track": "Mama"
+        },
+        {
+            "startTime": 200000,
+            "endTime": 202000,
+            "artist": "Bow Wow Wow",
+            "track": "I Want Candy"
+        },
+        {
+            "startTime": 204000,
+            "endTime": 208000,
+            "artist": "Yeah Yeah Yeahs",
+            "track": "Gold Lion"
+        },
+        {
+            "startTime": 205000,
+            "endTime": 206000,
+            "artist": "T.I.",
+            "track": "You Know What It Is"
+        },
+        {
+            "startTime": 210000,
+            "endTime": 213000,
+            "artist": "OutKast",
+            "track": "Ms. Jackson"
+        },
+        {
+            "startTime": 212000,
+            "endTime": 247000,
+            "artist": "Vanilla Ice",
+            "track": "Havin' a Roni"
+        },
+        {
+            "startTime": 213000,
+            "endTime": 243000,
+            "artist": "The Jackson 5",
+            "track": "ABC"
+        },
+        {
+            "startTime": 213000,
+            "endTime": 244000,
+            "artist": "Rihanna",
+            "track": "Umbrella"
+        },
+        {
+            "startTime": 233000,
+            "endTime": 254000,
+            "artist": "Queen",
+            "track": "Bohemian Rhapsody"
+        }
+    ]
+}

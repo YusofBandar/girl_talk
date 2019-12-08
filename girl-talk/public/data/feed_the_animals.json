@@ -17,6 +17,11 @@
             "title": "Still Here",
             "dataPath": "../data/feed_the_animals/still_here.json",
             "audioPath": "../audio/Still_Here.mp3"
+        },
+        {
+            "title": "What it's All About",
+            "dataPath": "../data/feed_the_animals/what_its_all_about.json",
+            "audioPath": "../audio/What_its_All_About.mp3"
         }
     ]
 }
