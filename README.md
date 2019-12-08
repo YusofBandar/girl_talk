@@ -8,7 +8,7 @@
  
  ### Visulisations
  
- To view full visulisation please visit
+ To view full visulisation please visit https://girltalkviz.000webhostapp.com/#/
  
  For a simpler view see the [static folder](https://github.com/YusofBandar/girl_talk/tree/master/static)
  
