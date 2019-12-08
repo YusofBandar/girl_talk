@@ -57,6 +57,11 @@
             "title": "Let Me See You",
             "dataPath": "../data/feed_the_animals/let_me_see_you.json",
             "audioPath": "../audio/Let_Me_See_You.mp3"
+        },
+        {
+            "title": "Here's the Thing",
+            "dataPath": "../data/feed_the_animals/heres_the_thing.json",
+            "audioPath": "../audio/Heres_the_Thing.mp3"
         }
     ]
 }
