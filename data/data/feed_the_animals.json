@@ -67,6 +67,11 @@
             "title": "Don't Stop",
             "dataPath": "../data/feed_the_animals/dont_stop.json",
             "audioPath": "../audio/Dont_Stop.mp3"
+        },
+        {
+            "title": "Play Your Part (Pt. 2)",
+            "dataPath": "../data/feed_the_animals/play_your_part_(pt2).json",
+            "audioPath": "../audio/Play_Your_Part_(Pt2).mp3"
         }
     ]
 }
