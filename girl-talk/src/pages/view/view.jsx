@@ -13,7 +13,6 @@ class View extends Component {
 
         this.screenSize = this.screenSize.bind(this);
         this.backgroundSyle = this.backgroundSyle.bind(this);
-        this.screenStyle = this.screenStyle.bind(this);
 
         this.handleScroll = this.handleScroll.bind(this);
     }
@@ -21,7 +20,9 @@ class View extends Component {
 
     state = {
         tracks: [],
-        backgroundY: 0
+        backgroundY: 0,
+        width: 0,
+        height: 0
     }
 
     async readJson(path) {
@@ -33,9 +34,11 @@ class View extends Component {
             return;
         }
 
-       let path = decodeURI(this.params.album).replace(/\s/g, "_").toLowerCase();
+        let path = decodeURI(this.params.album).replace(/\s/g, "_").toLowerCase();
         this.album = await this.readJson(`/data/${path}.json`);
-        
+
+        this.screenSize();
+        window.addEventListener('resize', this.screenSize);
         window.addEventListener('scroll', this.handleScroll);
 
         this.album.tracks.forEach(async (track) => {
@@ -44,63 +47,59 @@ class View extends Component {
             let tracks = this.state.tracks;
             tracks.push(data);
             this.setState({ tracks });
+            this.screenSize();
         })
     }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.screenSize);
+      }
 
     handleScroll() {
         let top = window.pageYOffset || document.body.scrollTop;
         let recordsHeight = this.album.tracks.length * 2000;
         let dy = this.mapNumRange(top, 0, recordsHeight, 0, window.outerWidth + 500);
 
-        this.setState({backgroundY : dy});
+        this.setState({ backgroundY: dy });
     }
 
     componentWillUnmount() {
         window.removeEventListener('scroll', this.handleScroll);
     }
 
-    backgroundSyle(){
-        if(!this.album) return {};
-        const size = this.screenSize();
-        
+    backgroundSyle(width,height) {
+        if (!this.album) return {};
+    
         return {
             backgroundImage: `url(${this.album.artWork})`,
             top: `${-(this.state.backgroundY)}px`,
-            width: `${size[0]}px`,
-            height: `${size[1]}px`
+            width: `${width}px`,
+            height: `${height}px`
         };
     }
 
-    screenSize(){
-        let height = Math.max( document.body.scrollHeight, document.body.offsetHeight);
-        let width = Math.max( document.body.scrollWidth, document.body.offsetWidth);
+    screenSize() {
+        let height = Math.max(document.body.scrollHeight, document.body.offsetHeight);
+        let width = Math.max(document.body.scrollWidth, document.body.offsetWidth);
 
-        return [width,height];
-    }
-
-    screenStyle(){
-        const size = this.screenSize();
-        return {
-            width: `${size[0]}px`,
-            height: `${size[1]}px`
-        };
+        this.setState({width,height});
     }
 
     render() {
         return (
             <React.Fragment>
-                <div className="r-background" style={this.backgroundSyle()}></div>
-                <div className="r-screen" style={this.screenStyle()}></div>
+                <div className="r-background" style={this.backgroundSyle(this.state.width,this.state.height)}></div>
+                <div className="r-screen" style={{width : this.state.width, height : this.state.height}}></div>
                 <div className="centre">
                     {
                         this.state.tracks.map((track, i) => {
-                            return <div  key={track.track} className="r-recordWrapper">
-                            <Record track={track} audioPath={this.album.tracks[i].audioPath} width="1000px" height="1000px"></Record>
-                            <div className="r-title">{track.track}</div>
+                            return <div key={track.track} className="r-recordWrapper">
+                                <Record track={track} audioPath={this.album.tracks[i].audioPath} width="1000px" height="1000px"></Record>
+                                <div className="r-title">{track.track}</div>
                             </div>
                         })
                     }
-                    
+
                 </div>
             </React.Fragment>
         );
