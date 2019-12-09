@@ -28,13 +28,16 @@ class Index extends Component {
 
   render() {
     return (
-      <div className="centre">
-        {
-          this.state.albums.map((album) => {
-            return <Album key={album.title} album={album}></Album>
-          })
-        }
-      </div>
+      <React.Fragment>
+        <div className="centre">
+          {
+            this.state.albums.map((album) => {
+              return <Album key={album.title} album={album}></Album>
+            })
+          }
+        </div>
+        <footer> <a href="https://github.com/YusofBandar" target="_blank">GitHub</a> | <a href="https://twitter.com/BandarYusof" target="_blank">Twitter</a></footer>
+      </React.Fragment>
     );
   }
 }
