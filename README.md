@@ -10,7 +10,7 @@
  
  To view full visulisation please visit https://girltalkviz.000webhostapp.com/#/
  
- For a simpler view see the [static](https://yusofbandar.github.io/girl_talk/static/all_day)
+ For a simpler view see the [static](https://yusofbandar.github.io/girl_talk/static/index)
  
  ### Data
  
