@@ -8,7 +8,7 @@
  
  ### Visulisations
  
- For a simpler view see the [static](https://yusofbandar.github.io/girl_talk/static/index)
+ For a simpler view see the [static](https://yusofbandar.github.io/girl_talk/visualisation/)
  
  ### Data
  
