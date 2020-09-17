@@ -3,9 +3,9 @@ window.onload = () => {
     const url = window.location.href;
 
     if(url.includes('allDay')){
-        dataUrl = '/data/all_day.json';
+        dataUrl = '../data/all_day.json';
     }else{
-        dataUrl = '/data/feed_the_animals.json';
+        dataUrl = '../data/feed_the_animals.json';
     }
     
     girlTalk(dataUrl);
