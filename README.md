@@ -1,4 +1,4 @@
-# Girl Talk Visulisations
+# Girl Talk Visulisation
 
  Girl Talk, is an American disc jockey who specializes in mashups and digital sampling. This repo visualises All Day and Feed the Animals
  albums by Girl Talk.
