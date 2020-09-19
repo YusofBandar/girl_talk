@@ -42,6 +42,8 @@ const girlTalk = async (url) => {
         .attr('id', (d) => d.track)
         .style('transform', `translate(${width * 0.5}px,${height * 0.5}px)`)
         .each(d => {
+            // attach album object to each track object in the
+            // album, useful when each track needs to access album data.
             d.tracks.forEach(t => t.album = d);
         });
     
@@ -64,6 +66,7 @@ const girlTalk = async (url) => {
         .attr('cy', 0)
         .style('fill', 'black');
 
+    // track arc and label
     const tracks = record.append('g')
         .selectAll('.track')
         .data((d) => d.tracks)
@@ -72,20 +75,26 @@ const girlTalk = async (url) => {
         .attr('class', 'track')
         .attr('id', (d) => d.track)
 
-    // track arcs
     tracks
         .append('path')
         .attr('d', (d, i) => {
             const circum = 2 * Math.PI;
 
+            // using track arc width calculate inner and outer radius
             const arcWidth = (((radius * 2) - (outerPadding + innerPadding + 50)) / 2) / d.album.tracks.length;
             const innerRadius = (((radius) - ((i + 1) * arcWidth)) - outerPadding);
             const outerRadius = (((radius) - (i * arcWidth)) - outerPadding);
 
+            // using the start and end time calculate angles
+            // in radians.
+            // For example an album that is 60s long and the track
+            // starts at 0s and ends at 30s. The start angle will be 0
+            // and end angle will be 3.14rad (180deg)
             let startAngle = (d.startTime / d.album.duration) * circum;
             let endAngle = (d.endTime / d.album.duration) * circum;
 
             const path = arc(startAngle, endAngle, innerRadius, outerRadius);
+            // cache arc center coords
             d.centroid = path.centroid();
             return path();
         })
@@ -108,6 +117,10 @@ const girlTalk = async (url) => {
         .attr('class', 'label')
 
     label.each((p, i) => {
+        // calculate the start and end coords for label line.
+        // Start coord is the centroid of the arc. 
+        // End coord is calculated to ensure the label line
+        // extends past the record and then some random padding is added.
         const { centroid } = p;
         const hypo = Math.hypot(centroid[0], centroid[1])
         const scaler = (radius + (65 * ((i + 1) % 3))) / hypo;
@@ -135,6 +148,12 @@ const girlTalk = async (url) => {
             `${d.line.x2}px ${d.line.y2}px`
         ))
         .style('transform', (d) => {
+            // label title is rotated to always point outwards
+            //
+            // ((startAngle + endAngle) / 2) rotates label to be parallel to
+            // label line
+            //
+            // -1.57rad rotates label to point outwards
             const circum = 2 * Math.PI;
             let startAngle = (d.startTime / d.album.duration) * circum;
             let endAngle = (d.endTime / d.album.duration) * circum;
